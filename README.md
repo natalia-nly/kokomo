@@ -1,4 +1,4 @@
-# KOKOMO
+# KOKOMO 🌴
 
 # **Developers:**
 
@@ -55,75 +55,63 @@ Geo Location:
 
 ## **ROUTES:**
 
-[Untitled](https://www.notion.so/42ed78d181e741be85a42f660e773bb0)
-
-```
-body:
-    - username
-    - password
-
-```
-
-GET | /auth/signup| redirects to / if user logged in. Renders auth/signup
-
-```
-body:
-    - username
-    - password
-
-```
-
-GET | / | renders the homepage. if the user is not logged in, render access. GET | /event/id | renders event-detail POST | /event/id | update event. redirect /event-detail
-
-```
-body:
-    - username
-    - event id 
-    - image
-
-```
-
-GET | /escape-room-list | renders escape-room-list POST | /logout | redirects to / GET | /escape-room-detail | renders escape-room-detail POST | /escape-room/id |
-
-```
-body:
-    - username
-    - escape-room
-    - date
-    - reserved time
-    - escape-room id
-
-```
+- GET /locals
+- GET /locals/availabilities
+- GET /local
+- GET /local/availability
+- POST /local/booking
 
 ## **Models**
 
-```
+```jsx
 CUSTOMER
-- username
-- passwordHash
+- username: String
+- passwordHash: String
 - reservas [REF Reservas]
-- email
+- email: String
 
 ```
 
-```
+```jsx
 PROPERTY
-- Nombre
-- Descripción
-- Categorías - tags
-- Descripción
-- Fotos
-- Localización
-- Horario
-- Tiempo por mesa
-- Available: number
-- Comentarios
-- Puntuación
+- name: String
+- descriptions: [
+    language: String,
+    description: String
+]
+- categories: [tags: String]
+- media: [images]
+- location: {
+    Nombre: String,
+    Lat: Number
+    Long: Number
+}
+- opening_hours:[{
+    opening_days:{
+ opening_day: Date
+    closing_day: Date
+    },
+    week_days:[String],
+    opening_times:[
+        {
+            opening_time: Date,
+            closing_time: Date
+        }
+    ]
+}]
+- booking_time: Number
+- available_places: number
+- comments: [{
+    username: String,
+    day: Date,
+    comment: String
+}]
+- rating: Number
 - Schedule: [REF Schedule]
 - Bookings: [REF bookings]
 ```
 
-```
+```jsx
 BOOKINGS
 - User [REF User]
 - Property 
@@ -149,7 +137,7 @@ const schedule =  {
  
 ```
 
-```
+
 
 ## Links
 
@@ -157,7 +145,7 @@ const schedule =  {
 
 The url to your repository and to your deployed project
 
-[Repository Link] (http://github.com)
+[Repository Link] (https://github.com/natalia-nly/kokomo)
 
 [Deploy Link] ('https://')
 
@@ -166,5 +154,3 @@ The url to your repository and to your deployed project
 The url to your presentation slides
 
 [Slides Link](http://slides.com)
-
-```
