@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}</p>
+
+    <h2>Chiringuitos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categorías</th>
+                <th scope="col">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each properties}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{categories}}</td>
+                <td>{{location.name}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

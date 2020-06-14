@@ -115,8 +115,8 @@ PROPERTY
 BOOKINGS
 - User [REF User]
 - Property 
-- Hora
-- Día
+- Hour
+- Day
 - People: Number
 
 ```
