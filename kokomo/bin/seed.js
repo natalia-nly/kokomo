@@ -22,14 +22,14 @@ const properties = [
 },
 opening_hours:[{
   opening_days:{
-      opening_day: "2020-06-14",
-      closing_day: "2030-06-14"
+      opening_day: "2020-06-07",
+      closing_day: "2020-06-14"
   },
-  week_days:['MO','TU','ST', 'SU'],
+  week_days:[1, 3, 4, 0],
   opening_times:[
       {
-        opening_time: 13,
-        closing_time: 00
+        opening_time: 13.00,
+        closing_time: 24.00
       }
   ]
 }],
@@ -51,14 +51,14 @@ available_places: 20,
 },
 opening_hours:[{
   opening_days:{
-      opening_day: "2020-06-14",
-      closing_day: "2030-06-14"
+    opening_day: "2020-06-07",
+    closing_day: "2020-06-14"
   },
-  week_days:['MO','TU','ST', 'SU'],
+  week_days:[1, 3, 4, 0],
   opening_times:[
       {
-      opening_time: 13,
-      closing_time: 00
+      opening_time: 13.00,
+      closing_time: 24.00
       }
   ]
 }],
@@ -80,14 +80,14 @@ available_places: 20,
 },
 opening_hours:[{
   opening_days:{
-      opening_day: "2020-06-14",
-      closing_day: "2030-06-14"
+    opening_day: "2020-06-07",
+    closing_day: "2020-06-14"
   },
-  week_days:['MO','TU','ST', 'SU'],
+  week_days:[1, 3, 4, 0],
   opening_times:[
       {
-        opening_time: 13,
-        closing_time: 00
+        opening_time: 13.00,
+        closing_time: 24.00
       }
   ]
 }],
@@ -109,14 +109,14 @@ available_places: 20,
 },
 opening_hours:[{
   opening_days:{
-      opening_day: "2020-06-14",
-      closing_day: "2030-06-14"
+    opening_day: "2020-06-07",
+    closing_day: "2020-06-14"
   },
-  week_days:['MO','TU','ST', 'SU'],
+  week_days:[1, 3, 4, 0],
   opening_times:[
       {
-        opening_time: 13,
-        closing_time: 00
+        opening_time: 13.00,
+        closing_time: 24.00
       }
   ]
 }],

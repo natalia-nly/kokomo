@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Property = require('../models/property.model');
 const Schedule = require('../models/schedule.model');
-const {
-    createScheduleProperty
-} = require('../controllers/schedule.cotroller');
+
 
 // require database configuration
 require('../config/db.config');
@@ -22,7 +20,7 @@ function createSchedule(property) {
         const openDays = (timeRange.opening_days.closing_day.getTime() - timeRange.opening_days.opening_day.getTime()) / (1000 * 3600 * 24);
         const weekDays = timeRange.week_days;
         var currentDay = timeRange.opening_days.opening_day;
-        console.log(openDays)
+    
         for (let i = 0; i < openDays; i++) {
             if (weekDays.includes(currentDay.getDay())) {
                 timeRange.opening_times.forEach(opening => {

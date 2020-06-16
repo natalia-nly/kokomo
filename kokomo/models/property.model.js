@@ -22,7 +22,7 @@ const propertySchema = new Schema({
             opening_day: Date,
             closing_day: Date
         },
-        week_days:[String],
+        week_days:[Number],
         opening_times:[
             {
             opening_time: Number,
@@ -39,7 +39,6 @@ const propertySchema = new Schema({
     }],
     rating: Number,
     bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}],
-    schedule: [{type: Schema.Types.ObjectId, ref: "Schedule"}]
     },
     {
         timestamps: {
