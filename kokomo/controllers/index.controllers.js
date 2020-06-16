@@ -15,3 +15,14 @@ exports.allProperties = (req, res, next) => {
     });
    
 };
+
+exports.viewLocal = (req, res, next) => {
+  Property.findById(req.params.id)
+  .then(resultado => {
+    res.render("property/property-details", resultado);
+  })
+  .catch(error => {
+    console.log('Error while retrieving book details: ', error);
+  });
+
+};

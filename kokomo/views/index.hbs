@@ -9,6 +9,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Categorías</th>
                 <th scope="col">Descripción</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,11 @@
                 <td>{{name}}</td>
                 <td>{{categories}}</td>
                 <td>{{location.name}}</td>
+                <td> 
+                    <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a> 
+                    <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a> 
+                    <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a> 
+                </td>
             </tr>
             {{/each}}
         </tbody>

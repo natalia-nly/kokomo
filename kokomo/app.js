@@ -51,8 +51,10 @@ app.locals.title = 'KOKOMO';
 //ROUTES
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
+
 app.use('/', index);
 app.use('/', auth);
+
 
 
 module.exports = app;
