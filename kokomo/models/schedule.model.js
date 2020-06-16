@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const scheduleSchema = new Schema({
     property: {type: Schema.Types.ObjectId, ref: "Property"},
     time_boxes: [{
-		start_time: Date,
-		end_time: Date,
+        day: Date,
+		start_time: Number,
+		end_time: Number,
 		status: Boolean,
 		remaining: Number,
         total: Number,
