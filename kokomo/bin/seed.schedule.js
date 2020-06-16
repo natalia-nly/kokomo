@@ -48,7 +48,7 @@ function createSchedule(property) {
                         
                         time_box = {
                             day: new Date(currentDay),
-                            start_time: startTime,
+                            start_time: parseFloat(startTime.toFixed(2)),
                             status: true,
                             remaining: property.available_places,
                             total: property.available_places

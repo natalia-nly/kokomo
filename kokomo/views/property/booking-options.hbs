@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>{{property.name}}</h1>
+    <h2>{{property.location.name}}</h2>
+
+    <p>Duración de la reserva: {{property.booking_duration}}</p>
+    <p>Plazas disponibles: {{property.available_places}}</p>
+
+    <form action="/local/{{property._id}}" method="POST">
+        <input type="date" name="bookingDate" id="">
+        <input type="submit" value="Reservar">
+    </form>
+
+    <h2>Página de carga de las posibles reservas</h2>
+
+        {{#each schedule}}
+        
+            <a href="/booking/{{this._id}}" class="btn btn-primary" style="margin: 10px">{{this.start_time}}</a>
+    
+        {{/each}}
+
+
+</div>
