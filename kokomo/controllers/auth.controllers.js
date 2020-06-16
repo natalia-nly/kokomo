@@ -2,7 +2,8 @@ const Customer = require('../models/customer.model');
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
-exports.signUp = (req, res, next) => res.render('auth/signup');
+
+exports.signUp = (req, res, next) => res.render('auth/signup', { title: '¡Crea tu cuenta! | KOKOMO' });
 
 exports.registerCustomer = (req, res, next) => {
     const {
@@ -52,7 +53,7 @@ exports.registerCustomer = (req, res, next) => {
         });
 };
 
-exports.loginView = (req, res, next) => res.render('auth/login');
+exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO' });
 
 exports.login = (req, res, next) => {
     const { email, password } = req.body;
