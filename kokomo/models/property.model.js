@@ -3,14 +3,12 @@ const Schema = mongoose.Schema;
 
 const propertySchema = new Schema({
     name: String,
-    descriptions: [{
-        language: String,
-        description: String
-    }],
+    description: String,
     categories: {
         type: [String],
         enum: ['Chillout', 'Surfer', 'Restaurante', 'Discoteca', 'Bar']
       },
+    main_image: String,
     media:[String],
     location: {
         name: String,

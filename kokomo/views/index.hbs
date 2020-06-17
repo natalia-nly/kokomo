@@ -1,30 +1,51 @@
-<div class="container">
-    <h1>KOKOMO</h1>
-    <p>Welcome to Kokomo</p>
+<div class="home-bg">
+    <div class="container">
+        <h2 class="hero">¡No te quedes sin mesa!<br>Reserva en los mejores locales de tu zona</h2>
 
-    <h2>Chiringuitos</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Categorías</th>
-                <th scope="col">Descripción</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+        <form action="" class="search-form">
+            <input type="search" name="" class="form-control ds-input" placeholder="Buscar...">
+        </form>
+    </div>
+
+    <div class="white-card">
+        <h2 class="title-search">Nuestros chiringuitos</h2>
+        <h3 class="subtitle-search">¡Reserva ahora!</h3>
+        <div class="properties-group">
             {{#each properties}}
-            <tr>
-                <td>{{name}}</td>
-                <td>{{categories}}</td>
-                <td>{{location.name}}</td>
-                <td> 
-                    <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a> 
-                    <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a> 
-                    <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a> 
-                </td>
-            </tr>
+            <a href="/local/{{_id}}">
+                <div class="property-card">
+                    <img src="{{main_image}}" alt="">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                </div>
+            </a>
             {{/each}}
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
+
+
+{{!-- <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Categorías</th>
+            <th scope="col">Descripción</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each properties}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{categories}}</td>
+            <td>{{location.name}}</td>
+            <td>
+                <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a>
+                <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a>
+                <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table> --}}

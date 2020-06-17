@@ -54,7 +54,6 @@ function createSchedule(property) {
                             total: property.available_places
                         };
                         scheduleObject.time_boxes.push(time_box)
-                        console.log(time_box)
                         startTime = t+rest;
                         
                     }

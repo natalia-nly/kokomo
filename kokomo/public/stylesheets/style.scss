@@ -2,7 +2,7 @@
 ---------------------------------------------------------------------------------------------------- 
 
     01.   VARIABLES
-    02.   LAYOUT
+    02.   HOME
     03.   HEADER
     04.   FOOTER
     05.   HOMEPAGE
@@ -19,6 +19,9 @@
 --------------------------------------------- */
 $blue: #3294BB;
 $orange: #FFBA69;
+$text-color: #809EAA;
+$cream: #FBF7F3;
+$light-blue: #e8f5fb;
 
 /* ## Fonts
 --------------------------------------------- */
@@ -27,7 +30,7 @@ $heading-font: bely-display, sans-serif;
 
 
 
-/* # 02. LAYOUT
+/* # 02. HOME
 ---------------------------------------------------------------------------------------------------- */
 
 body {
@@ -40,14 +43,171 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: $orange;
 }
 
-.navbar-brand {
-  font-family: $heading-font;
-  font-weight: 400;
+a:hover{
+  text-decoration: none !important;
 }
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 0px !important;
+}
+
+nav {
+  .navbar-brand {
+    font-family: $heading-font;
+    font-weight: 400;
+    color: $blue !important;
+  }
+
+  .navbar-toggler, i {
+    border: none;
+    color: $blue;
+  }
+}
+
+
+h2.hero {
+  color: $text-color;
+  text-align: center;
+  padding: 80px 0 40px 0;
+  font-size: 22px;
+}
+
 
 h1 {
   color: $blue;
+}
+
+.title-search {
+  font-size: 20px;
+  color: $orange;
+  font-weight: 600;
+  padding-bottom: 4px;
+  padding-left: 32px;
+}
+
+.subtitle-search {
+  font-size: 14px;
+  color: $text-color;
+  font-weight: 100;
+  padding-left: 32px;
+}
+
+.search-form {
+  padding-bottom: 50px;
+
+  input {
+    background-color: #d2e8f1;
+    border: none;
+    padding: 26px;
+    border-radius: 14px;
+  }
+}
+
+.white-card {
+  background-color: white;
+  padding: 26px 0px;
+  border-radius: 50px 50px 0 0;
+}
+
+.home-bg {
+  background-color: $light-blue;
+}
+
+.properties-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  overflow: scroll;
+  padding: 20px;
+
+  .property-card {
+    width: 130px;
+
+    img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    h3 {
+      font-family: $heading-font;
+      color: $blue;
+      font-size: 16px;
+      padding-top: 18px;
+    }
+
+    p {
+      color: $text-color;
+      font-weight: 200;
+      font-size: 13px;
+    }
+  }
+}
+
+@media all and (min-width: 768px){
+  .home-bg {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    padding: 40px !important;
+  }
+
+  .white-card {
+    width: 50vw;
+    height: 100vh;
+    background-color: white;
+    padding: 26px 0px;
+    border-radius: 50px 0 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title-search {
+    font-size: 45px;
+    color: $orange;
+    font-family: $heading-font;
+    font-weight: 600;
+    padding: 0 100px 10px 32px;
+  }
+  
+  .subtitle-search {
+    font-size: 20px;
+    color: $text-color;
+    font-weight: 100;
+    padding-left: 32px;
+  }
+
+  .properties-group {
+    padding: 40px;
+  
+    .property-card {
+      width: 230px;
+  
+      img {
+        height: 300px;
+        border-radius: 20px;
+      }
+  
+      h3 {
+        font-family: $heading-font;
+        color: $blue;
+        font-size: 16px;
+        padding-top: 18px;
+      }
+  
+      p {
+        color: $text-color;
+        font-weight: 200;
+        font-size: 13px;
+      }
+    }
+  }
 }
