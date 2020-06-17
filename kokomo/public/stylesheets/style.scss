@@ -99,22 +99,22 @@ h1 {
   padding-bottom: 50px;
 
   input {
-    background-color: #d2e8f1;
+    background-color: rgba($text-color, .15);
     border: none;
     padding: 26px;
     border-radius: 14px;
   }
 }
 
-.white-card {
-  background-color: white;
-  padding: 26px 0px;
-  border-radius: 50px 50px 0 0;
-}
+// .white-card {
+//   background-color: white;
+//   padding: 26px 0px;
+//   border-radius: 50px 50px 0 0;
+// }
 
-.home-bg {
-  background-color: $light-blue;
-}
+// .home-bg {
+//   background-color: $light-blue;
+// }
 
 .properties-group {
   display: grid;
@@ -155,15 +155,16 @@ h1 {
     min-height: 100vh;
   }
 
-  .container {
+  .container-left {
     padding: 40px !important;
+    width: 50vw;
   }
 
   .white-card {
     width: 50vw;
     height: 100vh;
-    background-color: white;
-    padding: 26px 0px;
+    background-color: $cream;
+    padding: 26px 0px 26px 32px;
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
@@ -172,17 +173,17 @@ h1 {
 
   .title-search {
     font-size: 45px;
-    color: $orange;
+    color: $blue;
     font-family: $heading-font;
     font-weight: 600;
-    padding: 0 100px 10px 32px;
+    padding: 0 100px 10px 0;
   }
   
   .subtitle-search {
     font-size: 20px;
     color: $text-color;
     font-weight: 100;
-    padding-left: 32px;
+    padding-left: 0;
   }
 
   .properties-group {
@@ -198,15 +199,15 @@ h1 {
   
       h3 {
         font-family: $heading-font;
-        color: $blue;
-        font-size: 16px;
+        color: $orange;
+        font-size: 22px;
         padding-top: 18px;
       }
   
       p {
         color: $text-color;
         font-weight: 200;
-        font-size: 13px;
+        font-size: 16px;
       }
     }
   }

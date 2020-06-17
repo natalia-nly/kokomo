@@ -70,18 +70,10 @@ h1 {
 .search-form {
   padding-bottom: 50px; }
   .search-form input {
-    background-color: #d2e8f1;
+    background-color: rgba(128, 158, 170, 0.15);
     border: none;
     padding: 26px;
     border-radius: 14px; }
-
-.white-card {
-  background-color: white;
-  padding: 26px 0px;
-  border-radius: 50px 50px 0 0; }
-
-.home-bg {
-  background-color: #e8f5fb; }
 
 .properties-group {
   display: grid;
@@ -111,28 +103,29 @@ h1 {
     display: flex;
     align-items: center;
     min-height: 100vh; }
-  .container {
-    padding: 40px !important; }
+  .container-left {
+    padding: 40px !important;
+    width: 50vw; }
   .white-card {
     width: 50vw;
     height: 100vh;
-    background-color: white;
-    padding: 26px 0px;
+    background-color: #FBF7F3;
+    padding: 26px 0px 26px 32px;
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
     justify-content: center; }
   .title-search {
     font-size: 45px;
-    color: #FFBA69;
+    color: #3294BB;
     font-family: bely-display, sans-serif;
     font-weight: 600;
-    padding: 0 100px 10px 32px; }
+    padding: 0 100px 10px 0; }
   .subtitle-search {
     font-size: 20px;
     color: #809EAA;
     font-weight: 100;
-    padding-left: 32px; }
+    padding-left: 0; }
   .properties-group {
     padding: 40px; }
     .properties-group .property-card {
@@ -142,12 +135,12 @@ h1 {
         border-radius: 20px; }
       .properties-group .property-card h3 {
         font-family: bely-display, sans-serif;
-        color: #3294BB;
-        font-size: 16px;
+        color: #FFBA69;
+        font-size: 22px;
         padding-top: 18px; }
       .properties-group .property-card p {
         color: #809EAA;
         font-weight: 200;
-        font-size: 13px; } }
+        font-size: 16px; } }
 
 /*# sourceMappingURL=style.css.map */
