@@ -1,12 +1,35 @@
 <div class="container">
     <h1>Profile</h1>
-
     {{#if user}}
     <h2>Hola, {{user.username}}</h2>
-
+    <h3>Reservas</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Time</th>
+                <th scope="col">Property</th>
+                <th scope="col">Guests</th>
+            </tr>
+        </thead>
+        <tbody>
+           {{#each user.bookings}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{time}}</td>
+                <td>{{property}}</td>
+                <td>{{guests}}</td>
+                <td> 
+                    <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a> 
+                    <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a> 
+                    <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a> 
+                </td>
+            </tr>
+ {{/each}}
+        </tbody>
+   
     {{else}}
     <p>Please, login first!</p>
     <a href="/login" class="btn btn-primary">Login</a>
     {{/if}}
-
 </div>

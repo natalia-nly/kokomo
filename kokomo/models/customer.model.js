@@ -22,7 +22,11 @@ const customerSchema = new Schema({
         required: [true, 'Password is required.']
       },
     //reservas del cliente
-    bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}]
+    bookings: [{
+    id: {type: Schema.Types.ObjectId, ref: "Booking"}, 
+    property: String, 
+    time: Date, 
+    guests: Number}]
     }, 
     {
     timestamps: {

@@ -80,6 +80,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.profile = (req, res) => {
+    
     console.log("Sesión: ", req.session);
     res.render('customer/profile', {
         user: req.session.currentUser,
