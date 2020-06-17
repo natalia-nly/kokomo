@@ -1,5 +1,6 @@
 const Property = require('../models/property.model');
 const Schedule = require('../models/schedule.model');
+const Booking = require('../models/booking.model');
 
 exports.allProperties = (req, res, next) => {
     Property.find()
@@ -22,7 +23,7 @@ exports.viewLocal = (req, res, next) => {
     res.render("property/property-details", resultado);
   })
   .catch(error => {
-    console.log('Error while retrieving book details: ', error);
+    console.log('Error: ', error);
   });
 
 };
@@ -47,15 +48,35 @@ exports.bookingDay = (req, res, next) => {
   .catch(error => {
     console.log('Error: ', error);
   });
+};
 
-  /*
-  Property.findById(req.params.id)
+exports.createBooking = (req, res, next) => {
+  console.log("Schedule ID: ", req.params.id);
+  console.log("Body: ", req.body);
+
+  const {day, propertyId} = req.body;
+  let finalTimebox;
+
+  Schedule.find({property: {$eq: propertyId}})
   .then(resultado => {
-    res.render("property/property-details", resultado);
+    //Filtrar el timebox seleccionado
+    const timeboxes = resultado[0].time_boxes;
+    finalTimebox = timeboxes.filter(element => element._id == req.params.id);
+    console.log("Final timebox: ", finalTimebox);
+    //Crear la reserva
+    return Booking.create({
+      customer: req.session.currentUser._id,
+      property: propertyId,
+      time: day,
+      guests: 4
+    });
+  })
+  .then(booking => {
+    console.log("Reserva creada: ", booking);
+    res.render('property/booking-details', booking);
   })
   .catch(error => {
-    console.log('Error while retrieving book details: ', error);
+    console.log('Error: ', error);
   });
-  */
 
 };

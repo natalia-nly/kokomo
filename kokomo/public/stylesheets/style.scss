@@ -1,53 +1,41 @@
-/*
-Bely Display Regular
+/* # 00.
+---------------------------------------------------------------------------------------------------- 
 
-font-family: bely-display, sans-serif;
-font-weight: 400;
-font-style: normal;
+    01.   VARIABLES
+    02.   LAYOUT
+    03.   HEADER
+    04.   FOOTER
+    05.   HOMEPAGE
+	  06.	  PORTFOLIO
+    07.   SERVICIOS
+    08.   PAGES
+	  09.   FORMS
+    10.   #DEGRATIS
+
+/* # 01. VARIABLES
+---------------------------------------------------------------------------------------------------- */
+
+/* ## Colors
+--------------------------------------------- */
+$blue: #3294BB;
+$orange: #FFBA69;
+
+/* ## Fonts
+--------------------------------------------- */
+$text-font: europa, sans-serif;
+$heading-font: bely-display, sans-serif;
 
 
-Bely Italic
 
-font-family: bely, serif;
-font-weight: 400;
-font-style: italic;
-
-
-Bely Regular
-
-font-family: bely, serif;
-font-weight: 400;
-font-style: normal;
-
-
-Bely Bold
-
-font-family: bely, serif;
-font-weight: 700;
-font-style: normal;
-
-
-Bely Bold Italic
-
-font-family: bely, serif;
-font-weight: 700;
-font-style: italic;
-
-font-family: europa, sans-serif;
-
-font-weight: 300;
-
-font-style: normal;
-
-*/
+/* # 02. LAYOUT
+---------------------------------------------------------------------------------------------------- */
 
 body {
   padding: 0px;
 }
 
 * {
-  font-family: europa, sans-serif;
-  font-style: normal;
+  font-family: $text-font;
   font-size: 16px;
 }
 
@@ -56,8 +44,10 @@ a {
 }
 
 .navbar-brand {
-  font-family: bely-display, sans-serif;
+  font-family: $heading-font;
   font-weight: 400;
-  font-style: normal;
 }
 
+h1 {
+  color: $blue;
+}

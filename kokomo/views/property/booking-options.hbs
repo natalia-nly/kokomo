@@ -7,16 +7,23 @@
 
     <form action="/local/{{property._id}}" method="POST">
         <input type="date" name="bookingDate" id="">
-        <input type="submit" value="Reservar">
+        <input type="submit" value="Ver disponibilidad">
     </form>
 
-    <h2>Página de carga de las posibles reservas</h2>
-
+    <h2 class="mt-4 mb-4">Página de carga de las posibles reservas</h2>
+    <div class="row">
         {{#each schedule}}
-        
-            <a href="/booking/{{this._id}}" class="btn btn-primary" style="margin: 10px">{{this.start_time}}</a>
-    
+        <div class="col-auto mb-3">
+            <form action="/booking/{{this._id}}" method="POST">
+                <input type="hidden" name="propertyId" value="{{../property._id}}">
+                <input type="hidden" name="day" value="{{this.day}}">
+                <input type="submit" class="btn btn-primary" value="{{this.start_time}}">
+            </form>
+
+        </div>
         {{/each}}
+    </div>
+
 
 
 </div>

@@ -11,4 +11,6 @@ router.get('/local/:id', index_controller.viewLocal);
 
 router.post('/local/:id', index_controller.bookingDay);
 
+router.post('/booking/:id', index_controller.createBooking);
+
 module.exports = router;
