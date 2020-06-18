@@ -70,6 +70,10 @@ p {
   color: $blue;
 }
 
+.cream {
+  color: $cream;
+}
+
 nav {
   .navbar-brand {
     font-family: $heading-font;
@@ -84,19 +88,29 @@ nav {
 }
 
 
-h2.hero {
+h2.hero-subtitle {
   color: $text-color;
   text-align: center;
-  padding: 80px 0 40px 0;
   font-size: 22px;
 }
 
+.hero {
+  padding: 80px 0 40px 0;
+}
 
 h1 {
   color: $blue;
 }
 
 .title-search {
+  font-size: 20px;
+  color: $blue;
+  font-weight: 600;
+  padding-bottom: 4px;
+  padding-left: 32px;
+}
+
+.title-search-home {
   font-size: 20px;
   color: $blue;
   font-weight: 600;
@@ -156,6 +170,14 @@ h1 {
   }
 }
 
+.display-blue {
+  font-size: 40px;
+  color: $blue;
+  font-family: $heading-font;
+  font-weight: 600;
+  padding: 30px;
+}
+
 @media all and (min-width: 768px){
   .home-bg {
     display: flex;
@@ -186,6 +208,14 @@ h1 {
     font-weight: 600;
     padding: 0 100px 10px 0;
   }
+
+  .title-search-home {
+    font-size: 24px;
+    color: $blue;
+    font-family: $text-font;
+    font-weight: 600;
+    padding: 0 100px 10px 0;
+  }
   
   .subtitle-search {
     font-size: 20px;
@@ -195,7 +225,7 @@ h1 {
   }
 
   .properties-group {
-    padding: 40px;
+    padding: 40px 0;
   
     .property-card {
       width: 20vw;
@@ -225,6 +255,12 @@ h2.display-orange {
   color: $orange;
   font-family: $heading-font;
   font-size: 40px;
+}
+
+h2.display-cream {
+  color: $cream;
+  font-family: $heading-font;
+  font-size: 60px;
 }
 
 .emoji {

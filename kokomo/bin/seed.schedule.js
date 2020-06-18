@@ -6,6 +6,8 @@ const Schedule = require('../models/schedule.model');
 // require database configuration
 require('../config/db.config');
 
+Schedule.collection.drop();
+
 
 function createSchedule(property) {
 

@@ -22,15 +22,19 @@
         </div>
 
 
-        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
-        <p>
+        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}<p>
 
         <p>Duración de la reserva: {{property.booking_duration}}</p>
         <p>Plazas disponibles: {{property.available_places}}</p>
 
+        {{#if user}}
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
                 <input type="date" name="bookingDate" id="" class="kokomo-input">
                 <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
+        {{else}}
+        <p>Necesitas una cuenta para poder hacer reservas.</p>
+        <a href="/signup" class="btn">Regístrate ahora</a>
+        {{/if}}
     </div>
 </div>

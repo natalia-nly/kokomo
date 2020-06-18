@@ -5,6 +5,8 @@ const Property = require('../models/property.model');
 // require database configuration
 require('../config/db.config');
 
+Property.collection.drop();
+
 
 const properties = [
   {

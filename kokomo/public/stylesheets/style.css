@@ -48,6 +48,9 @@ p {
 .blue {
   color: #3294BB; }
 
+.cream {
+  color: #FBF7F3; }
+
 nav .navbar-brand {
   font-family: bely-display, sans-serif;
   font-weight: 400;
@@ -57,16 +60,25 @@ nav .navbar-toggler, nav i {
   border: none;
   color: #3294BB; }
 
-h2.hero {
+h2.hero-subtitle {
   color: #809EAA;
   text-align: center;
-  padding: 80px 0 40px 0;
   font-size: 22px; }
+
+.hero {
+  padding: 80px 0 40px 0; }
 
 h1 {
   color: #3294BB; }
 
 .title-search {
+  font-size: 20px;
+  color: #3294BB;
+  font-weight: 600;
+  padding-bottom: 4px;
+  padding-left: 32px; }
+
+.title-search-home {
   font-size: 20px;
   color: #3294BB;
   font-weight: 600;
@@ -111,6 +123,13 @@ h1 {
       font-weight: 200;
       font-size: 13px; }
 
+.display-blue {
+  font-size: 40px;
+  color: #3294BB;
+  font-family: bely-display, sans-serif;
+  font-weight: 600;
+  padding: 30px; }
+
 @media all and (min-width: 768px) {
   .home-bg {
     display: flex;
@@ -134,13 +153,19 @@ h1 {
     font-family: bely-display, sans-serif;
     font-weight: 600;
     padding: 0 100px 10px 0; }
+  .title-search-home {
+    font-size: 24px;
+    color: #3294BB;
+    font-family: europa, sans-serif;
+    font-weight: 600;
+    padding: 0 100px 10px 0; }
   .subtitle-search {
     font-size: 20px;
     color: #809EAA;
     font-weight: 100;
     padding-left: 0; }
   .properties-group {
-    padding: 40px; }
+    padding: 40px 0; }
     .properties-group .property-card {
       width: 20vw; }
       .properties-group .property-card img {
@@ -160,6 +185,11 @@ h2.display-orange {
   color: #FFBA69;
   font-family: bely-display, sans-serif;
   font-size: 40px; }
+
+h2.display-cream {
+  color: #FBF7F3;
+  font-family: bely-display, sans-serif;
+  font-size: 60px; }
 
 .emoji {
   width: 24px;
