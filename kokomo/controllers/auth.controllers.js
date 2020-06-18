@@ -87,3 +87,9 @@ exports.profile = (req, res) => {
         title: 'Mi perfil | KOKOMO'
     });
 };
+
+exports.logout = (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+};
+

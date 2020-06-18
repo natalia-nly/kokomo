@@ -13,4 +13,6 @@ router.post('/local/:id', index_controller.bookingDay);
 
 router.post('/booking/:id', index_controller.createBooking);
 
+router.get('/booking/delete/:booking_ref', index_controller.deleteBooking);
+
 module.exports = router;

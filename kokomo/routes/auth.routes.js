@@ -19,4 +19,6 @@ router.post('/login', auth_controller.login);
 // GET de la ruta profile del customer
 router.get('/profile', auth_controller.profile);
 
+router.get('/logout', auth_controller.logout);
+
 module.exports = router;

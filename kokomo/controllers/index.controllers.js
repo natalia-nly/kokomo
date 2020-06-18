@@ -132,7 +132,11 @@ exports.createBooking = (req, res, next) => {
     .then(booking => {
       console.log("Customer: ",req.session.currentUser._id);
       console.log("Reserva creada: ", booking);
-      res.render('property/booking-details', booking);
+      res.render('property/booking-details', {
+        booking: booking,
+        user: req.session.currentUser,
+        title: `Reserva creada | KOKOMO`,
+      });
       //actualizar el perfil del cliente
       Property.findById(booking.property).then(property =>{
         const bookingCliente = {
@@ -163,4 +167,22 @@ exports.createBooking = (req, res, next) => {
       console.log('Error: ', error);
     });
 
+};
+
+exports.deleteBooking = (req, res) => {
+  const bookingRef = req.params.booking_ref;
+  console.log("BOOKING REF", bookingRef);
+  const p1 = Booking.findOneAndDelete({booking_ref: {$eq: bookingRef}});
+  const p2 = Customer.findOne(
+    {"bookings.booking_ref": {$eq: bookingRef}}
+  );
+
+  Promise.all([p1, p2])
+    .then(resultados => {
+      console.log(resultados);
+      res.redirect('/profile');
+    })
+    .catch(error => {
+      console.log('Error: ', error);
+    });
 };
