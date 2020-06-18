@@ -39,7 +39,7 @@
             <div class="col-auto mb-3">
                 <form action="/booking/{{this._id}}" method="POST">
                     <input type="hidden" name="propertyId" value="{{../property._id}}">
-                    <input type="hidden" name="day" value="{{this.day}}">
+                    <input type="hidden" name="day"  value="{{this.day}}">
                     <input type="hidden" name="guests" value="{{../guests}}">
                     <input type="submit" class="kokomo-hours" value="{{this.start_time}}">
                 </form>

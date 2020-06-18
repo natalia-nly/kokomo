@@ -29,7 +29,7 @@
         <p>Plazas disponibles: {{property.available_places}}</p>
 
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
-                <input type="date" name="bookingDate" id="" class="kokomo-input">
+                <input type="date" name="bookingDate"  data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
                 <input type="number" name="numberGuests" id="" min="0" class="kokomo-input">
                 <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
