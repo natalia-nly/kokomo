@@ -48,7 +48,7 @@ function createSchedule(property) {
                         
                         time_box = {
                             day: new Date(currentDay),
-                            start_time: parseFloat(startTime.toFixed(2)),
+                            start_time: startTime.toFixed(2).replace(".",":"),
                             status: true,
                             remaining: property.available_places,
                             total: property.available_places
@@ -73,7 +73,7 @@ function createSchedule(property) {
         if (err) {
             throw err;
         }
-        console.log(`Created ${scheduleObject} schedules`);
+        console.log(`Created ${scheduleObject.property} schedules`);
     });
 }
 

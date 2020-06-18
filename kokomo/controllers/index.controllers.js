@@ -64,6 +64,28 @@ exports.bookingDay = (req, res, next) => {
     });
 };
 
+function uniqueId(stringLength, possible)
+{
+  stringLength =  5;
+  possible = "ABCDEFGHJKMNPQRSTUXY";
+  var text = "";
+
+  for(var i = 0; i < stringLength; i++) {
+    var character = getCharacter(possible);
+    while(text.length > 0 && character === text.substr(-1)) {
+      character = getCharacter(possible);
+    }
+    text += character;
+  }
+
+  return text;
+}
+
+function getCharacter(possible) {
+  return possible.charAt(Math.floor(Math.random() * possible.length));
+}
+
+
 exports.createBooking = (req, res, next) => {
   console.log("Schedule ID: ", req.params.id);
   console.log("Body: ", req.body);
@@ -83,12 +105,13 @@ exports.createBooking = (req, res, next) => {
       //Filtrar el timebox seleccionado
       const timeboxes = resultado[0].time_boxes;
       finalTimebox = timeboxes.filter(element => element._id == req.params.id);
-      console.log("Final timebox: ", finalTimebox);
+      console.log("Final timebox: ", finalTimebox[0].start_time);
       //Crear la reserva
       return Booking.create({
         customer: req.session.currentUser._id,
         property: propertyId,
-        time: day,
+        day: day,
+        time: finalTimebox[0].start_time,
         guests: 4
       });
     })
@@ -97,21 +120,30 @@ exports.createBooking = (req, res, next) => {
       console.log("Reserva creada: ", booking);
       res.render('property/booking-details', booking);
       //actualizar el perfil del cliente
-      const bookingCliente = {
-        id: booking._id, 
-        property: booking.property, 
-        time: booking.time, 
-        guests: booking.guests
-      };
-      Customer.findOneAndUpdate({
-        _id: req.session.currentUser._id
+      Property.findById(booking.property).then(property =>{
+        const bookingCliente = {
+          booking_id: booking._id, 
+          booking_ref: uniqueId(),
+          guests: booking.guests,
+          property: property.name,
+          day: booking.day,
+          time:booking.time
+        };
+        Customer.findOneAndUpdate({
+          _id: req.session.currentUser._id
+          }, {
+          $push: { bookings:  bookingCliente} 
         }, {
-        $push: { bookings:  bookingCliente} 
-      }, {
-        new: true
-      }).then(customer => console.log(customer)).catch(error => {
+          new: true
+        }).then(customer => console.log(customer)).catch(error => {
+          console.log('Error: ', error);
+        });
+      }
+       
+      ).catch(error => {
         console.log('Error: ', error);
-      });
+      })
+      
     })
     .catch(error => {
       console.log('Error: ', error);

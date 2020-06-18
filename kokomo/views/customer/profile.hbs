@@ -7,22 +7,24 @@
 
     <div class="white-card">
 
-        <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Reservas</h3>
+        <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Tus Reservas</h3>
 
         {{#if user.bookings}}
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Property</th>
-                    <th scope="col">Guests</th>
+                    <th scope="col">Código de Reserva</th>
+                    <th scope="col">¿Día?</th>
+                    <th scope="col">¿Hora?</th>
+                    <th scope="col">¿Dónde?</th>
+                    <th scope="col">¿Cuántos somos?</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each user.bookings}}
                 <tr>
-                    <td>{{id}}</td>
+                    <td>{{booking_ref}}</td>
+                    <td>{{day}}</td>
                     <td>{{time}}</td>
                     <td>{{property}}</td>
                     <td>{{guests}}</td>

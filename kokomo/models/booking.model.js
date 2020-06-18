@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const bookingSchema = new Schema({
     customer: {type: Schema.Types.ObjectId, ref: "Customer"},
     property: {type: Schema.Types.ObjectId, ref: "Property"},
-    time: Date,
+    day: Date,
+    time: String,
     guests: Number
 },
 {
