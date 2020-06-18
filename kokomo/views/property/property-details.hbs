@@ -1,5 +1,5 @@
 <div class="home-bg" style="
-    background-image: url({{main_image}});
+    background-image: url({{property.main_image}});
     background-size: 60vw;
     background-position: left center;
     background-repeat: no-repeat">
@@ -8,17 +8,29 @@
     </div>
 
     <div class="white-card">
-        <h2 class="title-search">{{name}}</h2>
-        <h3 class="subtitle-search">{{description}}</h3>
+        <div class="title-heart">
+            <div>
+                <span class="fa-stack fa-2x mr-4">
+                    <i class="fas fa-circle fa-stack-2x orange"></i>
+                    <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div>
+                <h2 class="title-search">{{property.name}}</h2>
+                <h3 class="subtitle-search mb-4">{{property.description}}</h3>
+            </div>
+        </div>
 
-        <h2>{{location.name}}</h2>
 
-        <p>Duración de la reserva: {{booking_duration}}</p>
-        <p>Plazas disponibles: {{available_places}}</p>
+        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
+        <p>
 
-        <form action="/local/{{_id}}" method="POST">
-            <input type="date" name="bookingDate" id="">
-            <input type="submit" value="Ver disponibilidad">
+        <p>Duración de la reserva: {{property.booking_duration}}</p>
+        <p>Plazas disponibles: {{property.available_places}}</p>
+
+        <form action="/local/{{property._id}}" method="POST" class="mt-4">
+                <input type="date" name="bookingDate" id="" class="kokomo-input">
+                <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
     </div>
 </div>

@@ -26,8 +26,11 @@ const customerSchema = new Schema({
     id: {type: Schema.Types.ObjectId, ref: "Booking"}, 
     property: String, 
     time: Date, 
-    guests: Number}]
+    guests: Number}],
+    //favoritos
+    favourites: [{type: Schema.Types.ObjectId, ref: "Property"}],
     }, 
+
     {
     timestamps: {
       createdAt: 'createdAt',

@@ -4,6 +4,7 @@ const Booking = require('../models/booking.model');
 const Customer = require('../models/customer.model');
 
 exports.allProperties = (req, res, next) => {
+
   Property.find()
     .then(allProp => {
       res.render('index', {
@@ -21,7 +22,11 @@ exports.allProperties = (req, res, next) => {
 exports.viewLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
-      res.render("property/property-details", resultado);
+      res.render("property/property-details", {
+        property: resultado,
+        title: `${resultado.name} | KOKOMO`,
+        user: req.session.currentUser
+      });
     })
     .catch(error => {
       console.log('Error: ', error);
@@ -45,12 +50,13 @@ exports.bookingDay = (req, res, next) => {
       const theProperty = resultados[0];
       const schedules = resultados[1];
       const allSchedules = schedules[0].time_boxes;
-
       const finalSchedules = allSchedules.filter(element => element.day.getTime() == newDate.getTime());
 
       res.render("property/booking-options", {
         property: theProperty,
-        schedule: finalSchedules
+        schedule: finalSchedules,
+        user: req.session.currentUser,
+        title: `${theProperty.name} | KOKOMO`,
       });
     })
     .catch(error => {
@@ -84,7 +90,7 @@ exports.createBooking = (req, res, next) => {
         property: propertyId,
         time: day,
         guests: 4
-      })
+      });
     })
     .then(booking => {
       console.log("Customer: ",req.session.currentUser._id);
@@ -96,7 +102,7 @@ exports.createBooking = (req, res, next) => {
         property: booking.property, 
         time: booking.time, 
         guests: booking.guests
-      }
+      };
       Customer.findOneAndUpdate({
         _id: req.session.currentUser._id
         }, {

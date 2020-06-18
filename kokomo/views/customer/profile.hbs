@@ -1,35 +1,50 @@
-<div class="container">
-    <h1>Profile</h1>
-    {{#if user}}
-    <h2>Hola, {{user.username}}</h2>
-    <h3>Reservas</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Time</th>
-                <th scope="col">Property</th>
-                <th scope="col">Guests</th>
-            </tr>
-        </thead>
-        <tbody>
-           {{#each user.bookings}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{time}}</td>
-                <td>{{property}}</td>
-                <td>{{guests}}</td>
-                <td> 
-                    <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a> 
-                    <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a> 
-                    <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a> 
-                </td>
-            </tr>
- {{/each}}
-        </tbody>
-   
-    {{else}}
-    <p>Please, login first!</p>
-    <a href="/login" class="btn btn-primary">Login</a>
-    {{/if}}
+{{#if user}}
+<div class="home-bg">
+    <div class="container-left">
+
+        <h2 class="display-orange"><i class="fas fa-umbrella-beach fa-sm orange"></i> ¡Aloha, {{user.username}}!</h2>
+    </div>
+
+    <div class="white-card">
+
+        <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Reservas</h3>
+
+        {{#if user.bookings}}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Property</th>
+                    <th scope="col">Guests</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each user.bookings}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{time}}</td>
+                    <td>{{property}}</td>
+                    <td>{{guests}}</td>
+                    <td>
+                        <a href="/local/{{_id}}"><i class="far fa-eye ml-4"></i></a>
+                        <a href="/local/{{_id}}/edit"><i class="far fa-edit ml-4"></i></a>
+                        <a href="/local/{{_id}}/delete"><i class="far fa-trash-alt ml-4"></i></a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <p>Todavía no tienes reservas</p>
+        {{/if}}
+
+        <h3 class="section-title mt-4"><i class="fas fa-heart fa-sm blue"></i> Tus favoritos</h3>
+        <p>Todavía no tienes favoritos</p>
+    </div>
 </div>
+
+{{else}}
+<p>Please, login first!</p>
+<a href="/login" class="btn btn-primary">Login</a>
+{{/if}}
