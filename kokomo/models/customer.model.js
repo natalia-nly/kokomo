@@ -29,7 +29,7 @@ const customerSchema = new Schema({
       },
       booking_ref: String,
       property: String,
-      day: Date,
+      day: String,
       time: String,
       guests: Number
     }],

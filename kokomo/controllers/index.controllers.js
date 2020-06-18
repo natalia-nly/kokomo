@@ -70,7 +70,7 @@ exports.bookingDay = (req, res, next) => {
 function uniqueId(stringLength, possible)
 {
   stringLength =  5;
-  possible = "ABCDEFGHJKMNPQRSTUXY";
+  possible = "ABCDEFGHJKMNPQRSTUXY12345";
   var text = "";
 
   for(var i = 0; i < stringLength; i++) {
@@ -88,36 +88,44 @@ function getCharacter(possible) {
   return possible.charAt(Math.floor(Math.random() * possible.length));
 }
 
+function formattedDate(d) {
+  let month = String(d.getMonth() + 1);
+  let day = String(d.getDate());
+  const year = String(d.getFullYear());
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  return `${day}/${month}/${year}`;
+}
 
 exports.createBooking = (req, res, next) => {
   console.log("Schedule ID: ", req.params.id);
   console.log("Body: ", req.body);
 
-  const {
+  let {
     day,
     propertyId,
     guests
   } = req.body;
-  let finalTimebox;
+
 
   Schedule.find({
       property: {
         $eq: propertyId
       }
     })
-    .then(resultado => {
+    .then(([{time_boxes}]) => {
       //Filtrar el timebox seleccionado
-      const timeboxes = resultado[0].time_boxes;
-      finalTimebox = timeboxes.filter(element => element._id == req.params.id);
-      console.log("Final timebox: ", finalTimebox[0].start_time);
+    const [{start_time}] = time_boxes.filter(element => element._id == req.params.id)
       const bookingRef = uniqueId()
+      day =  formattedDate(new Date(day))
+    
       //Crear la reserva
       return Booking.create({
         customer: req.session.currentUser._id,
         property: propertyId,
         day: day,
         booking_ref: bookingRef,
-        time: finalTimebox[0].start_time,
+        time: start_time,
         guests: guests
       });
     })
