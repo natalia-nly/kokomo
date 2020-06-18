@@ -28,6 +28,7 @@
 
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
             <input type="date" name="bookingDate" id="" class="kokomo-input">
+            <input type="number" name="numberGuests" id="" class="kokomo-input">
             <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
 
@@ -39,6 +40,7 @@
                 <form action="/booking/{{this._id}}" method="POST">
                     <input type="hidden" name="propertyId" value="{{../property._id}}">
                     <input type="hidden" name="day" value="{{this.day}}">
+                    <input type="hidden" name="guests" value="{{../guests}}">
                     <input type="submit" class="kokomo-hours" value="{{this.start_time}}">
                 </form>
 

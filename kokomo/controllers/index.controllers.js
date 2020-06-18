@@ -38,6 +38,8 @@ exports.bookingDay = (req, res, next) => {
   const propertyId = req.params.id;
   let bookingDate = req.body.bookingDate;
   let newDate = new Date(bookingDate);
+  let newGuests = req.body.numberGuests;
+  console.log(newGuests)
 
   const p1 = Property.findById(req.params.id);
   const p2 = Schedule.find({
@@ -55,6 +57,7 @@ exports.bookingDay = (req, res, next) => {
       res.render("property/booking-options", {
         property: theProperty,
         schedule: finalSchedules,
+        guests: newGuests,
         user: req.session.currentUser,
         title: `${theProperty.name} | KOKOMO`,
       });
@@ -92,7 +95,8 @@ exports.createBooking = (req, res, next) => {
 
   const {
     day,
-    propertyId
+    propertyId,
+    guests
   } = req.body;
   let finalTimebox;
 
@@ -106,13 +110,15 @@ exports.createBooking = (req, res, next) => {
       const timeboxes = resultado[0].time_boxes;
       finalTimebox = timeboxes.filter(element => element._id == req.params.id);
       console.log("Final timebox: ", finalTimebox[0].start_time);
+      const bookingRef = uniqueId()
       //Crear la reserva
       return Booking.create({
         customer: req.session.currentUser._id,
         property: propertyId,
         day: day,
+        booking_ref: bookingRef,
         time: finalTimebox[0].start_time,
-        guests: 4
+        guests: guests
       });
     })
     .then(booking => {
@@ -123,7 +129,7 @@ exports.createBooking = (req, res, next) => {
       Property.findById(booking.property).then(property =>{
         const bookingCliente = {
           booking_id: booking._id, 
-          booking_ref: uniqueId(),
+          booking_ref: booking.booking_ref,
           guests: booking.guests,
           property: property.name,
           day: booking.day,
