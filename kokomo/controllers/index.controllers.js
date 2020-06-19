@@ -39,7 +39,7 @@ exports.bookingDay = (req, res, next) => {
   let bookingDate = req.body.bookingDate;
   let newDate = new Date(bookingDate);
   let newGuests = req.body.numberGuests;
-  console.log(newGuests)
+  console.log(newGuests);
 
   const p1 = Property.findById(req.params.id);
   const p2 = Schedule.find({
@@ -115,9 +115,9 @@ exports.createBooking = (req, res, next) => {
     })
     .then(([{time_boxes}]) => {
       //Filtrar el timebox seleccionado
-    const [{start_time}] = time_boxes.filter(element => element._id == req.params.id)
-      const bookingRef = uniqueId()
-      day =  formattedDate(new Date(day))
+    const [{start_time}] = time_boxes.filter(element => element._id == req.params.id);
+      const bookingRef = uniqueId();
+      day =  formattedDate(new Date(day));
     
       //Crear la reserva
       return Booking.create({
@@ -160,7 +160,7 @@ exports.createBooking = (req, res, next) => {
        
       ).catch(error => {
         console.log('Error: ', error);
-      })
+      });
       
     })
     .catch(error => {
@@ -173,9 +173,11 @@ exports.deleteBooking = (req, res) => {
   const bookingRef = req.params.booking_ref;
   console.log("BOOKING REF", bookingRef);
   const p1 = Booking.findOneAndDelete({booking_ref: {$eq: bookingRef}});
-  const p2 = Customer.findOne(
-    {"bookings.booking_ref": {$eq: bookingRef}}
-  );
+  const p2 =Customer.findByIdAndUpdate({
+    _id: req.session.currentUser._id
+    }, {
+    $pull: { bookings: {booking_ref:bookingRef}} 
+  });
 
   Promise.all([p1, p2])
     .then(resultados => {

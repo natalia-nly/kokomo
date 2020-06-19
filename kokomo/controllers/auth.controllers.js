@@ -79,13 +79,15 @@ exports.login = (req, res, next) => {
       .catch(error => next(error));
 };
 
-exports.profile = (req, res) => {
-    
+exports.profile = (req, res, next) => {
     console.log("Sesión: ", req.session);
-    res.render('customer/profile', {
-        user: req.session.currentUser,
-        title: 'Mi perfil | KOKOMO'
-    });
+    Customer.findById(req.session.currentUser._id).then(user => {
+        res.render('customer/profile', {
+            user,
+            title: 'Mi perfil | KOKOMO'
+        });
+    }).catch(error => next(error));
+    
 };
 
 exports.logout = (req, res) => {
