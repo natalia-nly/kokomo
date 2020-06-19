@@ -19,6 +19,10 @@ router.post('/login', auth_controller.login);
 // GET de la ruta profile del customer
 router.get('/profile', auth_controller.profile);
 
+router.get('/profile/edit', auth_controller.profileEdit);
+router.post('/profile/edit', auth_controller.profileChange);
+router.get('/profile/delete', auth_controller.deleteAccount);
+
 router.get('/logout', auth_controller.logout);
 
 module.exports = router;

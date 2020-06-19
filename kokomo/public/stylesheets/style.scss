@@ -145,7 +145,7 @@ h1 {
   padding: 20px;
 
   .property-card {
-    width: 40vw;
+    width: 50vw;
     margin-top: -80px;
 
     img {
@@ -187,17 +187,18 @@ h1 {
 
   .container-left {
     padding: 40px !important;
-    width: 50vw;
+    width: 40vw;
   }
 
   .white-card {
-    width: 50vw;
+    width: 60vw;
     height: 100vh;
     background-color: $cream;
     padding: 26px 0px 26px 50px;
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
 
   }

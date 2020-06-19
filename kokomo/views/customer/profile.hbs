@@ -11,7 +11,7 @@
     </div>
 
     <div class="white-card">
-
+    <a href="/profile/edit" class="btn btn-secondary mb-4"><i class="fas fa-user-cog"></i> Configuración</a>
         <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Tus Reservas</h3>
 
         {{#if user.bookings}}
@@ -19,10 +19,8 @@
             <thead>
                 <tr>
                     <th scope="col">Código de Reserva</th>
-                    <th scope="col">¿Día?</th>
-                    <th scope="col">¿Hora?</th>
-                    <th scope="col">¿Dónde?</th>
-                    <th scope="col">¿Cuántos somos?</th>
+                    <th scope="col">Detalles</th>                   
+                    <th scope="col">¿Dónde?</th>                 
                     <th></th>
                 </tr>
             </thead>
@@ -30,12 +28,14 @@
                 {{#each user.bookings}}
                 <tr>
                     <td>{{booking_ref}}</td>
-                    <td>{{day}}</td>
-                    <td>{{time}}</td>
-                    <td>{{property}}</td>
-                    <td>{{guests}}</td>
                     <td>
-                        <a href="/booking/delete/{{booking_ref}}"><i class="far fa-trash-alt ml-4"></i>Cancelar reserva</a>
+                        <i class="far fa-calendar-check"></i> {{day}} <br>
+                        <i class="far fa-clock"></i> {{time}} <br>
+                        <i class="fas fa-users"></i> {{guests}} personas
+                    </td>             
+                    <td>{{property}}</td>
+                    <td>
+                        <a href="/booking/delete/{{booking_ref}}" class="btn btn-warning"><i class="far fa-trash-alt mr-2"></i>Cancelar reserva</a>
                     </td>
                 </tr>
                 {{/each}}

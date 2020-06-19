@@ -90,6 +90,45 @@ exports.profile = (req, res, next) => {
     
 };
 
+exports.profileEdit = (req, res, next) => {
+
+    Customer.findById(req.session.currentUser._id).then(user => {
+        res.render('customer/edit', {
+            user,
+            title: 'Editar mi perfil | KOKOMO'
+        });
+    }).catch(error => next(error));
+    
+};
+
+exports.profileChange = (req, res, next) => {
+    const { id, oldPassword, newPassword } = req.body;
+
+    if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)){
+        Customer.findByIdAndUpdate(id, newPassword, {new: true})
+        .then(resultado => {
+        res.render('customer/edit', {
+            user: req.session.currentUser,
+            title: 'Editar mi perfil | KOKOMO',
+            infoMessage: '¡Contraseña cambiada! ✌️'
+        });
+        }).catch(error => next(error));
+    } else  {
+        res.render('customer/edit', {
+            user: req.session.currentUser,
+            title: 'Editar mi perfil | KOKOMO',
+            errorMessage: 'Tu contraseña actual no es correcta'
+        });
+    }
+};
+
+exports.deleteAccount = (req, res, next) => {
+    Customer.findByIdAndDelete(req.session.currentUser._id)
+    .then(user => {
+        res.redirect('/');
+    }).catch(error => next(error));
+};
+
 exports.logout = (req, res) => {
     req.session.destroy();
     res.redirect("/");
