@@ -1,0 +1,55 @@
+<div class="home-bg" style="
+    background-image: url({{property.main_image}});
+    background-size: 60vw;
+    background-position: left center;
+    background-repeat: no-repeat">
+    <div class="container-left">
+
+    </div>
+
+    <div class="white-card">
+        <div class="title-heart">
+            <div>
+                <span class="fa-stack fa-2x mr-4">
+                    <i class="fas fa-circle fa-stack-2x orange"></i>
+                    <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div>
+                <h2 class="title-search">{{property.name}}</h2>
+                <h3 class="subtitle-search mb-4">{{property.description}}</h3>
+            </div>
+        </div>
+
+        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
+        <p>
+
+        <p>Duración de la reserva: {{property.booking_duration}}</p>
+        <p>Plazas disponibles: {{property.available_places}}</p>
+
+        <form action="/local/{{property._id}}" method="POST" class="mt-4">
+            <input type="date" name="bookingDate" id="" class="kokomo-input">
+            <input type="number" name="numberGuests" min="0" id="" class="kokomo-input">
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
+        </form>
+
+        <h3 class="mt-4 mb-4 section-title">Horas disponibles</h3>
+        <div class="row">
+            {{#if schedule}}
+            {{#each schedule}}
+            <div class="col-auto mb-3">
+                <form action="/booking/{{this._id}}" method="POST">
+                    <input type="hidden" name="propertyId" value="{{../property._id}}">
+                    <input type="hidden" name="day"  value="{{this.day}}">
+                    <input type="hidden" name="guests" value="{{../guests}}">
+                    <input type="submit" class="kokomo-hours" value="{{this.start_time}}">
+                </form>
+
+            </div>
+            {{/each}}
+            {{else}}
+            <p>¡Ups! 😅 No hay reservas disponibles para este día.</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

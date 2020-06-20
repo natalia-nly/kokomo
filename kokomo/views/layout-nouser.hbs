@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    
     <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: rgba(255, 255, 255, 0);">
         <a class="navbar-brand" href="/">KOKOMO</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
@@ -23,19 +24,19 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Inicio</a>
+                    <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile"> <i class="far fa-user-circle"></i> {{user.username}}</a>
+                    <a class="nav-link" href="/signup">Regístrate ahora</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+                    <a class="nav-link" href="/login">Inicia sesión</a>
                 </li>
+                
             </ul>
         </div>
     </nav>
-
-    
+  
 
     {{{body}}}
 

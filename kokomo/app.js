@@ -18,6 +18,9 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 require('./config/db.config');
 
 const app = express();
+//Session
+const createSession = require('./config/session.config');
+createSession(app);
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -40,14 +43,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
 // default value for title local
-app.locals.title = 'Kokomo';
+app.locals.title = 'KOKOMO';
 
 
-
+//ROUTES
 const index = require('./routes/index.routes');
+const auth = require('./routes/auth.routes');
+
 app.use('/', index);
+app.use('/', auth);
+
 
 
 module.exports = app;

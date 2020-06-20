@@ -3,14 +3,12 @@ const Schema = mongoose.Schema;
 
 const propertySchema = new Schema({
     name: String,
-    descriptions: [{
-        language: String,
-        description: String
-    }],
+    description: String,
     categories: {
         type: [String],
         enum: ['Chillout', 'Surfer', 'Restaurante', 'Discoteca', 'Bar']
       },
+    main_image: String,
     media:[String],
     location: {
         name: String,
@@ -22,7 +20,7 @@ const propertySchema = new Schema({
             opening_day: Date,
             closing_day: Date
         },
-        week_days:[String],
+        week_days:[Number],
         opening_times:[
             {
             opening_time: Number,
@@ -39,7 +37,6 @@ const propertySchema = new Schema({
     }],
     rating: Number,
     bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}],
-    schedule: [{type: Schema.Types.ObjectId, ref: "Schedule"}]
     },
     {
         timestamps: {

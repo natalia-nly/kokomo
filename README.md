@@ -55,11 +55,15 @@ Geo Location:
 
 ## **ROUTES:**
 
-- GET /locals
-- GET /locals/availabilities
-- GET /local
-- GET /local/availability
-- POST /local/booking
+| Method | URL                    | Description                   |
+| ------ | ---------------------- | ----------------------------- |
+| GET    | /locals                | Listado de todos los locales  |
+| GET    | /locals/availabilities | Disponibilidad de los locales |
+| GET    | /local                 | Vista de un local             |
+| GET    | /local/availability    | Disponibilidad de un local    |
+| POST   | /local/booking         | Reservar en un local          |
+
+
 
 ## **Models**
 
