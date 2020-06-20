@@ -124,17 +124,20 @@ exports.createBooking = (req, res, next) => {
     })
     .then(([{time_boxes}]) => {
       //Filtrar el timebox seleccionado
-    const [{start_time}] = time_boxes.filter(element => element._id == req.params.id);
+
+      const finalTimebox = time_boxes.filter(element => element._id == req.params.id);
+      const [{start_time}] = time_boxes.filter(element => element._id == req.params.id);
       const bookingRef = uniqueId();
       day =  formattedDate(new Date(day));
+      const remainingUpdate = finalTimebox.remaining - guests;
     
-      //Crear la reserva
+      //Crear la reserva en la colección de bookings
       return Booking.create({
         customer: req.session.currentUser._id,
         property: propertyId,
         day: day,
         booking_ref: bookingRef,
-        time: start_time,
+        time: start_time,//finalTimebox.start_time
         guests: guests
       });
     })
@@ -146,7 +149,9 @@ exports.createBooking = (req, res, next) => {
         user: req.session.currentUser,
         title: `Reserva creada | KOKOMO`,
       });
-      //actualizar el perfil del cliente
+    
+      // Actualizar el perfil del cliente 
+      // Buscando la property para coger el nombre del local
       Property.findById(booking.property).then(property =>{
         const bookingCliente = {
           booking_id: booking._id, 
@@ -156,6 +161,7 @@ exports.createBooking = (req, res, next) => {
           day: booking.day,
           time:booking.time
         };
+        // Actualizar el customer añadiéndole la reserva con el nombre del local
         Customer.findOneAndUpdate({
           _id: req.session.currentUser._id
           }, {

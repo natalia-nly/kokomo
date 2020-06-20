@@ -9,8 +9,7 @@ const scheduleSchema = new Schema({
 		end_time: Number,
 		status: Boolean,
 		remaining: Number,
-        total: Number,
-        bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}]
+        total: Number
 	}]
 },
 {

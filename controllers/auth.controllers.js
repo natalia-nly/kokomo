@@ -8,6 +8,11 @@ exports.signUp = (req, res, next) => res.render('auth/signup', {
     layout: 'layout-nouser'
 });
 
+exports.signUpLocal = (req, res, next) => res.render('auth/signup-owner', { 
+    title: '¡Crea tu cuenta! | KOKOMO',
+    layout: 'layout-nouser'
+});
+
 exports.registerCustomer = (req, res, next) => {
     
     const {
@@ -59,6 +64,58 @@ exports.registerCustomer = (req, res, next) => {
         });
 };
 
+exports.registerOwner = (req, res, next) => {
+    
+    const {
+        username,
+        telephone,
+        email,
+        password
+    } = req.body;
+    if (!username || !telephone || !email || !password) {
+        res.render('auth/signup', {
+            errorMessage: 'Necesitas completar todos los campos para crear tu cuenta'
+        });
+        return;
+    }
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(password)) {
+        res.status(500).render('auth/signup', {
+            errorMessage: 'La contraseña debe tener al menos 6 caracteres y debe contener, por lo menos, una letra minúscula, una mayúscula y un número.'
+        });
+        return;
+    }
+    bcrypt.genSalt(saltRounds)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hashedPassword => {
+            return Customer.create({
+                username,
+                email,
+                telephone,
+                passwordHash: hashedPassword,
+                owner: true
+            });
+        }).then(userFromDB => {
+            console.log('Customer creado: ', userFromDB.username);
+            req.session.currentUser = userFromDB;
+            console.log(userFromDB);
+            res.redirect('/');
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.status(400).render('auth/signup', {
+                    errorMessage: error.message
+                });
+            } else if (error.code === 11000) {
+                res.status(400).render('auth/signup', {
+                    errorMessage: 'El username ya existe...'
+                });
+            } else {
+                next(error);
+            }
+        });
+};
+
 exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO',  layout: 'layout-nouser' });
 
 exports.login = (req, res, next) => {
@@ -88,14 +145,26 @@ exports.login = (req, res, next) => {
       .catch(error => next(error));
 };
 
+
 exports.profile = (req, res, next) => {
     console.log("Sesión: ", req.session);
-    Customer.findById(req.session.currentUser._id).then(user => {
-        res.render('customer/profile', {
-            user,
-            title: 'Mi perfil | KOKOMO'
-        });
-    }).catch(error => next(error));
+
+    if(req.session.currentUser.owner) {
+        Customer.findById(req.session.currentUser._id).then(user => {
+            res.render('owner/profile', {
+                user,
+                title: 'Mi perfil | KOKOMO'
+            });
+        }).catch(error => next(error));
+    } else {
+        Customer.findById(req.session.currentUser._id).then(user => {
+            res.render('customer/profile', {
+                user,
+                title: 'Mi perfil | KOKOMO'
+            });
+        }).catch(error => next(error));
+    }
+    
     
 };
 

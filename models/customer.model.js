@@ -42,6 +42,16 @@ const customerSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Property"
     }],
+    // boolean para saber si es owner
+    owner: {
+      type: Boolean,
+      default: false
+    },
+    // lista de sus locales
+    ownProperties: [{
+      type: Schema.Types.ObjectId,
+      ref: "Property"
+    }]
   },
 
   {

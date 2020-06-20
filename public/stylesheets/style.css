@@ -18,8 +18,6 @@
 --------------------------------------------- */
 /* ## Fonts
 --------------------------------------------- */
-/* # 02. HOME
----------------------------------------------------------------------------------------------------- */
 body {
   padding: 0px; }
 
@@ -51,6 +49,48 @@ p {
 .cream {
   color: #FBF7F3; }
 
+/* ## Botones
+--------------------------------------------- */
+.btn-kokomo {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: 5px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+
+.btn-kokomo-success {
+  color: #fff;
+  background-color: #0AC5A3;
+  border-color: #0AC5A3; }
+  .btn-kokomo-success:hover {
+    color: #fff;
+    background-color: #0ac09f;
+    border-color: #0ac09f; }
+
+.btn-kokomo-grey {
+  color: #fff;
+  background-color: #C9C0B6;
+  border-color: #C9C0B6; }
+  .btn-kokomo-grey:hover {
+    color: #fff;
+    background-color: #c7bdb3;
+    border-color: #c7bdb3; }
+
+.btn-kokomo-danger {
+  color: #fff;
+  background-color: #FF8D69;
+  border-color: #FF8D69; }
+  .btn-kokomo-danger:hover {
+    color: #fff;
+    background-color: #ff8964;
+    border-color: #ff8964; }
+
 nav .navbar-brand {
   font-family: bely-display, sans-serif;
   font-weight: 400;
@@ -60,13 +100,15 @@ nav .navbar-toggler, nav i {
   border: none;
   color: #3294BB; }
 
+/* # 02. HOME
+---------------------------------------------------------------------------------------------------- */
 h2.hero-subtitle {
   color: #809EAA;
   text-align: center;
   font-size: 22px; }
 
 .hero {
-  padding: 80px 0 40px 0; }
+  padding: 50px 0 40px 0; }
 
 h1 {
   color: #3294BB; }
@@ -78,6 +120,11 @@ h1 {
   padding-bottom: 4px;
   font-family: bely-display, sans-serif; }
 
+.subtitle-search {
+  font-size: 16px;
+  color: #809EAA;
+  font-weight: 100; }
+
 .title-search-home {
   font-size: 20px;
   color: #3294BB;
@@ -85,10 +132,11 @@ h1 {
   padding-bottom: 4px;
   padding-left: 32px; }
 
-.subtitle-search {
+.subtitle-search-home {
   font-size: 16px;
   color: #809EAA;
-  font-weight: 100; }
+  font-weight: 100;
+  padding-left: 32px; }
 
 .search-form {
   padding-bottom: 50px; }
@@ -105,7 +153,7 @@ h1 {
   overflow: scroll;
   padding: 20px; }
   .properties-group .property-card {
-    width: 50vw;
+    width: 40vw;
     margin-top: -80px; }
     .properties-group .property-card img {
       width: 100%;
@@ -123,16 +171,20 @@ h1 {
       font-size: 13px; }
 
 .display-blue {
-  font-size: 40px;
+  font-size: 26px;
   color: #3294BB;
   font-family: bely-display, sans-serif;
   font-weight: 600;
-  padding: 30px; }
+  padding: 10px 30px; }
 
 .container-left {
   padding: 40px !important;
   width: 100vw;
   height: 40vh; }
+
+.table-bookings {
+  max-height: 50vh;
+  overflow: scroll; }
 
 .image-background {
   background-size: 100vw;
@@ -225,6 +277,10 @@ h3.section-title {
   color: #809EAA;
   padding: 10px 20px; }
 
+/* # 01. MEDIA QUERIES
+---------------------------------------------------------------------------------------------------- */
+/* ## MEDIA QUERIES PANTALLAS +768px
+--------------------------------------------- */
 @media all and (min-width: 768px) {
   .home-bg {
     display: flex;
@@ -241,7 +297,7 @@ h3.section-title {
     width: 60vw;
     height: 100vh;
     background-color: #FBF7F3;
-    padding: 26px 0px 26px 50px;
+    padding: 26px 40px 26px 50px;
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
@@ -277,6 +333,8 @@ h3.section-title {
     color: #809EAA;
     font-weight: 100;
     padding-left: 0; }
+  .subtitle-search-home {
+    padding-left: 0px; }
   .properties-group {
     padding: 40px 0; }
     .properties-group .property-card {

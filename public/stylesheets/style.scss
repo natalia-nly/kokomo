@@ -22,6 +22,9 @@ $orange: #FFBA69;
 $text-color: #809EAA;
 $cream: #FBF7F3;
 $light-blue: #e8f5fb;
+$success: #0AC5A3;
+$danger: #FF8D69;
+$grey: #C9C0B6;
 
 /* ## Fonts
 --------------------------------------------- */
@@ -30,8 +33,6 @@ $heading-font: bely-display, sans-serif;
 
 
 
-/* # 02. HOME
----------------------------------------------------------------------------------------------------- */
 
 body {
   padding: 0px;
@@ -74,6 +75,61 @@ p {
   color: $cream;
 }
 
+/* ## Botones
+--------------------------------------------- */
+
+.btn-kokomo {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: 5px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-kokomo-success {
+  color: #fff;
+  background-color: $success;
+  border-color: $success;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($success, 1);
+    border-color: darken($success, 1);
+  }
+}
+
+.btn-kokomo-grey {
+  color: #fff;
+  background-color: $grey;
+  border-color: $grey;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($grey, 1);
+    border-color: darken($grey, 1);
+  }
+}
+
+.btn-kokomo-danger{
+  color: #fff;
+  background-color: $danger;
+  border-color: $danger;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($danger, 1);
+    border-color: darken($danger, 1);
+  }
+}
+
+
+
 nav {
   .navbar-brand {
     font-family: $heading-font;
@@ -87,6 +143,8 @@ nav {
   }
 }
 
+/* # 02. HOME
+---------------------------------------------------------------------------------------------------- */
 
 h2.hero-subtitle {
   color: $text-color;
@@ -95,7 +153,7 @@ h2.hero-subtitle {
 }
 
 .hero {
-  padding: 80px 0 40px 0;
+  padding: 50px 0 40px 0;
 }
 
 h1 {
@@ -110,6 +168,13 @@ h1 {
   font-family: $heading-font;
 }
 
+.subtitle-search {
+  font-size: 16px;
+  color: $text-color;
+  font-weight: 100;
+}
+
+
 .title-search-home {
   font-size: 20px;
   color: $blue;
@@ -118,10 +183,11 @@ h1 {
   padding-left: 32px;
 }
 
-.subtitle-search {
+.subtitle-search-home {
   font-size: 16px;
   color: $text-color;
   font-weight: 100;
+  padding-left: 32px;
 }
 
 .search-form {
@@ -144,7 +210,7 @@ h1 {
   padding: 20px;
 
   .property-card {
-    width: 50vw;
+    width: 40vw;
     margin-top: -80px;
 
     img {
@@ -170,17 +236,22 @@ h1 {
 }
 
 .display-blue {
-  font-size: 40px;
+  font-size: 26px;
   color: $blue;
   font-family: $heading-font;
   font-weight: 600;
-  padding: 30px;
+  padding: 10px 30px;
 }
 
 .container-left {
   padding: 40px !important;
   width: 100vw;
   height: 40vh;
+}
+
+.table-bookings {
+ max-height: 50vh;
+ overflow: scroll;
 }
 
 .image-background {
@@ -298,7 +369,13 @@ h3.section-title {
 }
 
 
-// MEDIA QUERIES PANTALLAS +768px
+
+/* # 01. MEDIA QUERIES
+---------------------------------------------------------------------------------------------------- */
+
+/* ## MEDIA QUERIES PANTALLAS +768px
+--------------------------------------------- */
+
 @media all and (min-width: 768px){
   .home-bg {
     display: flex;
@@ -321,7 +398,7 @@ h3.section-title {
     width: 60vw;
     height: 100vh;
     background-color: $cream;
-    padding: 26px 0px 26px 50px;
+    padding: 26px 40px 26px 50px;
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
@@ -368,6 +445,10 @@ h3.section-title {
     color: $text-color;
     font-weight: 100;
     padding-left: 0;
+  }
+
+  .subtitle-search-home {
+    padding-left: 0px;
   }
 
   .properties-group {
