@@ -20,7 +20,8 @@ router.post('/login', auth_controller.login);
 router.get('/profile', auth_controller.profile);
 
 router.get('/profile/edit', auth_controller.profileEdit);
-router.post('/profile/edit', auth_controller.profileChange);
+router.post('/profile/editPassword', auth_controller.profilePasswordChange);
+router.post('/profile/editTelephone', auth_controller.profileTelephoneChange);
 router.get('/profile/delete', auth_controller.deleteAccount);
 
 router.get('/logout', auth_controller.logout);

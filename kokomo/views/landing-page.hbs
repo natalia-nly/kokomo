@@ -1,0 +1,33 @@
+<div class="home-bg">
+    <div class="container p-4">
+        <div class="hero">
+            <h2 class="display-blue text-center">LANDING PAGE Este verano<br>no te quedes sin planes</h2>
+            <h2 class="hero-subtitle">Reserva en los mejores locales de tu zona</h2>
+        </div>
+
+
+        <form action="" class="search-form">
+            <input type="search" name="" class="form-control ds-input" placeholder="Buscar...">
+        </form>
+    </div>
+
+    <div class="white-card-home">
+        <h2 class="title-search-home">Nuestros chiringuitos</h2>
+        <h3 class="subtitle-search">¡Reserva ahora!</h3>
+        <div class="properties-group">
+            {{#each properties}}
+            <a href="/local/{{_id}}">
+                <div class="property-card">
+                    <span class="fa-stack fa-2x float-right heart-home">
+                        <i class="fas fa-circle fa-stack-2x orange"></i>
+                        <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <img src="{{main_image}}" alt="">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                </div>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</div>

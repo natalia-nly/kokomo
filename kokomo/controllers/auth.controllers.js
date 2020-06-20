@@ -3,15 +3,20 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 
-exports.signUp = (req, res, next) => res.render('auth/signup', { title: '¡Crea tu cuenta! | KOKOMO' });
+exports.signUp = (req, res, next) => res.render('auth/signup', { 
+    title: '¡Crea tu cuenta! | KOKOMO',
+    layout: 'layout-nouser'
+});
 
 exports.registerCustomer = (req, res, next) => {
+    
     const {
         username,
+        telephone,
         email,
         password
     } = req.body;
-    if (!username || !email || !password) {
+    if (!username || !telephone || !email || !password) {
         res.render('auth/signup', {
             errorMessage: 'Necesitas completar todos los campos para crear tu cuenta'
         });
@@ -53,7 +58,7 @@ exports.registerCustomer = (req, res, next) => {
         });
 };
 
-exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO' });
+exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO',  layout: 'layout-nouser' });
 
 exports.login = (req, res, next) => {
     if(req.session.currentUser){
@@ -104,11 +109,23 @@ exports.profileEdit = (req, res, next) => {
     
 };
 
-exports.profileChange = (req, res, next) => {
-    const { id, oldPassword, newPassword } = req.body;
+exports.profileTelephoneChange = (req, res, next) => {
+    const { id, newTelephone} = req.body;
+        Customer.findByIdAndUpdate(id, newTelephone,{new: true})
+        .then(resultado => {
+        res.render('customer/edit', {
+            user: req.session.currentUser,
+            title: 'Editar mi perfil | KOKOMO',
+            infoMessage: '¡Número de Teléfono cambiado! ✌️'
+        });
+        }).catch(error => next(error));
+};
+
+exports.profilePasswordChange = (req, res, next) => {
+    const { id, oldPassword, newPassword} = req.body;
 
     if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)){
-        Customer.findByIdAndUpdate(id, newPassword, {new: true})
+        Customer.findByIdAndUpdate(id, newPassword,{new: true})
         .then(resultado => {
         res.render('customer/edit', {
             user: req.session.currentUser,

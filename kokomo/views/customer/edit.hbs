@@ -19,10 +19,28 @@
         </div>
 
         <h3 class="section-title"><i class="far fa-edit"></i> Edita tus datos</h3>
+                    {{!-- info message will be added here --}}
+            {{#if infoMessage}}
+            <p class="info">{{infoMessage}}</p>
+            {{/if}}
 
-        <form action="/profile/edit" method="POST">
+        <form action="/profile/editTelephone" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">
+             <div class="form-group">
+                <label for="telephone">Nuevo Teléfono</label>
+                <input type="telephone" name="newTelephone" id="input-telephone" placeholder="Nuevo número de teléfono"
+                    class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">Cambiar teléfono</button>
 
+            {{!-- error message will be added here --}}
+            {{#if errorMessage}}
+            <p class="error">{{errorMessage}}</p>
+            {{/if}}
+        </form>
+
+        <form action="/profile/editPassword" method="POST">
+            <input type="hidden" name="id" value="{{user._id}}">
             <div class="form-group">
                 <label for="password">Contraseña actual</label>
                 <input type="password" name="oldPassword" id="input-password" placeholder="********"
@@ -41,10 +59,7 @@
             <p class="error">{{errorMessage}}</p>
             {{/if}}
 
-            {{!-- info message will be added here --}}
-            {{#if infoMessage}}
-            <p class="info">{{infoMessage}}</p>
-            {{/if}}
+
         </form>
 
     </div>

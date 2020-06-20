@@ -9,6 +9,10 @@ const customerSchema = new Schema({
       required: [true, 'Username is required.'],
       unique: true
     },
+    //Número de teléfono del cliente
+    telNumber:{
+      type: Number
+    },
     //email del cliente
     email: {
       type: String,

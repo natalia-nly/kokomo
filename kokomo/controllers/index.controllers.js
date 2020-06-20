@@ -7,11 +7,20 @@ exports.allProperties = (req, res, next) => {
 
   Property.find()
     .then(allProp => {
-      res.render('index', {
-        properties: allProp,
-        title: 'KOKOMO | ¡Haz tu reserva!',
-        user: req.session.currentUser
-      });
+      if(req.session.currentUser){
+        res.render('index', {
+          properties: allProp,
+          title: 'KOKOMO | ¡Haz tu reserva!',
+          user: req.session.currentUser
+        });
+      } else {
+        res.render('landing-page', {
+          properties: allProp,
+          title: 'KOKOMO | ¡Haz tu reserva!',
+          layout: 'layout-nouser'
+        });
+      }
+      
     })
     .catch(error => {
       console.log('Error while getting the properties from the DB: ', error);
