@@ -56,6 +56,9 @@ exports.registerCustomer = (req, res, next) => {
 exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO' });
 
 exports.login = (req, res, next) => {
+    if(req.session.currentUser){
+        return res.redirect('/profile');
+    }
     const { email, password } = req.body;
     if (email === '' || password === '') {
       res.render('auth/login', {

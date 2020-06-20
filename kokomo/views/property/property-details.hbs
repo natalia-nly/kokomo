@@ -20,22 +20,41 @@
                 <h3 class="subtitle-search mb-4">{{property.description}}</h3>
             </div>
         </div>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Descripción</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">Comentarios</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">Horarios</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
 
-
-        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}<p>
+        <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
+        <p>
 
         <p>Duración de la reserva: {{property.booking_duration}}</p>
         <p>Plazas disponibles: {{property.available_places}}</p>
 
         {{#if user}}
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
-                <input type="date" name="bookingDate"  data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
-                <input type="number" name="numberGuests" id="" min="0" class="kokomo-input">
-                <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
+            <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
+            <input type="number" name="numberGuests" id="" min="0" class="kokomo-input">
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
         {{else}}
-        <p>Necesitas una cuenta para poder hacer reservas.</p>
-        <a href="/signup" class="btn">Regístrate ahora</a>
+        <div class="mt-4 border-top">
+            <p>Necesitas una cuenta para poder hacer reservas.</p>
+            <a href="/signup" class="btn btn-success mt-3">Regístrate ahora</a>
+        </div>
+
         {{/if}}
     </div>
 </div>

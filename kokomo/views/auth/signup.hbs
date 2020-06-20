@@ -1,12 +1,16 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+<div class="home-bg" style="
+    background-image: url(/images/water.jpg);
+    background-size: 60vw;
+    background-position: left center;
+    background-repeat: no-repeat">
 
-        </div>
-        <div class="col-md-6">
-            <div id="signup">
-                <h2>Signup</h2>
-                <form action="/signup" method="POST">
+    <div class="container-left">
+
+        <h2 class="display-cream"><i class="fas fa-umbrella-beach fa-sm cream"></i><br> ¡Aloha!</h2>
+    </div>
+
+    <div class="white-card">
+    <form action="/signup" method="POST" style="width: 60%;">
                     <div class="form-group">
                         <label for="input-username">Username</label>
                         <input type="text" id="input-username" name="username" placeholder="Your username"
@@ -24,17 +28,13 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-success">Create account</button>
+                    <button type="submit" class="btn btn-success">Crear cuenta</button>
 
                     {{!-- error message will be added here --}}
                     {{#if errorMessage}}
                     <p class="error">{{errorMessage}}</p>
                     {{/if}}
                 </form>
-            </div>
-        </div>
-        <div class="col-md-3">
 
-        </div>
     </div>
 </div>

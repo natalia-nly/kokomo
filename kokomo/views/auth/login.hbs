@@ -1,12 +1,16 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+<div class="home-bg" style="
+    background-image: url(/images/water.jpg);
+    background-size: 60vw;
+    background-position: left center;
+    background-repeat: no-repeat">
 
-        </div>
-        <div class="col-md-6">
-            <div id="signup">
-                <h2>Login</h2>
-                <form action="/login" method="POST">
+    <div class="container-left">
+
+        <h2 class="display-cream"><i class="fas fa-umbrella-beach fa-sm cream"></i><br> ¡Aloha!</h2>
+    </div>
+
+    <div class="white-card">
+    <form action="/login" method="POST" style="width: 60%;">
                     <div class="form-group">
                         <label for="input-email">Email</label>
                         <input type="email" id="input-email" name="email" placeholder="Your email"
@@ -25,10 +29,6 @@
                     <p class="error">{{errorMessage}}</p>
                     {{/if}}
                 </form>
-            </div>
-        </div>
-        <div class="col-md-3">
 
-        </div>
     </div>
 </div>
