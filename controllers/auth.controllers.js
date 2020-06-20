@@ -35,6 +35,7 @@ exports.registerCustomer = (req, res, next) => {
             return Customer.create({
                 username,
                 email,
+                telephone,
                 passwordHash: hashedPassword
             });
         }).then(userFromDB => {
