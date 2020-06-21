@@ -1,0 +1,97 @@
+{{#if user}}
+<div class="home-bg" style="
+    background-image: url(/images/water.jpg);
+    background-size: 60vw;
+    background-position: left center;
+    background-repeat: no-repeat">
+
+    <div class="container-left">
+
+        <h2 class="display-cream"><i class="fas fa-umbrella-beach fa-sm cream"></i><br> ¡Aloha, <br>{{user.username}}!
+        </h2>
+    </div>
+
+    <div class="white-card">
+        <div class ="input-form">
+        <form action="/signup-local" method="POST" style="width: 60%;">
+            <div class="form-group">
+                <label for="input-name">Nombre</label>
+                <input type=" text" id="input-name" name="name" placeholder="Nombre del local"
+                    class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="input-description">Descripción</label>
+                <input type="text" id="input-description" name="description" placeholder="Descripción"
+                    class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="input-categories">Categoría</label>
+                <input list="categories" type="categories" id="input-categories" name="categories"
+                    placeholder="Categoría" class="form-control">
+                <datalist id="categories">
+                    <option value="Chillout">
+                    <option value="Surfer">
+                    <option value="Restaurante">
+                    <option value="Discoteca">
+                    <option value="Bar">
+                </datalist>
+                </input>
+            </div>
+                         <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+                                        <div class="form-group">
+                        <label for="input-password">Password</label>
+                        <input type="password" name="password" id="input-password" placeholder="********"
+                            class="form-control" />
+                    </div>
+        </form>
+        </div>
+<button type="submit" class="btn btn-success">Crear cuenta</button>
+    </div>
+
+
+
+
+    
+
+    {{!-- error message will be added here --}}
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    </form>
+
+</div>
+</div>
+
+{{else}}
+<p>Please, login first!</p>
+<a href="/login" class="btn btn-primary">Login</a>
+{{/if}}

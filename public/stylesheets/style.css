@@ -193,6 +193,7 @@ h1 {
   height: 40vh; }
 
 .white-card {
+  overflow: scroll;
   width: 100vw;
   height: 60vh;
   background-color: #FBF7F3;
@@ -294,6 +295,7 @@ h3.section-title {
     padding: 40px !important;
     width: 40vw; }
   .white-card {
+    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: #FBF7F3;
@@ -303,7 +305,10 @@ h3.section-title {
     flex-direction: column;
     justify-content: center;
     margin-top: 0px; }
+  .input-form {
+    overflow: scroll; }
   .white-card-home {
+    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: #FBF7F3;

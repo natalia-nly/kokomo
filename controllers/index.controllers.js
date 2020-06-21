@@ -3,6 +3,13 @@ const Schedule = require('../models/schedule.model');
 const Booking = require('../models/booking.model');
 const Customer = require('../models/customer.model');
 
+exports.createLocal = (req, res, next) =>res.render('owner/create-local', { 
+  title: 'Crea tu local | KOKOMO',
+  layout: 'layout',
+  user: req.session.currentUser
+});
+
+
 exports.allProperties = (req, res, next) => {
 
   Property.find()
@@ -171,7 +178,7 @@ exports.createBooking = (req, res, next) => {
 
         // GUARDANDO LA RESERVA EN LA PROPERTY
         Property.findByIdAndUpdate(booking.property, {
-          $push: { bookings:  bookingCliente.booking_id} 
+          $push: { bookings:  bookingCliente.booking_ref} 
         }, {new: true}).then(customer => console.log(customer)).catch(error => {
           console.log('Error: ', error);
         });

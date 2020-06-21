@@ -254,6 +254,7 @@ h1 {
  overflow: scroll;
 }
 
+
 .image-background {
   background-size: 100vw;
   background-position: center center;
@@ -262,6 +263,7 @@ h1 {
 }
 
 .white-card {
+  overflow: scroll;
   width: 100vw;
     height: 60vh;
     background-color: #FBF7F3;
@@ -272,7 +274,9 @@ h1 {
     justify-content: flex-start;
     margin-top: -50px;
 
+
 }
+
 
 .title-heart {
   display: flex;
@@ -395,6 +399,7 @@ h3.section-title {
   }
 
   .white-card {
+    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: $cream;
@@ -405,8 +410,12 @@ h3.section-title {
     justify-content: center;
     margin-top: 0px;
   }
+  .input-form {
+    overflow: scroll;
+  }
 
   .white-card-home {
+    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: $cream;
