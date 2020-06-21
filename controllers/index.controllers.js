@@ -10,6 +10,129 @@ exports.createLocal = (req, res, next) =>res.render('owner/create-local', {
 });
 
 
+
+
+function createSchedule(property) {
+
+    const timeRanges = property.opening_hours;
+    console.log(timeRanges)
+    const bookTime = property.booking_duration;
+    var scheduleObject = {
+        property: property._id,
+        time_boxes: []
+    };
+    let newSchedule;
+    timeRanges.forEach(timeRange => {
+        const openDays = (timeRange.opening_days.closing_day.getTime() - timeRange.opening_days.opening_day.getTime()) / (1000 * 3600 * 24);
+        const weekDays = timeRange.week_days;
+        var currentDay = timeRange.opening_days.opening_day;
+    
+        for (let i = 0; i < openDays; i++) {
+            if (weekDays.includes(currentDay.getDay())) {
+                timeRange.opening_times.forEach(opening => {
+                    var interval = bookTime / 60;
+                    let hours = opening.closing_time - opening.opening_time;
+                    let total = hours / interval;
+                    let t = opening.opening_time;
+                    let rest = 0;
+                    let startTime = t+rest;
+                    var time_box = {
+                        day: currentDay,
+                        start_time: startTime,
+                        status: true,
+                        remaining: property.available_places,
+                        total: property.available_places
+                    }
+                    for (let j = 0; j < total; j++) {
+                        t = t + (bookTime / 100);
+
+                        if ((t - Math.floor(t)) >= 0.60) {
+                            let rest = (t - Math.floor(t)) - 0.60;
+                            t = Math.floor(t) + rest + 1;
+
+                        }
+                        
+                        time_box = {
+                            day: new Date(currentDay),
+                            start_time: startTime.toFixed(2).replace(".",":"),
+                            status: true,
+                            remaining: property.available_places,
+                            total: property.available_places
+                        };
+                        scheduleObject.time_boxes.push(time_box)
+                        startTime = t+rest;
+                        
+                    }
+                })
+                newSchedule = JSON.parse(JSON.stringify(scheduleObject));
+                
+                currentDay.setDate(currentDay.getDate() + 1);
+              
+            } else {
+                currentDay.setDate(currentDay.getDate() + 1);
+            }
+        }
+    });
+   Schedule.create(newSchedule, err => {
+        if (err) {
+            throw err;
+        }
+        console.log(`Created ${scheduleObject.property} schedules`);
+    });
+}
+
+exports.registerLocal = (req, res, next) =>{
+  console.log(req.body)
+  Property.create( 
+    {
+      owner: req.session.currentUser,
+      name: req.body.name,
+      description: req.body.description,
+    categories:[req.body.categories],
+    main_image: req.body.image,
+    media:[req.body.media],
+    location: {
+      name: req.body.ubication,
+      lat: req.body.latitude,
+      long: req.body.longitude
+  },
+  opening_hours:[{
+    opening_days:{
+      opening_day: req.body.opening,
+      closing_day: req.body.closing
+    },
+    week_days:[req.body.monday,req.body.tuesday, req.body.wednesday, req.body.thursday, req.body.friday, req.body.saturday, req.body.sunday],
+    opening_times:[
+        {
+          opening_time: req.body.openhour,
+          closing_time: req.body.closehour
+        }
+    ]
+  }],
+  booking_duration: req.body.duration,
+  available_places: req.body.places,
+  }).then (property =>{
+    createSchedule(property);
+    Customer.findByIdAndUpdate(req.session.currentUser._id, 
+      {
+        $push: { ownProperties:  property._id} 
+      }, {
+        new: true
+      }).then(customer => console.log(customer)).catch(error => {
+        console.log('Error: ', error);
+      });
+
+    res.render('owner/created-local', { 
+      title: 'Local creado | KOKOMO',
+      layout: 'layout',
+      user: req.session.currentUser,
+      property
+    });
+  } )
+
+;};
+
+
 exports.allProperties = (req, res, next) => {
 
   Property.find()

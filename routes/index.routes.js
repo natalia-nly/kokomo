@@ -17,5 +17,7 @@ router.get('/booking/delete/:booking_ref', index_controller.deleteBooking);
 
 router.get('/profile/create-local', index_controller.createLocal);
 
+router.post('/profile/create-local', index_controller.registerLocal);
+
 
 module.exports = router;

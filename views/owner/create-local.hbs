@@ -12,75 +12,113 @@
     </div>
 
     <div class="white-card">
-        <div class ="input-form">
-        <form action="/signup-local" method="POST" style="width: 60%;">
-            <div class="form-group">
-                <label for="input-name">Nombre</label>
-                <input type=" text" id="input-name" name="name" placeholder="Nombre del local"
-                    class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="input-description">Descripción</label>
-                <input type="text" id="input-description" name="description" placeholder="Descripción"
-                    class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="input-categories">Categoría</label>
-                <input list="categories" type="categories" id="input-categories" name="categories"
-                    placeholder="Categoría" class="form-control">
-                <datalist id="categories">
-                    <option value="Chillout">
-                    <option value="Surfer">
-                    <option value="Restaurante">
-                    <option value="Discoteca">
-                    <option value="Bar">
-                </datalist>
-                </input>
-            </div>
-                         <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-                                        <div class="form-group">
-                        <label for="input-password">Password</label>
-                        <input type="password" name="password" id="input-password" placeholder="********"
-                            class="form-control" />
-                    </div>
-        </form>
+        <div class="input-form">
+            <form action="/profile/create-local" method="POST" style="width: 60%;">
+                <div class="form-group">
+                    <label for="input-name">Nombre</label>
+                    <input type=" text" id="input-name" name="name" placeholder="Nombre del local"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-description">Descripción</label>
+                    <input type="text" id="input-description" name="description" placeholder="Inserte la Descripción"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-categories">Categoría</label>
+                    <input list="categories" type="categories" id="input-categories" name="categories"
+                        placeholder="Inserte la Categoría" class="form-control">
+                    <datalist id="categories">
+                        <option value="Chillout">
+                        <option value="Surfer">
+                        <option value="Restaurante">
+                        <option value="Discoteca">
+                        <option value="Bar">
+                    </datalist>
+                    </input>
+                </div>
+                <div class="form-group">
+                    <label for="input-image">Imagen Principal</label>
+                    <input type="url" name="image-main" id="input-image-main" placeholder="Inserte la Imagen principal"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-media">Imagen Secundaria</label>
+                    <input type="url" name="image-media" id="input-image-media"
+                        placeholder="Inserte la Imagen principal" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-ubication">Ubicación</label>
+                    <input type="text" name="ubication" id="input-ubication"
+                        placeholder="Inserte la dirección del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-latitude">Latitud</label>
+                    <input type="number" name="latitude" id="input-latitude" placeholder="Inserte la latitud del local"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-longitude">Longitud</label>
+                    <input type="number" name="longitude" id="input-longitude"
+                        placeholder="Inserte la longitud del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-opening">Día de apertura</label>
+                    <input type="date" name="opening" id="input-opening"
+                        placeholder="Inserte el día de apertura del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-closing">Día de cierre</label>
+                    <input type="date" name="closing" id="input-closing"
+                        placeholder="Inserte el día de cierre del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-days">Días de la semana</label><br>
+                    <label for="input-monday">Lunes</label>
+                    <input type="checkbox" name="monday" id="input-monday" value=1 class="form-control" />
+                    <label for="input-tuesday">Martes</label>
+                    <input type="checkbox" name="tuesday" id="input-tuesday" value=2 class="form-control" />
+                    <label for="input-wednesday">Miércoles</label>
+                    <input type="checkbox" name="wednesday" id="input-wednesday" value=3 class="form-control" />
+                    <label for="input-thursday">Jueves</label>
+                    <input type="checkbox" name="thursday" id="input-thursday" value=4 class="form-control" />
+                    <label for="input-friday">Viernes</label>
+                    <input type="checkbox" name="friday" id="input-friday" value=5 class="form-control" />
+                    <label for="input-saturday">Sábado</label>
+                    <input type="checkbox" name="saturday" id="input-saturday" value=6 class="form-control" />
+                    <label for="input-sunday">Domingo</label>
+                    <input type="checkbox" name="sunday" id="input-sunday" value=0 class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-openhour">Hora de apertura</label>
+                    <input type="number" name="openhour" id="input-openhour"
+                        placeholder="Inserte la hora de apertura del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-closehour">Hora de cierre</label>
+                    <input type="number" name="closehour" id="input-closehour"
+                        placeholder="Inserte la hora de cierre del local" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-duration">Duración de la reserva</label>
+                    <input type="number" name="duration" id="input-duration"
+                        placeholder="Inserte la duración, en min, de la reserva" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="input-places">Plazas</label>
+                    <input type="number" name="places" id="input-places"
+                        placeholder="Inserte el número de plazas disponibles del local" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-success">Crear propiedad y horarios</button>
+            </form>
         </div>
-<button type="submit" class="btn btn-success">Crear cuenta</button>
+
     </div>
 
 
 
 
-    
+
 
     {{!-- error message will be added here --}}
     {{#if errorMessage}}
