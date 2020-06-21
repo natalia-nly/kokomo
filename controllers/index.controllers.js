@@ -51,17 +51,14 @@ exports.bookingDay = (req, res, next) => {
   console.log(newGuests);
 
   const p1 = Property.findById(req.params.id);
-  const p2 = Schedule.find({
-    property: {
-      $eq: propertyId
-    }
-  });
+  const p2 = Schedule.find({property: {$eq: propertyId}});
+
   Promise.all([p1, p2])
     .then(resultados => {
       const theProperty = resultados[0];
       const schedules = resultados[1];
       const allSchedules = schedules[0].time_boxes;
-      const finalSchedules = allSchedules.filter(element => element.day.getTime() == newDate.getTime());
+      const finalSchedules = allSchedules.filter(element => element.day.getTime() == newDate.getTime() && element.remaining >= newGuests);
 
       res.render("property/booking-options", {
         property: theProperty,
@@ -107,42 +104,43 @@ function formattedDate(d) {
 }
 
 exports.createBooking = (req, res, next) => {
+
   console.log("Schedule ID: ", req.params.id);
   console.log("Body: ", req.body);
 
-  let {
-    day,
-    propertyId,
-    guests
-  } = req.body;
+  let {day, propertyId, guests} = req.body;
+ 
+  ////////////////////////////////////
 
-
-  Schedule.find({
-      property: {
-        $eq: propertyId
-      }
-    })
+  Schedule.find({"time_boxes._id": {$eq: req.params.id}})
     .then(([{time_boxes}]) => {
       //Filtrar el timebox seleccionado
-
-      const finalTimebox = time_boxes.filter(element => element._id == req.params.id);
+      const [finalTimebox] = time_boxes.filter(element => element._id == req.params.id);
       const [{start_time}] = time_boxes.filter(element => element._id == req.params.id);
       const bookingRef = uniqueId();
       day =  formattedDate(new Date(day));
       const remainingUpdate = finalTimebox.remaining - guests;
     
+
+      Schedule.updateOne(
+        { property: propertyId, "time_boxes._id": req.params.id },
+        { $set: { "time_boxes.$.remaining" : remainingUpdate } }
+      ).then(finalbox => console.log(finalbox));
+
+      
       //Crear la reserva en la colección de bookings
       return Booking.create({
         customer: req.session.currentUser._id,
         property: propertyId,
         day: day,
         booking_ref: bookingRef,
-        time: start_time,//finalTimebox.start_time
+        time: finalTimebox.start_time,
         guests: guests
       });
+
     })
     .then(booking => {
-      console.log("Customer: ",req.session.currentUser._id);
+      //console.log("Customer: ",req.session.currentUser._id);
       console.log("Reserva creada: ", booking);
       res.render('property/booking-details', {
         booking: booking,
@@ -162,13 +160,19 @@ exports.createBooking = (req, res, next) => {
           time:booking.time
         };
         // Actualizar el customer añadiéndole la reserva con el nombre del local
-        Customer.findOneAndUpdate({
-          _id: req.session.currentUser._id
-          }, {
+        Customer.findByIdAndUpdate(req.session.currentUser._id, 
+        {
           $push: { bookings:  bookingCliente} 
         }, {
           new: true
         }).then(customer => console.log(customer)).catch(error => {
+          console.log('Error: ', error);
+        });
+
+        // GUARDANDO LA RESERVA EN LA PROPERTY
+        Property.findByIdAndUpdate(booking.property, {
+          $push: { bookings:  bookingCliente.booking_id} 
+        }, {new: true}).then(customer => console.log(customer)).catch(error => {
           console.log('Error: ', error);
         });
       }
