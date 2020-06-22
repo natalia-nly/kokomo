@@ -147,7 +147,7 @@ exports.login = (req, res, next) => {
 
 
 exports.profile = (req, res, next) => {
-    console.log("Sesión: ", req.session);
+    console.log("SESSION: ", req.session);
 
     if(req.session.currentUser.owner) {
         Customer.findById(req.session.currentUser._id).then(user => {

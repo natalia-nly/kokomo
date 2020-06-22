@@ -10,14 +10,55 @@
 
     <div class="white-card">
         <div>
-            <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mb-4"><i class="fas fa-user-cog"></i>
+            <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mb-4 mt-5"><i class="fas fa-user-cog"></i>
                 Configuración</a>
         </div>
 
         <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Tus Reservas</h3>
 
         {{#if user.bookings}}
-        <div class="table-bookings">
+        {{#each user.bookings}}
+        <div class="div-booking">
+            <div>
+                <p>
+                    <span class="fa-stack fa-lg">
+                        <i class="fas fa-square fa-stack-2x orange-20"></i>
+                        <i class="far fa-calendar-check fa-stack-1x orange"></i>
+                    </span>
+                    {{day}}
+                </p>
+                <p>
+                    <span class="fa-stack fa-lg">
+                        <i class="fas fa-square fa-stack-2x orange-20"></i>
+                        <i class="far fa-clock fa-stack-1x orange"></i>
+                    </span>
+                    {{time}} 
+                </p>
+                <p>
+                    <span class="fa-stack fa-lg">
+                        <i class="fas fa-square fa-stack-2x orange-20"></i>
+                        <i class="fas fa-users fa-stack-1x orange"></i>
+                    </span>
+                    {{guests}} personas 
+                </p>
+                <p>
+                    <span class="fa-stack fa-lg">
+                        <i class="fas fa-square fa-stack-2x orange-20"></i>
+                        <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+                    </span>
+                    {{property}}
+                </p>
+            </div>
+            <div>
+                <p class="mb-4 text-right"><span class="booking-ref">{{booking_ref}}</span></p>
+                
+                <a href="/booking/delete/{{booking_ref}}" class="btn-kokomo btn-kokomo-grey float-right">Cancelar reserva</a>
+            </div>
+            
+        </div>
+        {{/each}}
+
+        {{!-- <div class="table-bookings">
             <table class="table">
                 <thead>
                     <tr>
@@ -45,7 +86,7 @@
                     {{/each}}
                 </tbody>
             </table>
-        </div>
+        </div> --}}
         {{else}}
         <p>Todavía no tienes reservas</p>
         {{/if}}

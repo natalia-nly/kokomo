@@ -26,6 +26,7 @@ $success: #0AC5A3;
 $danger: #FF8D69;
 $grey: #C9C0B6;
 
+
 /* ## Fonts
 --------------------------------------------- */
 $text-font: europa, sans-serif;
@@ -65,6 +66,10 @@ p {
 
 .orange {
   color: $orange;
+}
+
+.orange-20 {
+  color: rgba($orange, .2);
 }
 
 .blue {
@@ -128,7 +133,29 @@ p {
   }
 }
 
+.navbar-kokomo {
+  background-color: $cream;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  border-radius: 26px 26px 0 0;
 
+  ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    margin: 0;
+
+    li {
+      list-style: none;
+      font-size: 20px;
+
+      a {
+        font-size: 28px;
+        color: $blue;
+      }
+    }
+  }
+
+}
 
 nav {
   .navbar-brand {
@@ -263,7 +290,6 @@ h1 {
 }
 
 .white-card {
-  overflow: scroll;
   width: 100vw;
     height: 60vh;
     background-color: #FBF7F3;
@@ -311,9 +337,17 @@ h1 {
 
 .display-form {
   width: 100%;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  
+  div {
+    width: 100%;
+
+    .kokomo-input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 h2.display-orange {
@@ -325,7 +359,7 @@ h2.display-orange {
 h2.display-cream {
   color: $cream;
   font-family: $heading-font;
-  font-size: 60px;
+  font-size: 20px;
 }
 
 .emoji {
@@ -372,7 +406,24 @@ h3.section-title {
     padding: 10px 20px;
 }
 
+.div-booking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(141, 136, 131, 0.2);
+  margin: 10px 0;
+  padding: 20px;
+}
 
+.booking-ref {
+  background-color: $blue;
+  color: $cream;
+  padding: 4px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
 
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
@@ -399,7 +450,6 @@ h3.section-title {
   }
 
   .white-card {
-    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: $cream;
@@ -415,7 +465,6 @@ h3.section-title {
   }
 
   .white-card-home {
-    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: $cream;
@@ -424,6 +473,7 @@ h3.section-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0px;
   }
 
   .title-heart {

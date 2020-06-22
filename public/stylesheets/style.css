@@ -43,6 +43,9 @@ p {
 .orange {
   color: #FFBA69; }
 
+.orange-20 {
+  color: rgba(255, 186, 105, 0.2); }
+
 .blue {
   color: #3294BB; }
 
@@ -90,6 +93,22 @@ p {
     color: #fff;
     background-color: #ff8964;
     border-color: #ff8964; }
+
+.navbar-kokomo {
+  background-color: #FBF7F3;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  border-radius: 26px 26px 0 0; }
+  .navbar-kokomo ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    margin: 0; }
+    .navbar-kokomo ul li {
+      list-style: none;
+      font-size: 20px; }
+      .navbar-kokomo ul li a {
+        font-size: 28px;
+        color: #3294BB; }
 
 nav .navbar-brand {
   font-family: bely-display, sans-serif;
@@ -193,7 +212,6 @@ h1 {
   height: 40vh; }
 
 .white-card {
-  overflow: scroll;
   width: 100vw;
   height: 60vh;
   background-color: #FBF7F3;
@@ -226,9 +244,13 @@ h1 {
 
 .display-form {
   width: 100%;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 1fr 1fr; }
+  display: flex;
+  flex-wrap: wrap; }
+  .display-form div {
+    width: 100%; }
+    .display-form div .kokomo-input {
+      width: 100%;
+      margin-bottom: 10px; }
 
 h2.display-orange {
   color: #FFBA69;
@@ -238,7 +260,7 @@ h2.display-orange {
 h2.display-cream {
   color: #FBF7F3;
   font-family: bely-display, sans-serif;
-  font-size: 60px; }
+  font-size: 20px; }
 
 .emoji {
   width: 24px;
@@ -278,6 +300,23 @@ h3.section-title {
   color: #809EAA;
   padding: 10px 20px; }
 
+.div-booking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(141, 136, 131, 0.2);
+  margin: 10px 0;
+  padding: 20px; }
+
+.booking-ref {
+  background-color: #3294BB;
+  color: #FBF7F3;
+  padding: 4px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px; }
+
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 /* ## MEDIA QUERIES PANTALLAS +768px
@@ -295,7 +334,6 @@ h3.section-title {
     padding: 40px !important;
     width: 40vw; }
   .white-card {
-    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: #FBF7F3;
@@ -308,7 +346,6 @@ h3.section-title {
   .input-form {
     overflow: scroll; }
   .white-card-home {
-    overflow: scroll;
     width: 60vw;
     height: 100vh;
     background-color: #FBF7F3;
@@ -316,7 +353,8 @@ h3.section-title {
     border-radius: 50px 0 0 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center; }
+    justify-content: center;
+    margin-top: 0px; }
   .title-heart {
     display: flex;
     flex-direction: row;
