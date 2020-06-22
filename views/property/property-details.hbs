@@ -1,5 +1,5 @@
 <div class="home-bg image-background" style="
-    background-image: url({{property.main_image}})">
+    background-image: url({{property.mainImage}})">
     <div class="container-left">
 
     </div>
@@ -34,18 +34,22 @@
                 <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
                 </p>
 
-                <p>Duración de la reserva: {{property.booking_duration}}</p>
-                <p>Plazas disponibles: {{property.available_places}}</p>
+                <p>Duración de la reserva: {{property.bookingDuration}}</p>
+                <p>Plazas disponibles: {{property.availablePlaces}}</p>
             </div>
             <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">...</div>
             <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
                 <h3 class="subtitle-search mb-4">Días de apertura</h3>
-                {{#each property.opening_hours}}
-                <p><i class="fas fa-map-marker-alt"></i> {{opening_days.opening_day }}
-                </p>
+                {{#each property.openingHours}}
+                <p>Día de apertura: <span id="openingDay1">{{openingDays.openingDay}}</span></p>
 
-                <p>Duración de la reserva: {{property.booking_duration}}</p>
-                <p>Plazas disponibles: {{property.available_places}}</p>
+                <p>Día de cierre: <span id="closingDay1">{{openingDays.closingDay}}</span></p>
+
+                <p>Días de la semana: {{weekDays}}</p>
+                {{#each opening_times}}
+                <p>Hora de apertura: {{openingTime}}</p>
+                <p>Hora de cierre: {{closingTime}}</p>
+                {{/each}}
                 {{/each}}
             </div>
         </div>
@@ -58,8 +62,7 @@
                     <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
                 </div>
                 <div>
-                    <input type="number" name="numberGuests" id="" min="0" class="kokomo-input"
-                        placeholder="Personas">
+                    <input type="number" name="numberGuests" id="" min="0" class="kokomo-input" placeholder="Personas">
                 </div>
             </div>
             <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">

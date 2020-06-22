@@ -1,5 +1,5 @@
 <div class="home-bg" style="
-    background-image: url({{property.main_image}});
+    background-image: url({{property.mainImage}});
     background-size: 60vw;
     background-position: left center;
     background-repeat: no-repeat">
@@ -24,8 +24,8 @@
         <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
         <p>
 
-        <p>Duración de la reserva: {{property.booking_duration}}</p>
-        <p>Plazas disponibles: {{property.available_places}}</p>
+        <p>Duración de la reserva: {{property.bookingDuration}}</p>
+        <p>Plazas disponibles: {{property.availablePlaces}}</p>
 
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
             <input type="date" name="bookingDate" id="" class="kokomo-input">
@@ -42,7 +42,7 @@
                     <input type="hidden" name="propertyId" value="{{../property._id}}">
                     <input type="hidden" name="day"  value="{{this.day}}">
                     <input type="hidden" name="guests" value="{{../guests}}">
-                    <input type="submit" class="kokomo-hours" value="{{this.start_time}}">
+                    <input type="submit" class="kokomo-hours" value="{{this.startTime}}">
                 </form>
 
             </div>

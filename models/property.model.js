@@ -8,26 +8,26 @@ const propertySchema = new Schema({
         type: [String],
         enum: ['Chillout', 'Surfer', 'Restaurante', 'Discoteca', 'Bar']
     },
-    main_image: String,
+    mainImage: String,
     media: [String],
     location: {
         name: String,
         lat: Number,
         long: Number
     },
-    opening_hours: [{
-        opening_days: {
-            opening_day: Date,
-            closing_day: Date
+    openingHours: [{
+         openingDays: {
+             openingDay: Date,
+            closingDay: Date
         },
-        week_days: [Number],
-        opening_times: [{
-            opening_time: Number,
-            closing_time: Number
+       weekDays: [Number],
+        openingTimes: [{
+            openingTime: Number,
+            closingTime: Number
         }]
     }],
-    booking_duration: Number,
-    available_places: Number,
+    bookingDuration: Number,
+    availablePlaces: Number,
     comments: [{
         username: String,
         day: Date,
