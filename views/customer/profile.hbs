@@ -30,7 +30,7 @@
                 <tbody>
                     {{#each user.bookings}}
                     <tr>
-                        <td>{{booking_ref}}</td>
+                        <td>{{bookingRef}}</td>
                         <td>
                             <i class="far fa-calendar-check"></i> {{day}} <br>
                             <i class="far fa-clock"></i> {{time}} <br>
@@ -38,7 +38,7 @@
                         </td>
                         <td>{{property}}</td>
                         <td>
-                            <a href="/booking/delete/{{booking_ref}}" class="btn btn-warning"><i
+                            <a href="/booking/delete/{{bookingRef}}" class="btn btn-warning"><i
                                     class="far fa-trash-alt mr-2"></i>Cancelar reserva</a>
                         </td>
                     </tr>

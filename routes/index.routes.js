@@ -19,5 +19,7 @@ router.get('/profile/create-local', index_controller.createLocal);
 
 router.post('/profile/create-local', index_controller.registerLocal);
 
+router.get('/owner/property/:id', index_controller.ownerViewLocal);
+
 
 module.exports = router;

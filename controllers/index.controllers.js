@@ -196,6 +196,20 @@ exports.viewLocal = (req, res, next) => {
     });
 
 };
+exports.ownerViewLocal = (req, res, next) => {
+  Property.findById(req.params.id)
+    .then(resultado => {
+      res.render("owner/property-details", {
+        property: resultado,
+        title: `${resultado.name} | KOKOMO`,
+        user: req.session.currentUser
+      });
+    })
+    .catch(error => {
+      console.log('Error: ', error);
+    });
+
+};
 
 exports.bookingDay = (req, res, next) => {
   const propertyId = req.params.id;
