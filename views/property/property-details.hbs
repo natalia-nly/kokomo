@@ -32,13 +32,22 @@
                 aria-labelledby="nav-description-tab">
                 <h3 class="subtitle-search mb-4">{{property.description}}</h3>
                 <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
-                <p>
+                </p>
 
                 <p>Duración de la reserva: {{property.booking_duration}}</p>
                 <p>Plazas disponibles: {{property.available_places}}</p>
             </div>
             <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">...</div>
-            <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">...</div>
+            <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
+                <h3 class="subtitle-search mb-4">Días de apertura</h3>
+                {{#each property.opening_hours}}
+                <p><i class="fas fa-map-marker-alt"></i> {{opening_days.opening_day }}
+                </p>
+
+                <p>Duración de la reserva: {{property.booking_duration}}</p>
+                <p>Plazas disponibles: {{property.available_places}}</p>
+                {{/each}}
+            </div>
         </div>
 
 
