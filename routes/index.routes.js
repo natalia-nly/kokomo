@@ -13,11 +13,13 @@ router.post('/local/:id', index_controller.bookingDay);
 
 router.post('/booking/:id', index_controller.createBooking);
 
-router.get('/booking/delete/:booking_ref', index_controller.deleteBooking);
+router.get('/booking/delete/:bookingRef', index_controller.deleteBooking);
 
 router.get('/profile/create-local', index_controller.createLocal);
 
 router.post('/profile/create-local', index_controller.registerLocal);
+
+router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
 
 module.exports = router;

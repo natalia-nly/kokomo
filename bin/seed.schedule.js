@@ -11,33 +11,33 @@ Schedule.collection.drop();
 
 function createSchedule(property) {
 
-    const timeRanges = property.opening_hours;
-    const bookTime = property.booking_duration;
+    const timeRanges = property.opningHours;
+    const bookTime = property.bookingDuration;
     var scheduleObject = {
         property: property._id,
         time_boxes: []
     };
     let newSchedule;
     timeRanges.forEach(timeRange => {
-        const openDays = (timeRange.opening_days.closing_day.getTime() - timeRange.opening_days.opening_day.getTime()) / (1000 * 3600 * 24);
-        const weekDays = timeRange.week_days;
-        var currentDay = timeRange.opening_days.opening_day;
+        const openDays = (timeRange. openingDays.closingDay.getTime() - timeRange.openingDays.openingDay.getTime()) / (1000 * 3600 * 24);
+        const weekDays = timeRange.weekDays;
+        var currentDay = timeRange.openingDays.openingDay;
     
         for (let i = 0; i < openDays; i++) {
             if (weekDays.includes(currentDay.getDay())) {
                 timeRange.opening_times.forEach(opening => {
                     var interval = bookTime / 60;
-                    let hours = opening.closing_time - opening.opening_time;
+                    let hours = opening.closingTime - opening.openingTime;
                     let total = hours / interval;
-                    let t = opening.opening_time;
+                    let t = opening.openingTime;
                     let rest = 0;
                     let startTime = t+rest;
-                    var time_box = {
+                    var timeBox = {
                         day: currentDay,
-                        start_time: startTime,
+                        startTime: startTime,
                         status: true,
-                        remaining: property.available_places,
-                        total: property.available_places
+                        remaining: property.availablePlaces,
+                        total: property.availablePlaces
                     }
                     for (let j = 0; j < total; j++) {
                         t = t + (bookTime / 100);
@@ -48,14 +48,14 @@ function createSchedule(property) {
 
                         }
                         
-                        time_box = {
+                        timeBox = {
                             day: new Date(currentDay),
-                            start_time: startTime.toFixed(2).replace(".",":"),
+                            startTime: startTime.toFixed(2).replace(".",":"),
                             status: true,
-                            remaining: property.available_places,
-                            total: property.available_places
+                            remaining: property.availablePlaces,
+                            total: property.availablePlaces
                         };
-                        scheduleObject.time_boxes.push(time_box)
+                        scheduleObject.time_boxes.push(timeBox)
                         startTime = t+rest;
                         
                     }

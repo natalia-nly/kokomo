@@ -19,21 +19,22 @@
         </div>
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
-                    role="tab" aria-controls="nav-description" aria-selected="true">Descripción</a>
+                <a class="nav-item nav-link " id="nav-description-tab" data-toggle="tab" href="#nav-description"
+                    role="tab" aria-controls="nav-description" aria-selected="false">Descripción</a>
                 <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
                     aria-controls="nav-comments" aria-selected="false">Comentarios</a>
                 <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
                     aria-controls="nav-openings" aria-selected="false">Horarios</a>
+                <a class="nav-item nav-link active" id="nav-reservations-tab" data-toggle="tab" href="#nav-reservations"
+                    role="tab" aria-controls="nav-reservations" aria-selected="true">Reservas</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
+            <div class="tab-pane fade" id="nav-description" role="tabpanel"
                 aria-labelledby="nav-description-tab">
                 <h3 class="subtitle-search mb-4">{{property.description}}</h3>
                 <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
                 </p>
-
                 <p>Duración de la reserva: {{property.bookingDuration}}</p>
                 <p>Plazas disponibles: {{property.availablePlaces}}</p>
             </div>
@@ -50,6 +51,13 @@
                 <p>Hora de apertura: {{openingTime}}</p>
                 <p>Hora de cierre: {{closingTime}}</p>
                 {{/each}}
+                {{/each}}
+            </div>
+            <div class="tab-pane fade show active" id="nav-reservations" role="tabpanel" aria-labelledby="nav-reservations-tab">
+                <h3 class="subtitle-search mb-4">Reservas activas: {{property.bookings.length}}</h3>
+
+                {{#each property.bookings}}
+                <p>Código de la reserva: {{bookingRef}}</span></p>
                 {{/each}}
             </div>
         </div>
