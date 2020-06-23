@@ -37,6 +37,9 @@ h1, h2, h3, h4, h5, h6, p {
 p {
   color: #809EAA; }
 
+.body-container {
+  margin: 15px; }
+
 .padding-menu {
   padding-top: 100px; }
 
@@ -51,6 +54,9 @@ p {
 
 .cream {
   color: #FBF7F3; }
+
+.blue-background {
+  background-color: #e7eff3; }
 
 /* ## Botones
 --------------------------------------------- */
@@ -95,20 +101,38 @@ p {
     border-color: #ff8964; }
 
 .navbar-kokomo {
-  background-color: #FBF7F3;
+  background-color: #3294BB;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
-  border-radius: 26px 26px 0 0; }
+  border-radius: 26px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 10px; }
   .navbar-kokomo ul {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 30px;
-    margin: 0; }
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 10px 12px;
+    margin: 0;
+    width: 100%; }
     .navbar-kokomo ul li {
       list-style: none;
-      font-size: 20px; }
+      font-size: 20px;
+      border-radius: 30px;
+      background-color: #3294BB;
+      padding: 10px; }
       .navbar-kokomo ul li a {
         font-size: 28px;
-        color: #3294BB; }
+        color: #FBF7F3; }
+
+.search-icon-menu {
+  background-color: #FBF7F3 !important;
+  margin-top: -25px;
+  padding: 20px !important;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45); }
+  .search-icon-menu a {
+    color: #3294BB !important; }
 
 nav .navbar-brand {
   font-family: bely-display, sans-serif;
@@ -119,15 +143,72 @@ nav .navbar-toggler, nav i {
   border: none;
   color: #3294BB; }
 
+.form-group {
+  position: relative;
+  margin-bottom: 2rem; }
+  .form-group input {
+    font-family: europa, sans-serif;
+    color: #809EAA;
+    width: 100%;
+    outline: none;
+    padding: 2px 0;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgba(255, 186, 105, 0.2);
+    vertical-align: top;
+    margin-bottom: 30px; }
+    .form-group input:focus {
+      border-bottom: 2px solid #FFBA69; }
+  .form-group textarea {
+    max-width: 100%;
+    max-height: 10.25rem;
+    min-height: 5.125rem;
+    min-width: 100%; }
+  .form-group label {
+    color: #809EAA;
+    font-family: europa, sans-serif;
+    font-size: 16px;
+    font-weight: 500; }
+    .form-group label.label {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      font-size: 1rem;
+      line-height: 1rem;
+      margin-left: 1rem;
+      -webkit-transition: all .3s ease;
+      -o-transition: all .3s ease;
+      transition: all .3s ease; }
+      .form-group label.label.active {
+        top: -18px;
+        margin-left: 0;
+        font-size: 12px;
+        line-height: 0.75rem;
+        color: #809EAA; }
+
 /* # 02. HOME
 ---------------------------------------------------------------------------------------------------- */
 h2.hero-subtitle {
   color: #809EAA;
-  text-align: center;
-  font-size: 22px; }
+  font-size: 22px;
+  font-weight: 100; }
+
+.hero-title {
+  font-size: 30px;
+  color: #49636d;
+  padding-bottom: 10px; }
 
 .hero {
-  padding: 50px 0 40px 0; }
+  padding: 10px 0; }
+
+.hero-arrow-phone {
+  font-size: 35px;
+  margin-left: -6px;
+  color: #d0dde2;
+  margin-top: 10px; }
+
+.hero-arrow-desktop {
+  display: none; }
 
 h1 {
   color: #3294BB; }
@@ -146,10 +227,11 @@ h1 {
 
 .title-search-home {
   font-size: 20px;
+  font-family: bely-display, sans-serif;
   color: #3294BB;
   font-weight: 600;
-  padding-bottom: 4px;
-  padding-left: 32px; }
+  padding-bottom: 20px;
+  padding-left: 20px; }
 
 .subtitle-search-home {
   font-size: 16px;
@@ -206,7 +288,7 @@ h1 {
   overflow: scroll; }
 
 .image-background {
-  background-size: 100vw;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   height: 40vh; }
@@ -221,6 +303,13 @@ h1 {
   flex-direction: column;
   justify-content: flex-start;
   margin-top: -50px; }
+
+.banner-profile {
+  background-image: url("/images/water.jpg");
+  background-size: cover;
+  padding: 50px;
+  border-radius: 20px;
+  margin-top: 10px; }
 
 .title-heart {
   display: flex;
@@ -322,19 +411,51 @@ h3.section-title {
 /* ## MEDIA QUERIES PANTALLAS +768px
 --------------------------------------------- */
 @media all and (min-width: 768px) {
+  .body-container {
+    margin-left: 140px; }
+  .hero {
+    min-width: 20vw; }
   .home-bg {
     display: flex;
     align-items: center;
     min-height: 100vh; }
+  .hero-arrow-phone {
+    display: none; }
+  .hero-arrow-desktop {
+    display: block;
+    font-size: 35px;
+    margin-left: -6px;
+    color: #d0dde2;
+    margin-top: 10px; }
+  .navbar-kokomo {
+    box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+    border-radius: 26px;
+    position: fixed;
+    top: 0;
+    right: auto;
+    width: auto;
+    margin: 10px; }
+    .navbar-kokomo ul {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 12px;
+      margin: 0;
+      height: 100%; }
+      .navbar-kokomo ul li {
+        border-radius: 30px;
+        background-color: #3294BB;
+        padding: 20px; }
   .image-background {
-    background-size: 60vw;
+    background-size: cover;
     background-position: left center;
     background-repeat: no-repeat; }
   .container-left {
     padding: 40px !important;
-    width: 40vw; }
-  .white-card {
     width: 60vw;
+    height: 100vh;
+    margin-right: -40px; }
+  .white-card {
+    width: 100%;
     height: 100vh;
     background-color: #FBF7F3;
     padding: 26px 40px 26px 50px;
@@ -346,7 +467,8 @@ h3.section-title {
   .input-form {
     overflow: scroll; }
   .white-card-home {
-    width: 60vw;
+    width: 80vw;
+    overflow: scroll;
     height: 100vh;
     background-color: #FBF7F3;
     padding: 26px 0px 26px 50px;
@@ -359,6 +481,8 @@ h3.section-title {
     display: flex;
     flex-direction: row;
     margin-left: -90px !important; }
+  h2.display-cream {
+    font-size: 40px; }
   .title-search {
     font-size: 45px;
     color: #3294BB;
@@ -366,10 +490,7 @@ h3.section-title {
     font-weight: 600;
     padding: 0 100px 10px 0; }
   .title-search-home {
-    font-size: 24px;
-    color: #3294BB;
-    font-family: europa, sans-serif;
-    font-weight: 600;
+    font-size: 40px;
     padding: 0 100px 10px 0; }
   .subtitle-search {
     font-size: 20px;

@@ -25,7 +25,7 @@ $light-blue: #e8f5fb;
 $success: #0AC5A3;
 $danger: #FF8D69;
 $grey: #C9C0B6;
-
+$blue-background: #e7eff3;
 
 /* ## Fonts
 --------------------------------------------- */
@@ -60,6 +60,10 @@ p {
   color: $text-color;
 }
 
+.body-container {
+  margin: 15px;
+}
+
 .padding-menu {
   padding-top: 100px;
 }
@@ -78,6 +82,10 @@ p {
 
 .cream {
   color: $cream;
+}
+
+.blue-background {
+  background-color: $blue-background;
 }
 
 /* ## Botones
@@ -134,27 +142,50 @@ p {
 }
 
 .navbar-kokomo {
-  background-color: $cream;
+  background-color: $blue;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
-  border-radius: 26px 26px 0 0;
+  border-radius: 26px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 10px;
 
   ul {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 30px;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 10px 12px;
     margin: 0;
+    width: 100%;
 
     li {
       list-style: none;
       font-size: 20px;
+      border-radius: 30px;
+      background-color: $blue;
+      padding: 10px;
 
       a {
         font-size: 28px;
-        color: $blue;
+        color: $cream;
+
       }
+
     }
   }
 
+}
+
+.search-icon-menu {
+  background-color: $cream !important;
+  margin-top: -25px;
+  padding: 20px !important;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+
+  a {
+    color: $blue !important;
+  }
 }
 
 nav {
@@ -170,17 +201,90 @@ nav {
   }
 }
 
+.form-group{
+  position: relative;
+  margin-bottom: 2rem;
+
+  input {
+    font-family: $text-font;
+    color: $text-color;
+    width: 100%;
+    outline: none;
+    padding: 2px 0;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgba($orange, .2);
+    vertical-align: top;
+    margin-bottom: 30px;
+
+    &:focus{
+      border-bottom: 2px solid $orange;
+    }
+  }
+
+  textarea{
+    max-width: 100%;
+    max-height: 10.25rem;
+    min-height: 5.125rem;
+    min-width: 100%;
+  }
+
+  label{
+    color: $text-color;
+    font-family: $text-font;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.label{
+      position: absolute;
+      top: 2px;
+      left: 0;
+      font-size: 1rem;
+      line-height: 1rem;
+      margin-left: 1rem;
+      -webkit-transition: all .3s ease;
+      -o-transition: all .3s ease;
+      transition: all .3s ease;
+
+      &.active{
+        top: -18px;
+        margin-left: 0;
+        font-size: 12px;
+        line-height: 0.75rem;
+        color: $text-color;
+      }
+    }
+  }
+}
+
 /* # 02. HOME
 ---------------------------------------------------------------------------------------------------- */
 
 h2.hero-subtitle {
   color: $text-color;
-  text-align: center;
   font-size: 22px;
+  font-weight: 100;
+}
+
+.hero-title {
+  font-size: 30px;
+    color: #49636d;
+    padding-bottom: 10px;
 }
 
 .hero {
-  padding: 50px 0 40px 0;
+  padding: 10px 0;
+}
+
+.hero-arrow-phone {
+  font-size: 35px;
+    margin-left: -6px;
+    color: #d0dde2;
+    margin-top: 10px;
+}
+
+.hero-arrow-desktop {
+  display: none;
 }
 
 h1 {
@@ -204,10 +308,11 @@ h1 {
 
 .title-search-home {
   font-size: 20px;
+  font-family: $heading-font;
   color: $blue;
   font-weight: 600;
-  padding-bottom: 4px;
-  padding-left: 32px;
+  padding-bottom: 20px;
+  padding-left: 20px;
 }
 
 .subtitle-search-home {
@@ -283,7 +388,7 @@ h1 {
 
 
 .image-background {
-  background-size: 100vw;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   height: 40vh;
@@ -301,6 +406,14 @@ h1 {
     margin-top: -50px;
 
 
+}
+
+.banner-profile {
+  background-image: url("/images/water.jpg");
+  background-size: cover;
+  padding: 50px;
+  border-radius: 20px;
+  margin-top: 10px;
 }
 
 
@@ -432,25 +545,74 @@ h3.section-title {
 --------------------------------------------- */
 
 @media all and (min-width: 768px){
+  .body-container {
+    margin-left: 140px;
+  }
+
+  .hero {
+    min-width: 20vw;
+  }
+
   .home-bg {
     display: flex;
     align-items: center;
     min-height: 100vh;
   }
 
+  .hero-arrow-phone {
+    display: none;
+  }
+  
+  .hero-arrow-desktop {
+    display: block;
+    font-size: 35px;
+      margin-left: -6px;
+      color: #d0dde2;
+      margin-top: 10px;
+  }
+
+  .navbar-kokomo {
+    box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+    border-radius: 26px;
+    position: fixed;
+    top: 0;
+    right: auto;
+    width: auto;
+    margin: 10px;
+  
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 12px;
+      margin: 0;
+      height: 100%;
+  
+      li{
+        border-radius: 30px;
+        background-color: $blue;
+        padding: 20px;
+      }
+
+      }
+    
+  
+  }
+
   .image-background {
-    background-size: 60vw;
+    background-size: cover;
     background-position: left center;
     background-repeat: no-repeat;
   }
 
   .container-left {
     padding: 40px !important;
-    width: 40vw;
+    width: 60vw;
+    height: 100vh;
+    margin-right: -40px;
   }
 
   .white-card {
-    width: 60vw;
+    width: 100%;
     height: 100vh;
     background-color: $cream;
     padding: 26px 40px 26px 50px;
@@ -465,7 +627,8 @@ h3.section-title {
   }
 
   .white-card-home {
-    width: 60vw;
+    width: 80vw;
+    overflow: scroll;
     height: 100vh;
     background-color: $cream;
     padding: 26px 0px 26px 50px;
@@ -482,6 +645,9 @@ h3.section-title {
     margin-left: -90px !important;
   }
   
+  h2.display-cream {
+    font-size: 40px;
+  }
 
   .title-search {
     font-size: 45px;
@@ -492,10 +658,7 @@ h3.section-title {
   }
 
   .title-search-home {
-    font-size: 24px;
-    color: $blue;
-    font-family: $text-font;
-    font-weight: 600;
+    font-size: 40px;
     padding: 0 100px 10px 0;
   }
   

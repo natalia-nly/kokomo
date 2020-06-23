@@ -1,15 +1,13 @@
 <div class="home-bg">
-    <div class="container-left p-4">
-        <div class="hero">
-            <h2 class="display-blue text-center">Este verano<br>no te quedes sin planes</h2>
-            <h2 class="hero-subtitle">Reserva en los mejores locales de tu zona</h2>
-        </div>
-
+    <div class="hero body-container">
+        <h2 class="hero-title">Hey, {{user.username}}</h2>
+        <h2 class="hero-subtitle">Reserva en los mejores<br>locales de tu zona</h2>
+        <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
+        <h2 class="hero-arrow-desktop mdi mdi-arrow-right"></h2>
     </div>
 
     <div class="white-card-home">
         <h2 class="title-search-home">Nuestros chiringuitos</h2>
-        <h3 class="subtitle-search-home mb-4">¡Reserva ahora!</h3>
         <div class="properties-group">
             {{#each properties}}
             <a href="/local/{{_id}}">

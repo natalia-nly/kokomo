@@ -1,18 +1,19 @@
 {{#if user}}
-<div class="home-bg image-background" style="
-    background-image: url(/images/water.jpg);">
-
-  <div class="container-left">
-
-    <h2 class="display-cream"><i class="fas fa-umbrella-beach fa-sm cream"></i><br> ¡Aloha, <br>{{user.username}}!</h2>
+<div class="body-container">
+  <div class="hero">
+    <h2 class="hero-title">¡Aloha, <br>{{user.username}}!</h2>
+    <h2 class="hero-subtitle">Revisa tus locales y reservas</h2>
+    <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
+    <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
   </div>
-
-  <div class="white-card">
+  <div>
     <div>
       <a href="/profile/create-local" class="btn-kokomo btn-kokomo-success mb-4"><i class="fas fa-plus-circle"></i>
         Crear un nuevo
         local</a>
       <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mb-4"><i class="fas fa-user-cog"></i> Configuración</a>
+      <a href="/logout" class="btn-kokomo btn-kokomo-grey mb-4 mt-5"><i class="mdi mdi-logout-variant"></i>
+        Cerrar sesión</a>
     </div>
 
     <h3 class="section-title"><i class="fa fa-map-marker fa-sm" aria-hidden="true"></i> Tus Locales</h3>
@@ -22,27 +23,26 @@
       <thead>
         <tr>
           <th scope="col">Nombre</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {{#each user.ownProperties}}
         <tr>
-          <td>{{name}}</td>
           <td>
-            <a href="owner/property/{{id}}" class="btn btn-success"><i class="fa fa-book mr-2"></i>Ver Reservas</a>
+            {{name}}</td>
+          <td>
+            <a href="owner/property/{{id}}" class="btn-kokomo btn-kokomo-success"><i class="fa fa-book mr-2"></i>Ver Reservas</a>
           </td>
+       
           <td>
-          <td>
-            <a href="/local/{{id}}" class="btn btn-primary"><i class="far fa-eye mr-2"></i>Ver Local</a>
+            <a href="/local/{{id}}" class="btn-kokomo btn-kokomo-grey"><i class="far fa-eye"></i></a>
+            <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-grey"><i class="fa fa-pencil"></i></a>
+            <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-danger"><i
+                class="far fa-trash-alt"></i></a>
           </td>
-          <td>
-            <a href="/booking/delete/{{bookingRef}}" class="btn btn-info"><i class="fa fa-pencil mr-2"
-                ></i> Modificar Local</a>
-          </td>
-          <td>
-            <a href="/booking/delete/{{bookingRef}}" class="btn btn-warning"><i
-                class="far fa-trash-alt mr-2"></i>Eliminar Local</a>
-          </td>
+          
         </tr>
         {{/each}}
       </tbody>
@@ -54,33 +54,46 @@
     <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Tus Reservas</h3>
 
     {{#if user.bookings}}
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Código de Reserva</th>
-          <th scope="col">Detalles</th>
-          <th scope="col">¿Dónde?</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each user.bookings}}
-        <tr>
-          <td>{{bookingRef}}</td>
-          <td>
-            <i class="far fa-calendar-check"></i> {{day}} <br>
-            <i class="far fa-clock"></i> {{time}} <br>
-            <i class="fas fa-users"></i> {{guests}} personas
-          </td>
-          <td>{{property}}</td>
-          <td>
-            <a href="/booking/delete/{{bookingRef}}" class="btn btn-warning"><i
-                class="far fa-trash-alt mr-2"></i>Cancelar reserva</a>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    {{#each user.bookings}}
+    <div class="div-booking">
+        <div>
+            <p>
+                <span class="fa-stack fa-lg">
+                    <i class="fas fa-square fa-stack-2x orange-20"></i>
+                    <i class="far fa-calendar-check fa-stack-1x orange"></i>
+                </span>
+                {{day}}
+            </p>
+            <p>
+                <span class="fa-stack fa-lg">
+                    <i class="fas fa-square fa-stack-2x orange-20"></i>
+                    <i class="far fa-clock fa-stack-1x orange"></i>
+                </span>
+                {{time}}
+            </p>
+            <p>
+                <span class="fa-stack fa-lg">
+                    <i class="fas fa-square fa-stack-2x orange-20"></i>
+                    <i class="fas fa-users fa-stack-1x orange"></i>
+                </span>
+                {{guests}} personas
+            </p>
+            <p>
+                <span class="fa-stack fa-lg">
+                    <i class="fas fa-square fa-stack-2x orange-20"></i>
+                    <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+                </span>
+                {{property}}
+            </p>
+        </div>
+        <div>
+            <p class="mb-4 text-right"><span class="booking-ref">{{bookingRef}}</span></p>
+
+            <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-grey float-right">Cancelar reserva</a>
+        </div>
+
+    </div>
+    {{/each}}
     {{else}}
     <p>Todavía no tienes reservas</p>
     {{/if}}
@@ -89,6 +102,7 @@
     <p>Todavía no tienes favoritos</p>
   </div>
 </div>
+
 
 {{else}}
 <p>Please, login first!</p>
