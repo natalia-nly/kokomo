@@ -364,6 +364,8 @@ exports.createBooking = (req, res, next) => {
       //Crear la reserva en la colección de bookings
       return Booking.create({
         customer: req.session.currentUser._id,
+        customerName: req.session.currentUser.username,
+        telNumber: req.session.currentUser.telNumber,
         property: propertyId,
         day: day,
         bookingRef: bookingRef,
