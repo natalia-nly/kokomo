@@ -6,12 +6,12 @@
 
     <div class="white-card">
         <div class="title-heart">
-            <div>
+            <a href="/local/love/{{property._id}}">
                 <span class="fa-stack fa-2x mr-4">
                     <i class="fas fa-circle fa-stack-2x orange"></i>
                     <i class="far fa-heart fa-stack-1x fa-inverse"></i>
                 </span>
-            </div>
+            </a>
             <div>
                 <h2 class="title-search">{{property.name}}</h2>
 
@@ -57,15 +57,22 @@
 
         {{#if user}}
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
-            <div class="display-form mb-3">
-                <div>
-                    <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
+                        <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
+                    </div>
                 </div>
-                <div>
-                    <input type="number" name="numberGuests" id="" min="0" class="kokomo-input" placeholder="Personas">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
+                        <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
+                    </div>
                 </div>
             </div>
-            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
+            
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
         </form>
         {{else}}
         <div class="mt-4 border-top">

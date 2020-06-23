@@ -10,8 +10,6 @@ exports.createLocal = (req, res, next) => res.render('owner/create-local', {
 });
 
 
-
-
 function createSchedule(property) {
   const timeRanges = property.openingHours;
   const bookTime = property.bookingDuration;
@@ -209,6 +207,36 @@ exports.ownerViewLocal = (req, res, next) => {
     .catch(error => {
       console.log('Error: ', error);
     });
+
+};
+
+exports.editLocal = (req, res, next) => {
+  Property.findById(req.params.id)
+    .then(resultado => {
+      res.render("owner/edit-local", {
+        property: resultado,
+        title: `Editar ${resultado.name} | KOKOMO`,
+        user: req.session.currentUser
+      });
+    })
+    .catch(error => {
+      console.log('Error: ', error);
+    });
+
+};
+
+exports.loveLocal = (req, res, next) => {
+  Customer.findOneAndUpdate(
+    {_id: req.session.currentUser._id}, 
+    {$push: {favourites: req.params.id}
+  })
+  .then(customer => {
+    console.log("Usuario actualizado", customer);
+    res.redirect('back');
+  })
+  .catch(error => {
+    console.log('Error: ', error);
+  });
 
 };
 

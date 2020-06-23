@@ -76,6 +76,10 @@ p {
   color: rgba($orange, .2);
 }
 
+.orange-80 {
+  color: rgba($orange, .8);
+}
+
 .blue {
   color: $blue;
 }
@@ -144,7 +148,7 @@ p {
 .navbar-kokomo {
   background-color: $blue;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
-  border-radius: 26px;
+  border-radius: 20px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -155,19 +159,19 @@ p {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 10px 12px;
+    padding: 0;
     margin: 0;
     width: 100%;
 
     li {
       list-style: none;
       font-size: 20px;
-      border-radius: 30px;
+      border-radius: 20px;
       background-color: $blue;
       padding: 10px;
 
       a {
-        font-size: 28px;
+        font-size: 20px;
         color: $cream;
 
       }
@@ -179,8 +183,8 @@ p {
 
 .search-icon-menu {
   background-color: $cream !important;
-  margin-top: -25px;
-  padding: 20px !important;
+  margin-top: -10px;
+  padding: 10px 16px !important;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
 
   a {
@@ -201,25 +205,29 @@ nav {
   }
 }
 
+
+
 .form-group{
   position: relative;
   margin-bottom: 2rem;
 
-  input {
+  input, textarea {
     font-family: $text-font;
-    color: $text-color;
+    color: #49636d;
     width: 100%;
     outline: none;
-    padding: 2px 0;
     background: none;
     border: none;
-    border-bottom: 2px solid rgba($orange, .2);
+    border: 1px solid rgba($text-color, .2);
     vertical-align: top;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    padding: 30px 10px 10px 10px;
+    border-radius: 8px;
 
     &:focus{
-      border-bottom: 2px solid $orange;
+      border: 2px solid $orange;
     }
+
   }
 
   textarea{
@@ -237,22 +245,15 @@ nav {
 
     &.label{
       position: absolute;
-      top: 2px;
+      top: 12px;
       left: 0;
       font-size: 1rem;
       line-height: 1rem;
-      margin-left: 1rem;
-      -webkit-transition: all .3s ease;
-      -o-transition: all .3s ease;
-      transition: all .3s ease;
-
-      &.active{
-        top: -18px;
-        margin-left: 0;
-        font-size: 12px;
+      margin-left: 10px;
+      font-size: 12px;
         line-height: 0.75rem;
         color: $text-color;
-      }
+
     }
   }
 }
@@ -337,17 +338,17 @@ h1 {
 .properties-group {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 26px;
   overflow: scroll;
   padding: 20px;
 
   .property-card {
-    width: 40vw;
-    margin-top: -80px;
+    width: 35vw;
+    margin-top: -60px;
 
     img {
       width: 100%;
-      height: 60vw;
+      height: 50vw;
       object-fit: cover;
       border-radius: 20px;
     }
@@ -356,7 +357,7 @@ h1 {
       font-family: $heading-font;
       color: $orange;
       font-size: 16px;
-      padding-top: 18px;
+      padding-top: 0;
     }
 
     p {
@@ -591,6 +592,10 @@ h3.section-title {
         border-radius: 30px;
         background-color: $blue;
         padding: 20px;
+
+        a {
+          font-size: 28px;
+        }
       }
 
       }
@@ -681,7 +686,7 @@ h3.section-title {
   
       img {
         height: 30vw;
-        border-radius: 20px;
+        border-radius: 40px;
       }
   
       h3 {

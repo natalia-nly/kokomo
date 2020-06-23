@@ -49,6 +49,9 @@ p {
 .orange-20 {
   color: rgba(255, 186, 105, 0.2); }
 
+.orange-80 {
+  color: rgba(255, 186, 105, 0.8); }
+
 .blue {
   color: #3294BB; }
 
@@ -103,7 +106,7 @@ p {
 .navbar-kokomo {
   background-color: #3294BB;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
-  border-radius: 26px;
+  border-radius: 20px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -113,23 +116,23 @@ p {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 10px 12px;
+    padding: 0;
     margin: 0;
     width: 100%; }
     .navbar-kokomo ul li {
       list-style: none;
       font-size: 20px;
-      border-radius: 30px;
+      border-radius: 20px;
       background-color: #3294BB;
       padding: 10px; }
       .navbar-kokomo ul li a {
-        font-size: 28px;
+        font-size: 20px;
         color: #FBF7F3; }
 
 .search-icon-menu {
   background-color: #FBF7F3 !important;
-  margin-top: -25px;
-  padding: 20px !important;
+  margin-top: -10px;
+  padding: 10px 16px !important;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45); }
   .search-icon-menu a {
     color: #3294BB !important; }
@@ -146,19 +149,20 @@ nav .navbar-toggler, nav i {
 .form-group {
   position: relative;
   margin-bottom: 2rem; }
-  .form-group input {
+  .form-group input, .form-group textarea {
     font-family: europa, sans-serif;
-    color: #809EAA;
+    color: #49636d;
     width: 100%;
     outline: none;
-    padding: 2px 0;
     background: none;
     border: none;
-    border-bottom: 2px solid rgba(255, 186, 105, 0.2);
+    border: 1px solid rgba(128, 158, 170, 0.2);
     vertical-align: top;
-    margin-bottom: 30px; }
-    .form-group input:focus {
-      border-bottom: 2px solid #FFBA69; }
+    margin-bottom: 10px;
+    padding: 30px 10px 10px 10px;
+    border-radius: 8px; }
+    .form-group input:focus, .form-group textarea:focus {
+      border: 2px solid #FFBA69; }
   .form-group textarea {
     max-width: 100%;
     max-height: 10.25rem;
@@ -171,20 +175,14 @@ nav .navbar-toggler, nav i {
     font-weight: 500; }
     .form-group label.label {
       position: absolute;
-      top: 2px;
+      top: 12px;
       left: 0;
       font-size: 1rem;
       line-height: 1rem;
-      margin-left: 1rem;
-      -webkit-transition: all .3s ease;
-      -o-transition: all .3s ease;
-      transition: all .3s ease; }
-      .form-group label.label.active {
-        top: -18px;
-        margin-left: 0;
-        font-size: 12px;
-        line-height: 0.75rem;
-        color: #809EAA; }
+      margin-left: 10px;
+      font-size: 12px;
+      line-height: 0.75rem;
+      color: #809EAA; }
 
 /* # 02. HOME
 ---------------------------------------------------------------------------------------------------- */
@@ -250,22 +248,22 @@ h1 {
 .properties-group {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 26px;
   overflow: scroll;
   padding: 20px; }
   .properties-group .property-card {
-    width: 40vw;
-    margin-top: -80px; }
+    width: 35vw;
+    margin-top: -60px; }
     .properties-group .property-card img {
       width: 100%;
-      height: 60vw;
+      height: 50vw;
       object-fit: cover;
       border-radius: 20px; }
     .properties-group .property-card h3 {
       font-family: bely-display, sans-serif;
       color: #FFBA69;
       font-size: 16px;
-      padding-top: 18px; }
+      padding-top: 0; }
     .properties-group .property-card p {
       color: #809EAA;
       font-weight: 200;
@@ -445,6 +443,8 @@ h3.section-title {
         border-radius: 30px;
         background-color: #3294BB;
         padding: 20px; }
+        .navbar-kokomo ul li a {
+          font-size: 28px; }
   .image-background {
     background-size: cover;
     background-position: left center;
@@ -505,7 +505,7 @@ h3.section-title {
       width: 20vw; }
       .properties-group .property-card img {
         height: 30vw;
-        border-radius: 20px; }
+        border-radius: 40px; }
       .properties-group .property-card h3 {
         font-family: bely-display, sans-serif;
         color: #FFBA69;

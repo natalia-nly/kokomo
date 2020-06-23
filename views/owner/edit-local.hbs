@@ -1,8 +1,8 @@
 {{#if user}}
 <div class="body-container">
     <div class="hero">
-        <h2 class="hero-title">Crea tu local</h2>
-        <h2 class="hero-subtitle">Rellena los datos de tu local y consigue reservas</h2>
+        <h2 class="hero-title">Edita tu local</h2>
+        <h2 class="hero-subtitle">{{property.name}}</h2>
         <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
         <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
     </div>
@@ -12,12 +12,12 @@
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <label for="input-name" class="label active">Nombre</label>
-                    <input type=" text" id="input-name" name="name"
+                    <input type=" text" id="input-name" name="name" value="{{property.name}}"
                         />
                 </div>
                 <div class="form-group">
                     <label for="input-description" class="label active">Descripción</label>
-                    <textarea id="input-description" name="description" rows="3" cols="30"></textarea>
+                    <textarea id="input-description" name="description" rows="3" cols="30">{{property.description}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="input-categories" class="label active">Categoría</label>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input-image" class="label active">Imagen Principal</label>
-                    <input type="url" name="main" id="input-image-main"/>
+                    <input type="url" name="main" id="input-image-main" value="{{property.mainImage}}"/>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">

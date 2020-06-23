@@ -21,5 +21,9 @@ router.post('/profile/create-local', index_controller.registerLocal);
 
 router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
+router.get('/local/edit/:id', index_controller.editLocal);
+
+router.get('/local/love/:id', index_controller.loveLocal);
+
 
 module.exports = router;
