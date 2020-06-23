@@ -24,6 +24,7 @@ router.get('/profile/edit', auth_controller.profileEdit);
 router.post('/profile/editPassword', auth_controller.profilePasswordChange);
 router.post('/profile/editTelephone', auth_controller.profileTelephoneChange);
 router.get('/profile/delete', auth_controller.deleteAccount);
+router.get('/my-favourites', auth_controller.myFavourites);
 
 //Sign up para owners
 router.get('/signup-local', auth_controller.signUpLocal);

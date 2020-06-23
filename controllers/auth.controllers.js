@@ -163,8 +163,17 @@ exports.profile = (req, res, next) => {
                 title: 'Mi perfil | KOKOMO'
             });
         }).catch(error => next(error));
-    }
+    }  
     
+};
+
+exports.myFavourites = (req, res, next) => {
+    Customer.findById(req.session.currentUser._id).then(user => {
+        res.render('customer/favourites', {
+            user,
+            title: 'Mis favoritos | KOKOMO'
+        });
+    }).catch(error => next(error)); 
     
 };
 

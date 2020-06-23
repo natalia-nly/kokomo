@@ -603,6 +603,17 @@ h3.section-title {
   
   }
 
+  .search-icon-menu {
+    background-color: $cream !important;
+    margin-top: -10px;
+    padding: 20px !important;
+    box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  
+    a {
+      color: $blue !important;
+    }
+  }
+
   .image-background {
     background-size: cover;
     background-position: left center;

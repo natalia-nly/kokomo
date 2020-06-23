@@ -39,8 +39,10 @@ const customerSchema = new Schema({
       }],
       //favoritos
       favourites: [{
-        type: Schema.Types.ObjectId,
-        ref: "Property"
+        id: {type: Schema.Types.ObjectId, ref: "Property"},
+        name: String,
+        mainImage: String,
+        location: String
       }],
       // boolean para saber si es owner
       owner: {

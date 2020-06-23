@@ -195,6 +195,7 @@ exports.viewLocal = (req, res, next) => {
     });
 
 };
+
 exports.ownerViewLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
@@ -226,17 +227,31 @@ exports.editLocal = (req, res, next) => {
 };
 
 exports.loveLocal = (req, res, next) => {
-  Customer.findOneAndUpdate(
-    {_id: req.session.currentUser._id}, 
-    {$push: {favourites: req.params.id}
-  })
-  .then(customer => {
-    console.log("Usuario actualizado", customer);
-    res.redirect('back');
-  })
-  .catch(error => {
-    console.log('Error: ', error);
-  });
+  Property.findById(req.params.id)
+    .then(resultado => {
+      const newFavourite = {
+        _id: resultado._id,
+        name: resultado.name,
+        mainImage: resultado.mainImage,
+        location: resultado.location.name
+      };
+
+      Customer.findOneAndUpdate(
+        {_id: req.session.currentUser._id}, 
+        {$push: {favourites: newFavourite}
+      })
+      .then(customer => {
+        console.log("Usuario actualizado", customer);
+        res.redirect('back');
+      })
+      .catch(error => {
+        console.log('Error: ', error);
+      });
+
+    })
+    .catch(error => {
+      console.log('Error: ', error);
+    });
 
 };
 
@@ -264,6 +279,8 @@ exports.bookingDay = (req, res, next) => {
       res.render("property/booking-options", {
         property: theProperty,
         schedule: finalSchedules,
+        newDate: bookingDate,
+        newGuests: newGuests,
         guests: newGuests,
         user: req.session.currentUser,
         title: `${theProperty.name} | KOKOMO`,
