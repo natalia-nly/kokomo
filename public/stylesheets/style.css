@@ -154,7 +154,7 @@ nav .navbar-toggler, nav i {
     color: #49636d;
     width: 100%;
     outline: none;
-    background: none;
+    background-color: white;
     border: none;
     border: 1px solid rgba(128, 158, 170, 0.2);
     vertical-align: top;

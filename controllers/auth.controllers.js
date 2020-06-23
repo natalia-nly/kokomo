@@ -177,6 +177,25 @@ exports.myFavourites = (req, res, next) => {
     
 };
 
+exports.myBookings = (req, res, next) => {
+    if(req.session.currentUser.owner) {
+        Customer.findById(req.session.currentUser._id).then(user => {
+            res.render('owner/bookings', {
+                user,
+                title: 'Mis reservas | KOKOMO'
+            });
+        }).catch(error => next(error));
+    } else {
+        Customer.findById(req.session.currentUser._id).then(user => {
+            res.render('customer/bookings', {
+                user,
+                title: 'Mis reservas | KOKOMO'
+            });
+        }).catch(error => next(error));
+    }  
+    
+};
+
 exports.profileEdit = (req, res, next) => {
 
     Customer.findById(req.session.currentUser._id).then(user => {
