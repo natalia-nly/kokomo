@@ -1,0 +1,157 @@
+{{#if user}}
+<div class="body-container">
+    <div class="hero">
+        <h2 class="hero-title">Crea tu local</h2>
+        <h2 class="hero-subtitle">Rellena los datos de tu local y consigue reservas</h2>
+        <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
+        <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
+    </div>
+    <form action="/profile/create-local" method="POST" class="kokomo-forms">
+        <h3 class="section-title">Datos principales</h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="input-name" class="label active">Nombre</label>
+                    <input type=" text" id="input-name" name="name"
+                        />
+                </div>
+                <div class="form-group">
+                    <label for="input-description" class="label active">Descripción</label>
+                    <textarea id="input-description" name="description" rows="3" cols="30"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="input-categories" class="label active">Categoría</label>
+                    <input list="categories" type="categories" id="input-categories" name="categories">
+                    <datalist id="categories">
+                        <option value="Chillout">
+                        <option value="Surfer">
+                        <option value="Restaurante">
+                        <option value="Discoteca">
+                        <option value="Bar">
+                    </datalist>
+                    </input>
+                </div>
+                <div class="form-group">
+                    <label for="input-image" class="label active">Imagen Principal</label>
+                    <input type="url" name="main" id="input-image-main"/>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="input-media" class="label active">Imagen Secundaria</label>
+                    <input type="url" name="media" id="input-image-media"/>
+                </div>
+                <div class="form-group">
+                    <label for="input-ubication" class="label active">Ubicación</label>
+                    <input type="text" name="ubication" id="input-ubication" />
+                </div>
+                <div class="form-group">
+                    <label for="input-latitude" class="label active">Latitud</label>
+                    <input type="number" name="latitude" id="input-latitude"
+                        step=".01" />
+                </div>
+                <div class="form-group">
+                    <label for="input-longitude" class="label active">Longitud</label>
+                    <input type="number" name="longitude" id="input-longitude" step=".01" />
+                </div>
+            </div>
+        </div>
+        <h3 class="section-title">Horarios</h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="input-opening">Día de apertura</label>
+                    <input type="date" name="opening" id="input-opening"/>
+                </div>
+                <div class="form-group">
+                    <label for="input-closing">Día de cierre</label>
+                    <input type="date" name="closing" id="input-closing"/>
+                </div>
+
+
+                <h6>Días de la semana</h6>
+                <div class="form-group">
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-monday" name="monday"
+                                    value=1>
+                                <label class="custom-control-label" for="input-monday">Lunes</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-tuesday" name="tuesday"
+                                    value=2>
+                                <label class="custom-control-label" for="input-tuesday">Martes</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-wednesday"
+                                    name="wednesday" value=3>
+                                <label class="custom-control-label" for="input-wednesday">Miércoles</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-thursday" name="thursday"
+                                    value=4>
+                                <label class="custom-control-label" for="input-thursday">Jueves</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-friday" name="friday"
+                                    value=5>
+                                <label class="custom-control-label" for="input-friday">Viernes</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-saturday" name="saturday"
+                                    value=6>
+                                <label class="custom-control-label" for="input-saturday">Sábado</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="input-sunday" name="sunday"
+                                    value=7>
+                                <label class="custom-control-label" for="input-sunday">Domingo</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="input-openhour" class="label active">Hora de apertura</label>
+                    <input type="number" name="openhour" id="input-openhour" />
+                </div>
+                <div class="form-group">
+                    <label for="input-closehour" class="label active">Hora de cierre</label>
+                    <input type="number" name="closehour" id="input-closehour" />
+                </div>
+                <div class="form-group">
+                    <label for="input-duration" class="label active">Duración de la reserva</label>
+                    <input type="number" name="duration" id="input-duration"/>
+                </div>
+                <div class="form-group">
+                    <label for="input-places" class="label active">Plazas</label>
+                    <input type="number" name="places" id="input-places"/>
+                </div>
+            </div>
+        </div>
+
+
+
+        <button type="submit" class="btn-kokomo btn-kokomo-success">Crear propiedad y horarios</button>
+    </form>
+</div>
+
+
+{{!-- error message will be added here --}}
+{{#if errorMessage}}
+<p class="error">{{errorMessage}}</p>
+{{/if}}
+</form>
+
+</div>
+</div>
+
+{{else}}
+<p>Please, login first!</p>
+<a href="/login" class="btn btn-primary">Login</a>
+{{/if}}

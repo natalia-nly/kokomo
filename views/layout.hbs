@@ -6,9 +6,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#3294BB">
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="https://use.typekit.net/qmq0qkg.css">
     <script src="https://kit.fontawesome.com/71d1d8f7e5.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="//cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.min.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,10 +19,12 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: rgba(255, 255, 255, 0);">
+
+    {{!-- <nav class="navbar navbar-expand-sm navbar-light" style="background-color: white;">
         <a class="navbar-brand" href="/">KOKOMO</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><i
+                class="fas fa-user-circle fa-lg"></i></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -33,11 +38,20 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> --}}
 
-    
 
     {{{body}}}
+
+    <nav class="navbar-kokomo">
+        <ul>
+            <li class=""><a href="/" class="mdi mdi-home"></a></li>
+            <li class=""><a href="/my-favourites" class="mdi mdi-heart-outline"></a></li>
+            <li class="search-icon-menu"><a href="/" class="mdi mdi-magnify"></a></li>
+            <li class=""><a href="/my-bookings" class="mdi mdi-calendar"></a></li>
+            <li class=""><a href="/profile" class="mdi mdi-account-circle"></a></li>
+        </ul>
+    </nav>
 
     <!-- Optional JavaScript -->
     <script src="/javascripts/script.js"></script>

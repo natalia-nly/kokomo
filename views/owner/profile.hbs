@@ -1,0 +1,63 @@
+{{#if user}}
+<div class="body-container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="hero-title">¡Aloha, <br>{{user.username}}!</h2>
+      <h2 class="hero-subtitle">Revisa tus locales y reservas</h2>
+      <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
+      <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
+    </div>
+    <div class="col-md-6">
+      <a href="/profile/create-local" class="btn-kokomo btn-kokomo-success"><i class="fas fa-plus-circle"></i>
+        Crear un nuevo
+        local</a>
+      <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey"><i class="fas fa-user-cog"></i> Configuración</a>
+      <a href="/logout" class="btn-kokomo btn-kokomo-grey"><i class="mdi mdi-logout-variant"></i>
+        Cerrar sesión</a>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="section-title"><i class="fa fa-map-marker fa-sm" aria-hidden="true"></i> Tus Locales</h3>
+
+    {{#if user.ownProperties}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each user.ownProperties}}
+        <tr>
+          <td>
+            {{name}}</td>
+          <td>
+            <a href="owner/property/{{id}}" class="btn-kokomo btn-kokomo-success"><i class="fa fa-book mr-2"></i>Ver
+              Reservas</a>
+          </td>
+
+          <td>
+            <a href="/local/{{id}}" class="btn-kokomo btn-kokomo-grey"><i class="far fa-eye"></i></a>
+            <a href="/local/edit/{{id}}" class="btn-kokomo btn-kokomo-grey"><i class="fa fa-pencil"></i></a>
+            <a href="/local/delete/{{id}}" class="btn-kokomo btn-kokomo-danger"><i class="far fa-trash-alt"></i></a>
+          </td>
+
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <p>Todavía no tienes locales</p>
+    {{/if}}
+
+  </div>
+</div>
+
+
+{{else}}
+<p>Please, login first!</p>
+<a href="/login" class="btn btn-primary">Login</a>
+{{/if}}

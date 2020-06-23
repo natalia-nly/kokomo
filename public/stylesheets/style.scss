@@ -22,6 +22,10 @@ $orange: #FFBA69;
 $text-color: #809EAA;
 $cream: #FBF7F3;
 $light-blue: #e8f5fb;
+$success: #0AC5A3;
+$danger: #FF8D69;
+$grey: #C9C0B6;
+$blue-background: #e7eff3;
 
 /* ## Fonts
 --------------------------------------------- */
@@ -30,8 +34,6 @@ $heading-font: bely-display, sans-serif;
 
 
 
-/* # 02. HOME
----------------------------------------------------------------------------------------------------- */
 
 body {
   padding: 0px;
@@ -58,6 +60,10 @@ p {
   color: $text-color;
 }
 
+.body-container {
+  margin: 15px;
+}
+
 .padding-menu {
   padding-top: 100px;
 }
@@ -66,12 +72,124 @@ p {
   color: $orange;
 }
 
+.orange-20 {
+  color: rgba($orange, .2);
+}
+
+.orange-80 {
+  color: rgba($orange, .8);
+}
+
 .blue {
   color: $blue;
 }
 
 .cream {
   color: $cream;
+}
+
+.blue-background {
+  background-color: $blue-background;
+}
+
+/* ## Botones
+--------------------------------------------- */
+
+.btn-kokomo {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: 5px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-kokomo-success {
+  color: #fff;
+  background-color: $success;
+  border-color: $success;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($success, 1);
+    border-color: darken($success, 1);
+  }
+}
+
+.btn-kokomo-grey {
+  color: #fff;
+  background-color: $grey;
+  border-color: $grey;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($grey, 1);
+    border-color: darken($grey, 1);
+  }
+}
+
+.btn-kokomo-danger{
+  color: #fff;
+  background-color: $danger;
+  border-color: $danger;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($danger, 1);
+    border-color: darken($danger, 1);
+  }
+}
+
+.navbar-kokomo {
+  background-color: $blue;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  border-radius: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 10px;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      list-style: none;
+      font-size: 20px;
+      border-radius: 20px;
+      background-color: $blue;
+      padding: 10px;
+
+      a {
+        font-size: 20px;
+        color: $cream;
+
+      }
+
+    }
+  }
+
+}
+
+.search-icon-menu {
+  background-color: $cream !important;
+  margin-top: -10px;
+  padding: 10px 16px !important;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+
+  a {
+    color: $blue !important;
+  }
 }
 
 nav {
@@ -88,14 +206,86 @@ nav {
 }
 
 
+
+.form-group{
+  position: relative;
+  margin-bottom: 2rem;
+
+  input, textarea {
+    font-family: $text-font;
+    color: #49636d;
+    width: 100%;
+    outline: none;
+    background-color: white;
+    border: none;
+    border: 1px solid rgba($text-color, .2);
+    vertical-align: top;
+    margin-bottom: 10px;
+    padding: 30px 10px 10px 10px;
+    border-radius: 8px;
+
+    &:focus{
+      border: 2px solid $orange;
+    }
+
+  }
+
+  textarea{
+    max-width: 100%;
+    max-height: 10.25rem;
+    min-height: 5.125rem;
+    min-width: 100%;
+  }
+
+  label{
+    color: $text-color;
+    font-family: $text-font;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.label{
+      position: absolute;
+      top: 12px;
+      left: 0;
+      font-size: 1rem;
+      line-height: 1rem;
+      margin-left: 10px;
+      font-size: 12px;
+        line-height: 0.75rem;
+        color: $text-color;
+
+    }
+  }
+}
+
+/* # 02. HOME
+---------------------------------------------------------------------------------------------------- */
+
 h2.hero-subtitle {
   color: $text-color;
-  text-align: center;
   font-size: 22px;
+  font-weight: 100;
+}
+
+.hero-title {
+  font-size: 30px;
+    color: #49636d;
+    padding-bottom: 10px;
 }
 
 .hero {
-  padding: 80px 0 40px 0;
+  padding: 10px 0;
+}
+
+.hero-arrow-phone {
+  font-size: 35px;
+    margin-left: -6px;
+    color: #d0dde2;
+    margin-top: 10px;
+}
+
+.hero-arrow-desktop {
+  display: none;
 }
 
 h1 {
@@ -110,18 +300,27 @@ h1 {
   font-family: $heading-font;
 }
 
-.title-search-home {
-  font-size: 20px;
-  color: $blue;
-  font-weight: 600;
-  padding-bottom: 4px;
-  padding-left: 32px;
-}
-
 .subtitle-search {
   font-size: 16px;
   color: $text-color;
   font-weight: 100;
+}
+
+
+.title-search-home {
+  font-size: 20px;
+  font-family: $heading-font;
+  color: $blue;
+  font-weight: 600;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.subtitle-search-home {
+  font-size: 16px;
+  color: $text-color;
+  font-weight: 100;
+  padding-left: 32px;
 }
 
 .search-form {
@@ -139,17 +338,17 @@ h1 {
 .properties-group {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 26px;
   overflow: scroll;
   padding: 20px;
 
   .property-card {
-    width: 50vw;
-    margin-top: -80px;
+    width: 35vw;
+    margin-top: -60px;
 
     img {
       width: 100%;
-      height: 60vw;
+      height: 50vw;
       object-fit: cover;
       border-radius: 20px;
     }
@@ -158,7 +357,7 @@ h1 {
       font-family: $heading-font;
       color: $orange;
       font-size: 16px;
-      padding-top: 18px;
+      padding-top: 0;
     }
 
     p {
@@ -170,11 +369,11 @@ h1 {
 }
 
 .display-blue {
-  font-size: 40px;
+  font-size: 26px;
   color: $blue;
   font-family: $heading-font;
   font-weight: 600;
-  padding: 30px;
+  padding: 10px 30px;
 }
 
 .container-left {
@@ -183,8 +382,14 @@ h1 {
   height: 40vh;
 }
 
+.table-bookings {
+ max-height: 50vh;
+ overflow: scroll;
+}
+
+
 .image-background {
-  background-size: 100vw;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   height: 40vh;
@@ -201,7 +406,17 @@ h1 {
     justify-content: flex-start;
     margin-top: -50px;
 
+
 }
+
+.banner-profile {
+  background-image: url("/images/water.jpg");
+  background-size: cover;
+  padding: 50px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
 
 .title-heart {
   display: flex;
@@ -236,9 +451,17 @@ h1 {
 
 .display-form {
   width: 100%;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  
+  div {
+    width: 100%;
+
+    .kokomo-input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 h2.display-orange {
@@ -250,7 +473,7 @@ h2.display-orange {
 h2.display-cream {
   color: $cream;
   font-family: $heading-font;
-  font-size: 60px;
+  font-size: 20px;
 }
 
 .emoji {
@@ -297,28 +520,131 @@ h3.section-title {
     padding: 10px 20px;
 }
 
+.div-booking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(141, 136, 131, 0.2);
+  margin: 10px 0;
+  padding: 20px;
+}
 
-// MEDIA QUERIES PANTALLAS +768px
+.booking-ref {
+  background-color: $blue;
+  color: $cream;
+  padding: 4px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* # 01. MEDIA QUERIES
+---------------------------------------------------------------------------------------------------- */
+
+/* ## MEDIA QUERIES PANTALLAS +768px
+--------------------------------------------- */
+
 @media all and (min-width: 768px){
+  .body-container {
+    margin-left: 140px;
+  }
+
+  .hero {
+    min-width: 20vw;
+  }
+
   .home-bg {
     display: flex;
     align-items: center;
     min-height: 100vh;
   }
 
+  .hero-arrow-phone {
+    display: none;
+  }
+  
+  .hero-arrow-desktop {
+    display: block;
+    font-size: 35px;
+      margin-left: -6px;
+      color: #d0dde2;
+      margin-top: 10px;
+  }
+
+  .navbar-kokomo {
+    box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+    border-radius: 26px;
+    position: fixed;
+    top: 0;
+    right: auto;
+    width: auto;
+    margin: 10px;
+  
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 12px;
+      margin: 0;
+      height: 100%;
+  
+      li{
+        border-radius: 30px;
+        background-color: $blue;
+        padding: 20px;
+
+        a {
+          font-size: 28px;
+        }
+      }
+
+      }
+    
+  
+  }
+
+  .search-icon-menu {
+    background-color: $cream !important;
+    margin-top: -10px;
+    padding: 20px !important;
+    box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  
+    a {
+      color: $blue !important;
+    }
+  }
+
   .image-background {
-    background-size: 60vw;
+    background-size: cover;
     background-position: left center;
     background-repeat: no-repeat;
   }
 
   .container-left {
     padding: 40px !important;
-    width: 40vw;
+    width: 60vw;
+    height: 100vh;
+    margin-right: -40px;
   }
 
   .white-card {
-    width: 60vw;
+    width: 100%;
+    height: 100vh;
+    background-color: $cream;
+    padding: 26px 40px 26px 50px;
+    border-radius: 50px 0 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0px;
+  }
+  .input-form {
+    overflow: scroll;
+  }
+
+  .white-card-home {
+    width: 80vw;
+    overflow: scroll;
     height: 100vh;
     background-color: $cream;
     padding: 26px 0px 26px 50px;
@@ -329,23 +655,15 @@ h3.section-title {
     margin-top: 0px;
   }
 
-  .white-card-home {
-    width: 60vw;
-    height: 100vh;
-    background-color: $cream;
-    padding: 26px 0px 26px 50px;
-    border-radius: 50px 0 0 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   .title-heart {
     display:flex;
     flex-direction: row;
     margin-left: -90px !important;
   }
   
+  h2.display-cream {
+    font-size: 40px;
+  }
 
   .title-search {
     font-size: 45px;
@@ -356,10 +674,7 @@ h3.section-title {
   }
 
   .title-search-home {
-    font-size: 24px;
-    color: $blue;
-    font-family: $text-font;
-    font-weight: 600;
+    font-size: 40px;
     padding: 0 100px 10px 0;
   }
   
@@ -370,6 +685,10 @@ h3.section-title {
     padding-left: 0;
   }
 
+  .subtitle-search-home {
+    padding-left: 0px;
+  }
+
   .properties-group {
     padding: 40px 0;
   
@@ -378,7 +697,7 @@ h3.section-title {
   
       img {
         height: 30vw;
-        border-radius: 20px;
+        border-radius: 40px;
       }
   
       h3 {

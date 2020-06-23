@@ -19,11 +19,19 @@ router.post('/login', auth_controller.login);
 // GET de la ruta profile del customer
 router.get('/profile', auth_controller.profile);
 
+// Rutas del profile
 router.get('/profile/edit', auth_controller.profileEdit);
 router.post('/profile/editPassword', auth_controller.profilePasswordChange);
 router.post('/profile/editTelephone', auth_controller.profileTelephoneChange);
 router.get('/profile/delete', auth_controller.deleteAccount);
+router.get('/my-favourites', auth_controller.myFavourites);
+router.get('/my-bookings', auth_controller.myBookings);
 
+//Sign up para owners
+router.get('/signup-local', auth_controller.signUpLocal);
+router.post('/signup-local', auth_controller.registerOwner);
+
+// LOG OUT
 router.get('/logout', auth_controller.logout);
 
 module.exports = router;

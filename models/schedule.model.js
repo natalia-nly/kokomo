@@ -3,14 +3,13 @@ const Schema = mongoose.Schema;
 
 const scheduleSchema = new Schema({
     property: {type: Schema.Types.ObjectId, ref: "Property"},
-    time_boxes: [{
+    timeBoxes: [{
         day: Date,
-		start_time: String,
-		end_time: Number,
+		startTime: String,
+		endTime: Number,
 		status: Boolean,
 		remaining: Number,
-        total: Number,
-        bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}]
+        total: Number
 	}]
 },
 {

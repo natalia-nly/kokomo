@@ -1,17 +1,17 @@
-<div class="home-bg">
-    <div class="container-left image-background" style="
+<div class="home-bg image-background" style="
     background-image: url({{property.mainImage}})">
+    <div class="container-left">
 
     </div>
 
     <div class="white-card">
         <div class="title-heart">
-            <a href="/local/love/{{property._id}}">
+            <div>
                 <span class="fa-stack fa-2x mr-4">
                     <i class="fas fa-circle fa-stack-2x orange"></i>
                     <i class="far fa-heart fa-stack-1x fa-inverse"></i>
                 </span>
-            </a>
+            </div>
             <div>
                 <h2 class="title-search">{{property.name}}</h2>
 
@@ -19,21 +19,22 @@
         </div>
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
-                    role="tab" aria-controls="nav-description" aria-selected="true">Descripción</a>
+                <a class="nav-item nav-link " id="nav-description-tab" data-toggle="tab" href="#nav-description"
+                    role="tab" aria-controls="nav-description" aria-selected="false">Descripción</a>
                 <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
                     aria-controls="nav-comments" aria-selected="false">Comentarios</a>
                 <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
                     aria-controls="nav-openings" aria-selected="false">Horarios</a>
+                <a class="nav-item nav-link active" id="nav-reservations-tab" data-toggle="tab" href="#nav-reservations"
+                    role="tab" aria-controls="nav-reservations" aria-selected="true">Reservas</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
+            <div class="tab-pane fade" id="nav-description" role="tabpanel"
                 aria-labelledby="nav-description-tab">
                 <h3 class="subtitle-search mb-4">{{property.description}}</h3>
                 <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
                 </p>
-
                 <p>Duración de la reserva: {{property.bookingDuration}}</p>
                 <p>Plazas disponibles: {{property.availablePlaces}}</p>
             </div>
@@ -52,27 +53,27 @@
                 {{/each}}
                 {{/each}}
             </div>
+            <div class="tab-pane fade show active" id="nav-reservations" role="tabpanel" aria-labelledby="nav-reservations-tab">
+                <h3 class="subtitle-search mb-4">Reservas activas: {{property.bookings.length}}</h3>
+
+                {{#each property.bookings}}
+                <p>Código de la reserva: {{bookingRef}}</span></p>
+                {{/each}}
+            </div>
         </div>
 
 
         {{#if user}}
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
-                        <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
-                    </div>
+            <div class="display-form mb-3">
+                <div>
+                    <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="" class="kokomo-input">
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
-                        <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
-                    </div>
+                <div>
+                    <input type="number" name="numberGuests" id="" min="0" class="kokomo-input" placeholder="Personas">
                 </div>
             </div>
-            
-            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
         </form>
         {{else}}
         <div class="mt-4 border-top">

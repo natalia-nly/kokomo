@@ -1,10 +1,6 @@
-<div class="home-bg" style="
-    background-image: url({{property.main_image}});
-    background-size: 60vw;
-    background-position: left center;
-    background-repeat: no-repeat">
-    <div class="container-left">
-
+<div class="home-bg">
+    <div class="container-left image-background" style="
+    background-image: url({{property.mainImage}})">
     </div>
 
     <div class="white-card">
@@ -24,13 +20,26 @@
         <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
         <p>
 
-        <p>Duración de la reserva: {{property.booking_duration}}</p>
-        <p>Plazas disponibles: {{property.available_places}}</p>
+        <p>Duración de la reserva: {{property.bookingDuration}}</p>
+        <p>Plazas disponibles: {{property.availablePlaces}}</p>
 
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
-            <input type="date" name="bookingDate" id="" class="kokomo-input">
-            <input type="number" name="numberGuests" min="0" id="" class="kokomo-input">
-            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
+                        <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="" value="{{newDate}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
+                        <input type="number" name="numberGuests" id="" min="1" class="kokomo-input" value="{{newGuests}}">
+                    </div>
+                </div>
+            </div>
+            
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
         </form>
 
         <h3 class="mt-4 mb-4 section-title">Horas disponibles</h3>
@@ -42,7 +51,7 @@
                     <input type="hidden" name="propertyId" value="{{../property._id}}">
                     <input type="hidden" name="day"  value="{{this.day}}">
                     <input type="hidden" name="guests" value="{{../guests}}">
-                    <input type="submit" class="kokomo-hours" value="{{this.start_time}}">
+                    <input type="submit" class="kokomo-hours" value="{{this.startTime}}">
                 </form>
 
             </div>
