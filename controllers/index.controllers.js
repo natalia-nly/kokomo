@@ -2,6 +2,7 @@ const Property = require('../models/property.model');
 const Schedule = require('../models/schedule.model');
 const Booking = require('../models/booking.model');
 const Customer = require('../models/customer.model');
+const uploadCloud = require('../config/cloudinary.js');
 
 exports.createLocal = (req, res, next) => res.render('owner/create-local', {
   title: 'Crea tu local | KOKOMO',
@@ -79,6 +80,7 @@ function createSchedule(property) {
   });
 }
 
+
 exports.registerLocal = (req, res, next) => {
   console.log(req.body);
   const workingDays = [];
@@ -109,7 +111,7 @@ exports.registerLocal = (req, res, next) => {
     name: req.body.name,
     description: req.body.description,
     categories: [req.body.categories],
-    mainImage: req.body.main,
+    mainImage: req.file.path,
     media: [req.body.media],
     location: {
       name: req.body.ubication,

@@ -251,7 +251,7 @@ h1 {
 
 .properties-group {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 26px;
   overflow: scroll;
   padding: 20px; }

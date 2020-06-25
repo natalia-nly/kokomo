@@ -3,6 +3,7 @@ const router  = express.Router();
 const Property = require('../models/property.model');
 const mongoose = require('mongoose');
 const index_controller = require('../controllers/index.controllers');
+const uploadCloud = require('../config/cloudinary.js');
 
 // GET home page
 router.get('/', index_controller.allProperties);
@@ -17,7 +18,7 @@ router.get('/booking/delete/:bookingRef', index_controller.deleteBooking);
 
 router.get('/profile/create-local', index_controller.createLocal);
 
-router.post('/profile/create-local', index_controller.registerLocal);
+router.post('/profile/create-local', uploadCloud.single('main'), index_controller.registerLocal);
 
 router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
