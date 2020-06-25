@@ -10,6 +10,7 @@ const bookingSchema = new Schema({
     bookingRef:String,
     day: String,
     time: String,
+    timeBox: {type: Schema.Types.ObjectId, ref: "Schedule"},
     guests: Number
 },
 {
