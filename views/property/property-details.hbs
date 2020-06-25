@@ -18,7 +18,7 @@
             </div>
         </div>
         <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
                     role="tab" aria-controls="nav-description" aria-selected="true">Descripción</a>
                 <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
@@ -36,6 +36,9 @@
 
                 <p>Duración de la reserva: {{property.bookingDuration}}</p>
                 <p>Plazas disponibles: {{property.availablePlaces}}</p>
+                {{#each property.categories}}
+                <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
+                {{/each}}
             </div>
             <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">...</div>
             <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
