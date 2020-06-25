@@ -7,6 +7,9 @@ const favicon      = require('serve-favicon');
 const hbs          = require('hbs');
 const logger       = require('morgan');
 const path         = require('path');
+const passport     = require('passport');
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const User         = require('./models/customer.model');
 
 
 
@@ -27,6 +30,51 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+passport.serializeUser((user, callback) => {
+  callback(null, user._id);
+});
+
+passport.deserializeUser((id, callback) => {
+  User.findById(id)
+    .then(user => {
+      callback(null, user);
+    })
+    .catch(error => {
+      callback(error);
+    });
+});
+
+passport.use(
+  new GoogleStrategy( {clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/auth/google/callback"},
+    (accessToken, refreshToken, profile, done) => {
+      console.log("Google account details:", profile);
+      User.findOne({ googleID: profile.id }).then(user => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+          User.create({ 
+            googleID: profile.id, 
+            username: profile.displayName, 
+            avatar: profile.photos[0].value,
+            email: profile.emails[0].value
+           })
+            .then(newUser => {
+              done(null, newUser);
+            })
+            .catch(err => done(err)); // closes User.create()
+        })
+        .catch(err => done(err)); // closes User.findOne()
+    } )
+);
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
 
 // Express View engine setup
 

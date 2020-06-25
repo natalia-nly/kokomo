@@ -19,12 +19,18 @@ const customerSchema = new Schema({
         trim: true,
         required: [true, 'Email is required.'],
         unique: true
-      },
+      }, 
+      //GOOGLE Id
+      googleID: String,
       //password del cliente
       passwordHash: {
-        type: String,
-        required: [true, 'Password is required.']
+        type: String
       },
+      //avatar
+      avatar: {
+        type: String,
+        default: "https://i.ya-webdesign.com/images/avatar-icon-png-5.png"
+      },  
       //reservas del cliente
       bookings: [{
         bookingId: {
