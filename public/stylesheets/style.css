@@ -38,7 +38,8 @@ p {
   color: #809EAA; }
 
 .body-container {
-  margin: 15px; }
+  margin: 15px;
+  padding-bottom: 50px; }
 
 .padding-menu {
   padding-top: 100px; }
@@ -57,6 +58,9 @@ p {
 
 .cream {
   color: #FBF7F3; }
+
+.danger {
+  color: #FF8D69; }
 
 .blue-background {
   background-color: #e7eff3; }
@@ -285,6 +289,9 @@ h1 {
   max-height: 50vh;
   overflow: scroll; }
 
+.group-booking {
+  padding: 30px 0; }
+
 .image-background {
   background-size: cover;
   background-position: center center;
@@ -293,9 +300,10 @@ h1 {
 
 .white-card {
   width: 100vw;
-  height: 60vh;
+  height: 100%;
   background-color: #FBF7F3;
   padding: 26px;
+  padding-bottom: 100px;
   border-radius: 50px 50px 0 0;
   display: flex;
   flex-direction: column;
@@ -327,7 +335,11 @@ h1 {
     background-color: transparent !important;
     border-color: transparent !important; }
   #nav-tab .nav-link.active {
-    border-bottom: 2px solid #FFBA69 !important; }
+    border-bottom: 2px solid #FFBA69 !important;
+    color: #FFBA69 !important; }
+
+.tab-content {
+  padding: 20px 0; }
 
 .display-form {
   width: 100%;
@@ -355,9 +367,15 @@ h2.display-cream {
 
 h3.section-title {
   color: #3294BB;
+  font-family: bely-display, sans-serif;
   padding-bottom: 10px;
-  margin-right: 40px;
-  border-bottom: 1px solid #f7ede3;
+  border-bottom: 10px solid rgba(50, 148, 187, 0.1);
+  margin-bottom: 20px !important; }
+
+h4.section-title {
+  color: #3294BB;
+  padding-bottom: 10px;
+  border-bottom: 10px solid rgba(50, 148, 187, 0.1);
   margin-bottom: 20px !important; }
 
 .kokomo-hours {
@@ -388,14 +406,17 @@ h3.section-title {
   padding: 10px 20px; }
 
 .div-booking {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(141, 136, 131, 0.2);
   margin: 10px 0;
   padding: 20px; }
+  .div-booking .column-xs {
+    width: 100%; }
+  .div-booking .column-xl {
+    width: 100%; }
 
 .booking-ref {
   background-color: #3294BB;
@@ -410,7 +431,8 @@ h3.section-title {
 --------------------------------------------- */
 @media all and (min-width: 768px) {
   .body-container {
-    margin-left: 140px; }
+    margin-left: 140px;
+    padding-bottom: 0px; }
   .hero {
     min-width: 20vw; }
   .home-bg {
@@ -445,6 +467,16 @@ h3.section-title {
         padding: 20px; }
         .navbar-kokomo ul li a {
           font-size: 28px; }
+  #nav-tab {
+    border-bottom: 2px solid rgba(255, 186, 105, 0.2) !important; }
+    #nav-tab .nav-link {
+      font-size: 18px; }
+    #nav-tab .nav-link, #nav-tab .nav-tabs .nav-link {
+      color: #8D8883 !important;
+      background-color: transparent !important;
+      border-color: transparent !important; }
+    #nav-tab .nav-link.active {
+      border-bottom: 2px solid #FFBA69 !important; }
   .search-icon-menu {
     background-color: #FBF7F3 !important;
     margin-top: -10px;
@@ -521,6 +553,10 @@ h3.section-title {
       .properties-group .property-card p {
         color: #809EAA;
         font-weight: 200;
-        font-size: 16px; } }
+        font-size: 16px; }
+  .div-booking .column-xs {
+    width: 20%; }
+  .div-booking .column-xl {
+    width: 30%; } }
 
 /*# sourceMappingURL=style.css.map */

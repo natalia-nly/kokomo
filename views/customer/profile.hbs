@@ -1,8 +1,6 @@
 {{#if user}}
 <div class="body-container">
-    <div class="banner-profile">
-        <h2 class="display-cream">¡Aloha, {{user.username}}!</h2>
-    </div>
+   <h3 class="section-title mdi mdi-account-circle">Tu perfil</h3>
 
     <div>
         <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mb-4 mt-5"><i class="fas fa-user-cog"></i>
@@ -11,53 +9,6 @@
             Cerrar sesión</a>
     </div>
 
-    <h3 class="section-title"><i class="far fa-calendar-alt fa-sm blue"></i> Tus Reservas</h3>
-
-    {{#if user.bookings}}
-    {{#each user.bookings}}
-    <div class="div-booking">
-        <div>
-            <p>
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-square fa-stack-2x orange-20"></i>
-                    <i class="far fa-calendar-check fa-stack-1x orange"></i>
-                </span>
-                {{day}}
-            </p>
-            <p>
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-square fa-stack-2x orange-20"></i>
-                    <i class="far fa-clock fa-stack-1x orange"></i>
-                </span>
-                {{time}}
-            </p>
-            <p>
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-square fa-stack-2x orange-20"></i>
-                    <i class="fas fa-users fa-stack-1x orange"></i>
-                </span>
-                {{guests}} personas
-            </p>
-            <p>
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-square fa-stack-2x orange-20"></i>
-                    <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-                </span>
-                {{property}}
-            </p>
-        </div>
-        <div>
-            <p class="mb-4 text-right"><span class="booking-ref">{{bookingRef}}</span></p>
-
-            <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-grey float-right">Cancelar reserva</a>
-        </div>
-
-    </div>
-    {{/each}}
-
-    {{else}}
-    <p>Todavía no tienes reservas</p>
-    {{/if}}
 
 </div>
 </div>

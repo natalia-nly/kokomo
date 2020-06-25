@@ -117,11 +117,11 @@ exports.registerLocal = (req, res, next) => {
       long: req.body.longitude
     },
     openingHours: [{
-       openingDays: {
-         openingDay: req.body.opening,
-         closingDay: req.body.closing
+      openingDays: {
+        openingDay: req.body.opening,
+        closingDay: req.body.closing
       },
-     weekDays: workingDays,
+      weekDays: workingDays,
       openingTimes: [{
         openingTime: req.body.openhour,
         closingTime: req.body.closehour
@@ -199,15 +199,35 @@ exports.viewLocal = (req, res, next) => {
 exports.ownerViewLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
-      res.render("owner/property-details", {
-        property: resultado,
-        title: `${resultado.name} | KOKOMO`,
-        user: req.session.currentUser
-      });
-    })
-    .catch(error => {
+
+
+
+      const getBookings = async () => {
+        return Promise.all(resultado.bookings.map(async (booking) => {
+          var item = await Booking.findById(booking.bookingId);
+          return item;
+        }))
+      };
+
+      getBookings().then(bookings => {
+          console.log(bookings)
+          console.log(resultado)
+          res.render("owner/property-details", {
+            property: resultado,
+            bookings: bookings,
+            title: `${resultado.name} | KOKOMO`,
+            user: req.session.currentUser
+          });
+        })
+        .catch(error => {
+          console.log('Error: ', error);
+        });
+
+    }).catch(error => {
       console.log('Error: ', error);
     });
+
+
 
 };
 
@@ -236,17 +256,20 @@ exports.loveLocal = (req, res, next) => {
         location: resultado.location.name
       };
 
-      Customer.findOneAndUpdate(
-        {_id: req.session.currentUser._id}, 
-        {$push: {favourites: newFavourite}
-      })
-      .then(customer => {
-        console.log("Usuario actualizado", customer);
-        res.redirect('back');
-      })
-      .catch(error => {
-        console.log('Error: ', error);
-      });
+      Customer.findOneAndUpdate({
+          _id: req.session.currentUser._id
+        }, {
+          $push: {
+            favourites: newFavourite
+          }
+        })
+        .then(customer => {
+          console.log("Usuario actualizado", customer);
+          res.redirect('back');
+        })
+        .catch(error => {
+          console.log('Error: ', error);
+        });
 
     })
     .catch(error => {
@@ -364,9 +387,12 @@ exports.createBooking = (req, res, next) => {
       //Crear la reserva en la colección de bookings
       return Booking.create({
         customer: req.session.currentUser._id,
+        customerName: req.session.currentUser.username,
+        telNumber: req.session.currentUser.telNumber,
         property: propertyId,
         day: day,
         bookingRef: bookingRef,
+        timeBox: finalTimebox._id,
         time: finalTimebox.startTime,
         guests: guests
       });
@@ -403,6 +429,16 @@ exports.createBooking = (req, res, next) => {
             console.log('Error: ', error);
           });
 
+          //Actualizar la reserva con el nombre de la property
+          Booking.findByIdAndUpdate(booking._id, {
+            propertyName: property.name
+          }, {
+            new: true
+          }).then(booking => console.log(booking)).catch(error => {
+            console.log('Error: ', error);
+          });
+
+
           // GUARDANDO LA RESERVA EN LA PROPERTY
           const bookingProperty = {
             bookingId: booking._id,
@@ -411,11 +447,10 @@ exports.createBooking = (req, res, next) => {
           Property.findByIdAndUpdate(booking.property, {
             $push: {
               bookings: bookingProperty
-            }},
-            {
-              new: true
             }
-          ).then(customer => console.log(customer)).catch(error => {
+          }, {
+            new: true
+          }).then(customer => console.log(customer)).catch(error => {
             console.log('Error: ', error);
           });
         }
@@ -434,6 +469,14 @@ exports.createBooking = (req, res, next) => {
 exports.deleteBooking = (req, res) => {
   const bookingRef = req.params.bookingRef;
   console.log("BOOKING REF", bookingRef);
+  Booking.findOne({
+    bookingRef: {
+      $eq: bookingRef
+    }
+  }).then(booking =>{
+    console.log("this is booking",booking)
+    Schedule.update({'timeBoxes._id':booking.timeBox}, {'$inc':{'timeBoxes.$.remaining': booking.guests}});
+  })
   const p1 = Booking.findOneAndDelete({
     bookingRef: {
       $eq: bookingRef
@@ -448,8 +491,18 @@ exports.deleteBooking = (req, res) => {
       }
     }
   });
+  const p3 = Property.findOneAndUpdate(
+    {
+     
+    }, {
+    $pull: {
+      bookings: {
+        bookingRef: bookingRef
+      }
+    }
+  });
 
-  Promise.all([p1, p2])
+  Promise.all([p1, p2, p3])
     .then(resultados => {
       console.log(resultados);
       res.redirect('/profile');

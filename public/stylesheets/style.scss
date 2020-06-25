@@ -62,6 +62,7 @@ p {
 
 .body-container {
   margin: 15px;
+  padding-bottom: 50px;
 }
 
 .padding-menu {
@@ -86,6 +87,10 @@ p {
 
 .cream {
   color: $cream;
+}
+
+.danger {
+  color: $danger;
 }
 
 .blue-background {
@@ -387,6 +392,9 @@ h1 {
  overflow: scroll;
 }
 
+.group-booking {
+  padding: 30px 0;
+}
 
 .image-background {
   background-size: cover;
@@ -397,9 +405,10 @@ h1 {
 
 .white-card {
   width: 100vw;
-    height: 60vh;
+    height: 100%;
     background-color: #FBF7F3;
     padding: 26px;
+    padding-bottom: 100px;
     border-radius: 50px 50px 0 0;
     display: flex;
     flex-direction: column;
@@ -445,8 +454,13 @@ h1 {
   
   .nav-link.active {
     border-bottom: 2px solid $orange !important;
+    color: $orange !important;
   }
   
+  
+}
+.tab-content{
+  padding: 20px 0;
 }
 
 .display-form {
@@ -483,9 +497,16 @@ h2.display-cream {
 
 h3.section-title {
   color: $blue;
+  font-family: $heading-font;
     padding-bottom: 10px;
-    margin-right: 40px;
-    border-bottom: 1px solid #f7ede3;
+    border-bottom: 10px solid rgba($blue, .1);
+    margin-bottom: 20px !important;
+}
+
+h4.section-title {
+  color: $blue;
+    padding-bottom: 10px;
+    border-bottom: 10px solid rgba($blue, .1);
     margin-bottom: 20px !important;
 }
 
@@ -521,14 +542,21 @@ h3.section-title {
 }
 
 .div-booking {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(141, 136, 131, 0.2);
   margin: 10px 0;
   padding: 20px;
+
+  .column-xs{
+    width: 100%;
+  }
+
+  .column-xl {
+    width: 100%;
+  }
 }
 
 .booking-ref {
@@ -548,6 +576,7 @@ h3.section-title {
 @media all and (min-width: 768px){
   .body-container {
     margin-left: 140px;
+    padding-bottom: 0px;
   }
 
   .hero {
@@ -601,6 +630,26 @@ h3.section-title {
       }
     
   
+  }
+
+  #nav-tab {
+
+    border-bottom: 2px solid rgba($orange, .2) !important;
+  
+    .nav-link {
+      font-size: 18px;
+    }
+    
+    .nav-link, .nav-tabs .nav-link {
+      color: #8D8883 !important;
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+    
+    .nav-link.active {
+      border-bottom: 2px solid $orange !important;
+    }
+    
   }
 
   .search-icon-menu {
@@ -714,4 +763,15 @@ h3.section-title {
       }
     }
   }
+
+  .div-booking {
+    .column-xs{
+      width: 20%;
+    }
+  
+    .column-xl {
+      width: 30%;
+    }
+  }
 }
+

@@ -1,20 +1,22 @@
 const Customer = require('../models/customer.model');
+const Property = require('../models/property.model');
+const Booking = require('../models/booking.model');
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 
-exports.signUp = (req, res, next) => res.render('auth/signup', { 
+exports.signUp = (req, res, next) => res.render('auth/signup', {
     title: '¡Crea tu cuenta! | KOKOMO',
     layout: 'layout-nouser'
 });
 
-exports.signUpLocal = (req, res, next) => res.render('auth/signup-owner', { 
+exports.signUpLocal = (req, res, next) => res.render('auth/signup-owner', {
     title: '¡Crea tu cuenta! | KOKOMO',
     layout: 'layout-nouser'
 });
 
 exports.registerCustomer = (req, res, next) => {
-    
+
     const {
         username,
         telephone,
@@ -65,7 +67,7 @@ exports.registerCustomer = (req, res, next) => {
 };
 
 exports.registerOwner = (req, res, next) => {
-    
+
     const {
         username,
         telephone,
@@ -116,40 +118,52 @@ exports.registerOwner = (req, res, next) => {
         });
 };
 
-exports.loginView = (req, res, next) => res.render('auth/login', { title: 'Inicia sesión | KOKOMO',  layout: 'layout-nouser' });
+exports.loginView = (req, res, next) => res.render('auth/login', {
+    title: 'Inicia sesión | KOKOMO',
+    layout: 'layout-nouser'
+});
 
 exports.login = (req, res, next) => {
-    if(req.session.currentUser){
+    if (req.session.currentUser) {
         return res.redirect('/profile');
     }
-    const { email, password } = req.body;
+    const {
+        email,
+        password
+    } = req.body;
     if (email === '' || password === '') {
-      res.render('auth/login', {
-        errorMessage: 'Please enter both, email and password to login.'
-      });
-      return;
+        res.render('auth/login', {
+            errorMessage: 'Please enter both, email and password to login.'
+        });
+        return;
     }
-  
-    Customer.findOne({ email })
-      .then(user => {
-        if (!user) {
-          res.render('auth/login', { errorMessage: 'Email is not registered. Try with other email.' });
-          return;
-        } else if (bcrypt.compareSync(password, user.passwordHash)) {
-          req.session.currentUser = user;
-          res.redirect('/');
-        } else {
-          res.render('auth/login', { errorMessage: 'Incorrect password.' });
-        }
-      })
-      .catch(error => next(error));
+
+    Customer.findOne({
+            email
+        })
+        .then(user => {
+            if (!user) {
+                res.render('auth/login', {
+                    errorMessage: 'Email is not registered. Try with other email.'
+                });
+                return;
+            } else if (bcrypt.compareSync(password, user.passwordHash)) {
+                req.session.currentUser = user;
+                res.redirect('/');
+            } else {
+                res.render('auth/login', {
+                    errorMessage: 'Incorrect password.'
+                });
+            }
+        })
+        .catch(error => next(error));
 };
 
 
 exports.profile = (req, res, next) => {
     console.log("SESSION: ", req.session);
 
-    if(req.session.currentUser.owner) {
+    if (req.session.currentUser.owner) {
         Customer.findById(req.session.currentUser._id).then(user => {
             res.render('owner/profile', {
                 user,
@@ -163,8 +177,8 @@ exports.profile = (req, res, next) => {
                 title: 'Mi perfil | KOKOMO'
             });
         }).catch(error => next(error));
-    }  
-    
+    }
+
 };
 
 exports.myFavourites = (req, res, next) => {
@@ -173,17 +187,47 @@ exports.myFavourites = (req, res, next) => {
             user,
             title: 'Mis favoritos | KOKOMO'
         });
-    }).catch(error => next(error)); 
-    
+    }).catch(error => next(error));
+
 };
 
 exports.myBookings = (req, res, next) => {
-    if(req.session.currentUser.owner) {
+    if (req.session.currentUser.owner) {
         Customer.findById(req.session.currentUser._id).then(user => {
-            res.render('owner/bookings', {
-                user,
-                title: 'Mis reservas | KOKOMO'
-            });
+
+            const getProperties = async () => {
+                return Promise.all(user.ownProperties.map(async (property) => {
+                    var local = await Property.findById(property.id);
+                    return local;
+
+                }))
+            }
+
+            getProperties().then(properties => {
+
+                const propertiesBookings = async () => {
+                    return Promise.all(properties.map(property => {
+                        const getBookings = async () => {
+                            return Promise.all(property.bookings.map(async (booking) => {
+                                var item = await Booking.findById(booking.bookingId);
+                                return item;
+                            }))
+                        };
+                        getBookings().then(bookings => {
+                            console.log(bookings)
+                            res.render('owner/bookings', {
+                                user,
+                                title: 'Mis reservas | KOKOMO',
+                                bookings
+                            });
+                        })
+
+                    }))
+                }
+                propertiesBookings()
+                
+                
+            })
         }).catch(error => next(error));
     } else {
         Customer.findById(req.session.currentUser._id).then(user => {
@@ -192,8 +236,8 @@ exports.myBookings = (req, res, next) => {
                 title: 'Mis reservas | KOKOMO'
             });
         }).catch(error => next(error));
-    }  
-    
+    }
+
 };
 
 exports.profileEdit = (req, res, next) => {
@@ -204,34 +248,45 @@ exports.profileEdit = (req, res, next) => {
             title: 'Editar mi perfil | KOKOMO'
         });
     }).catch(error => next(error));
-    
+
 };
 
 exports.profileTelephoneChange = (req, res, next) => {
-    const { id, newTelephone} = req.body;
-        Customer.findByIdAndUpdate(id, newTelephone,{new: true})
+    const {
+        id,
+        newTelephone
+    } = req.body;
+    Customer.findByIdAndUpdate(id, newTelephone, {
+            new: true
+        })
         .then(resultado => {
-        res.render('customer/edit', {
-            user: req.session.currentUser,
-            title: 'Editar mi perfil | KOKOMO',
-            infoMessage: '¡Número de Teléfono cambiado! ✌️'
-        });
+            res.render('customer/edit', {
+                user: req.session.currentUser,
+                title: 'Editar mi perfil | KOKOMO',
+                infoMessage: '¡Número de Teléfono cambiado! ✌️'
+            });
         }).catch(error => next(error));
 };
 
 exports.profilePasswordChange = (req, res, next) => {
-    const { id, oldPassword, newPassword} = req.body;
+    const {
+        id,
+        oldPassword,
+        newPassword
+    } = req.body;
 
-    if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)){
-        Customer.findByIdAndUpdate(id, newPassword,{new: true})
-        .then(resultado => {
-        res.render('customer/edit', {
-            user: req.session.currentUser,
-            title: 'Editar mi perfil | KOKOMO',
-            infoMessage: '¡Contraseña cambiada! ✌️'
-        });
-        }).catch(error => next(error));
-    } else  {
+    if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)) {
+        Customer.findByIdAndUpdate(id, newPassword, {
+                new: true
+            })
+            .then(resultado => {
+                res.render('customer/edit', {
+                    user: req.session.currentUser,
+                    title: 'Editar mi perfil | KOKOMO',
+                    infoMessage: '¡Contraseña cambiada! ✌️'
+                });
+            }).catch(error => next(error));
+    } else {
         res.render('customer/edit', {
             user: req.session.currentUser,
             title: 'Editar mi perfil | KOKOMO',
@@ -242,13 +297,12 @@ exports.profilePasswordChange = (req, res, next) => {
 
 exports.deleteAccount = (req, res, next) => {
     Customer.findByIdAndDelete(req.session.currentUser._id)
-    .then(user => {
-        res.redirect('/');
-    }).catch(error => next(error));
+        .then(user => {
+            res.redirect('/');
+        }).catch(error => next(error));
 };
 
 exports.logout = (req, res) => {
     req.session.destroy();
     res.redirect("/");
 };
-
