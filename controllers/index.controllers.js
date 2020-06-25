@@ -199,15 +199,33 @@ exports.viewLocal = (req, res, next) => {
 exports.ownerViewLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
-      res.render("owner/property-details", {
-        property: resultado,
-        title: `${resultado.name} | KOKOMO`,
-        user: req.session.currentUser
-      });
-    })
-    .catch(error => {
-      console.log('Error: ', error);
-    });
+
+ 
+
+     const getBookings = async () => {return Promise.all(resultado.bookings.map(async (booking) => {
+          var item = await Booking.findById(booking.bookingId);
+          return item;
+        }))};
+      
+getBookings().then(bookings => {
+  console.log(bookings)
+  console.log(resultado)
+  res.render("owner/property-details", {
+    property: resultado,
+    bookings: bookings,
+    title: `${resultado.name} | KOKOMO`,
+    user: req.session.currentUser
+  });
+})
+.catch(error => {
+  console.log('Error: ', error);
+});
+
+}).catch(error => {
+  console.log('Error: ', error);
+});
+    
+      
 
 };
 
@@ -404,6 +422,14 @@ exports.createBooking = (req, res, next) => {
           }).then(customer => console.log(customer)).catch(error => {
             console.log('Error: ', error);
           });
+  
+          //Actualizar la reserva con el nombre de la property
+          Booking.findByIdAndUpdate(booking._id, {propertyName :property.name},{
+            new: true
+          }).then(booking => console.log(booking)).catch(error => {
+            console.log('Error: ', error);
+          });
+
 
           // GUARDANDO LA RESERVA EN LA PROPERTY
           const bookingProperty = {

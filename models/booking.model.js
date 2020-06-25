@@ -6,6 +6,7 @@ const bookingSchema = new Schema({
     customerName: String,
     telNumber: Number,
     property: {type: Schema.Types.ObjectId, ref: "Property"},
+    propertyName: String,
     bookingRef:String,
     day: String,
     time: String,

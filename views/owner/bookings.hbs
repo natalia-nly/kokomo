@@ -16,7 +16,7 @@
         Cerrar sesión</a>
     </div>
   </div>
-  
+
   <div>
     <nav>
       <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -31,11 +31,8 @@
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-property-bookings" role="tabpanel"
         aria-labelledby="nav-property-bookings-tab">
-
-      </div>
-      <div class="tab-pane fade" id="nav-own-bookings" role="tabpanel" aria-labelledby="nav-own-bookings-tab">
-        {{#if user.bookings}}
-        {{#each user.bookings}}
+        {{#if bookings}}
+        {{#each bookings}}
         <div class="div-booking">
           <div>
             <p>
@@ -64,7 +61,7 @@
                 <i class="fas fa-square fa-stack-2x orange-20"></i>
                 <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
               </span>
-              {{property}}
+              {{propertyName}}
             </p>
           </div>
           <div>
@@ -72,21 +69,66 @@
 
             <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-grey float-right">Cancelar reserva</a>
           </div>
-
+         
         </div>
-        {{/each}}
-        {{else}}
-        <p>Todavía no tienes reservas</p>
-        {{/if}}
+         {{/each}}
+          {{/if}}
+          </div>
+        <div class="tab-pane fade" id="nav-own-bookings" role="tabpanel" aria-labelledby="nav-own-bookings-tab">
+          {{#if user.bookings}}
+          {{#each user.bookings}}
+          <div class="div-booking">
+            <div>
+              <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="far fa-calendar-check fa-stack-1x orange"></i>
+                </span>
+                {{day}}
+              </p>
+              <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="far fa-clock fa-stack-1x orange"></i>
+                </span>
+                {{time}}
+              </p>
+              <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="fas fa-users fa-stack-1x orange"></i>
+                </span>
+                {{guests}} personas
+              </p>
+              <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+                </span>
+                {{property}}
+              </p>
+            </div>
+            <div>
+              <p class="mb-4 text-right"><span class="booking-ref">{{bookingRef}}</span></p>
+
+              <a href="/booking/delete/{{bookingRef}}" class="btn-kokomo btn-kokomo-grey float-right">Cancelar
+                reserva</a>
+            </div>
+
+          </div>
+          {{/each}}
+          {{else}}
+          <p>Todavía no tienes reservas</p>
+          {{/if}}
+        </div>
+
       </div>
 
     </div>
-   
   </div>
-</div>
 
 
-{{else}}
-<p>Please, login first!</p>
-<a href="/login" class="btn btn-primary">Login</a>
-{{/if}}
+  {{else}}
+  <p>Please, login first!</p>
+  <a href="/login" class="btn btn-primary">Login</a>
+  {{/if}}
