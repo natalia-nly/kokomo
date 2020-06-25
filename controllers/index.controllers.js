@@ -477,6 +477,16 @@ exports.deleteBooking = (req, res) => {
     }
   });
 
+  const p3 = Property.findOneAndUpdate({
+    bookings: { $eq: bookingRef} 
+  }, {
+    $pull: {
+      bookings: {
+        bookingRef: bookingRef
+      }
+    }
+  });
+
   Promise.all([p1, p2])
     .then(resultados => {
       console.log(resultados);
