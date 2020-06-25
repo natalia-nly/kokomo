@@ -35,6 +35,13 @@
         {{#each bookings}}
         <div class="div-booking">
           <div>
+                        <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+              </span>
+              {{propertyName}}
+            </p>
             <p>
               <span class="fa-stack fa-lg">
                 <i class="fas fa-square fa-stack-2x orange-20"></i>
@@ -49,6 +56,20 @@
               </span>
               {{time}}
             </p>
+                                        <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="far fa-user fa-stack-1x orange"></i>
+                </span>
+                {{customerName}}
+              </p>
+                                          <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="far fa-mobile fa-stack-1x orange"></i>
+                </span>
+                {{telNumber}}
+              </p>
             <p>
               <span class="fa-stack fa-lg">
                 <i class="fas fa-square fa-stack-2x orange-20"></i>
@@ -56,13 +77,7 @@
               </span>
               {{guests}} personas
             </p>
-            <p>
-              <span class="fa-stack fa-lg">
-                <i class="fas fa-square fa-stack-2x orange-20"></i>
-                <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-              </span>
-              {{propertyName}}
-            </p>
+
           </div>
           <div>
             <p class="mb-4 text-right"><span class="booking-ref">{{bookingRef}}</span></p>
@@ -79,6 +94,13 @@
           {{#each user.bookings}}
           <div class="div-booking">
             <div>
+                            <p>
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-square fa-stack-2x orange-20"></i>
+                  <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+                </span>
+                {{property}}
+              </p>
               <p>
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-square fa-stack-2x orange-20"></i>
@@ -93,6 +115,7 @@
                 </span>
                 {{time}}
               </p>
+
               <p>
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-square fa-stack-2x orange-20"></i>
@@ -100,13 +123,7 @@
                 </span>
                 {{guests}} personas
               </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-                </span>
-                {{property}}
-              </p>
+
             </div>
             <div>
               <p class="mb-4 text-right"><span class="booking-ref">{{bookingRef}}</span></p>
