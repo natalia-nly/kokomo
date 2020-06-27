@@ -124,7 +124,8 @@ exports.loginView = (req, res, next) => res.render('auth/login', {
 });
 
 exports.login = (req, res, next) => {
-    if (req.session.currentUser) {
+    const sessionUser =req.session.currentUser|| req.user;
+    if (sessionUser) {
         return res.redirect('/profile');
     }
     const {
@@ -181,7 +182,8 @@ const sessionUser =req.session.currentUser|| req.user;
 };
 
 exports.myFavourites = (req, res, next) => {
-    Customer.findById(req.session.currentUser._id).then(user => {
+    const sessionUser =req.session.currentUser|| req.user;
+    Customer.findById(sessionUser._id).then(user => {
         res.render('customer/favourites', {
             user,
             title: 'Mis favoritos | KOKOMO'
@@ -191,8 +193,9 @@ exports.myFavourites = (req, res, next) => {
 };
 
 exports.myBookings = (req, res, next) => {
-    if (req.session.currentUser.owner) {
-        Customer.findById(req.session.currentUser._id).then(user => {
+    const sessionUser =req.session.currentUser|| req.user;
+    if (sessionUser.owner) {
+        Customer.findById(sessionUser._id).then(user => {
             const getProperties = async () => {
                 return Promise.all(user.ownProperties.map(async (property) => {
                     var local = await Property.findById(property.id);
@@ -228,7 +231,7 @@ exports.myBookings = (req, res, next) => {
             })
         }).catch(error => next(error));
     } else {
-        Customer.findById(req.session.currentUser._id).then(user => {
+        Customer.findById(sessionUser._id).then(user => {
             res.render('customer/bookings', {
                 user,
                 title: 'Mis reservas | KOKOMO'
@@ -239,8 +242,8 @@ exports.myBookings = (req, res, next) => {
 };
 
 exports.profileEdit = (req, res, next) => {
-
-    Customer.findById(req.session.currentUser._id).then(user => {
+    const sessionUser =req.session.currentUser|| req.user;
+    Customer.findById(sessionUser._id).then(user => {
         res.render('customer/edit', {
             user,
             title: 'Editar mi perfil | KOKOMO'
@@ -250,6 +253,7 @@ exports.profileEdit = (req, res, next) => {
 };
 
 exports.profileTelephoneChange = (req, res, next) => {
+    const sessionUser =req.session.currentUser|| req.user;
     const {
         id,
         newTelephone
@@ -259,7 +263,7 @@ exports.profileTelephoneChange = (req, res, next) => {
         })
         .then(resultado => {
             res.render('customer/edit', {
-                user: req.session.currentUser,
+                user: sessionUser,
                 title: 'Editar mi perfil | KOKOMO',
                 infoMessage: '¡Número de Teléfono cambiado! ✌️'
             });
@@ -272,7 +276,6 @@ exports.profilePasswordChange = (req, res, next) => {
         oldPassword,
         newPassword
     } = req.body;
-
     if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)) {
         Customer.findByIdAndUpdate(id, newPassword, {
                 new: true
@@ -294,7 +297,8 @@ exports.profilePasswordChange = (req, res, next) => {
 };
 
 exports.deleteAccount = (req, res, next) => {
-    Customer.findByIdAndDelete(req.session.currentUser._id)
+    const sessionUser =req.session.currentUser|| req.user;
+    Customer.findByIdAndDelete(sessionUser)
         .then(user => {
             res.redirect('/');
         }).catch(error => next(error));

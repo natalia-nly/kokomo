@@ -38,7 +38,7 @@
             <p class="error">{{errorMessage}}</p>
             {{/if}}
         </form>
-
+{{#unless user.googleID}}
         <form action="/profile/editPassword" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">
             <div class="form-group">
@@ -61,7 +61,7 @@
 
 
         </form>
-
+{{/unless}}
     </div>
 </div>
 
