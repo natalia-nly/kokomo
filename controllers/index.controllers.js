@@ -492,7 +492,7 @@ exports.deleteBooking = (req, res) => {
     }
   });
   const p2 = Customer.findByIdAndUpdate({
-    _id: sessionUser_id
+    _id: sessionUser._id
   }, {
     $pull: {
       bookings: {
