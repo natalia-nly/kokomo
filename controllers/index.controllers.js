@@ -133,14 +133,10 @@ exports.registerLocal = (req, res, next) => {
     availablePlaces: req.body.places,
   }).then(property => {
     createSchedule(property);
-    const ownerLocal = {
-      id: property._id,
-      name: property.name,
-      mainImage: property.mainImage
-    }
+
     Customer.findByIdAndUpdate(req.session.currentUser._id, {
       $push: {
-        ownProperties: ownerLocal
+        ownProperties: property._id
       }
     }, {
       new: true

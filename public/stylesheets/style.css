@@ -263,6 +263,13 @@ h1 {
       height: 50vw;
       object-fit: cover;
       border-radius: 20px; }
+    .properties-group .property-card .blur-image {
+      position: relative;
+      top: -60vw;
+      z-index: -1;
+      filter: blur(10px);
+      opacity: .5;
+      margin-bottom: -60vw; }
     .properties-group .property-card h3 {
       font-family: bely-display, sans-serif;
       color: #FFBA69;
@@ -545,6 +552,8 @@ h4.section-title {
       .properties-group .property-card img {
         height: 30vw;
         border-radius: 40px; }
+      .properties-group .property-card .blur-image {
+        top: -45vw; }
       .properties-group .property-card h3 {
         font-family: bely-display, sans-serif;
         color: #FFBA69;

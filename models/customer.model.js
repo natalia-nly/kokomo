@@ -44,25 +44,15 @@ const customerSchema = new Schema({
         guests: Number
       }],
       //favoritos
-      favourites: [{
-        id: {type: Schema.Types.ObjectId, ref: "Property"},
-        name: String,
-        mainImage: String,
-        location: String
-      }],
+      favourites: [{type: Schema.Types.ObjectId, ref: "Property"}],
       // boolean para saber si es owner
       owner: {
         type: Boolean,
         default: false
       },
       // lista de sus locales
-      ownProperties: [{
-          id: {
-            type: Schema.Types.ObjectId,
-            ref: "Property"
-          },
-          name: String
-        }]},
+      ownProperties: [{type: Schema.Types.ObjectId, ref: "Property"}]
+    },
 
         {
           timestamps: {

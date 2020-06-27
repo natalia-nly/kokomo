@@ -358,6 +358,15 @@ h1 {
       border-radius: 20px;
     }
 
+    .blur-image {
+      position:relative; 
+      top: -60vw; 
+      z-index: -1; 
+      filter:blur(10px); 
+      opacity: .5; 
+      margin-bottom: -60vw
+    }
+
     h3 {
       font-family: $heading-font;
       color: $orange;
@@ -747,6 +756,10 @@ h4.section-title {
       img {
         height: 30vw;
         border-radius: 40px;
+      }
+
+      .blur-image {
+        top: -45vw; 
       }
   
       h3 {

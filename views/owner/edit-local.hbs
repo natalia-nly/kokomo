@@ -12,8 +12,7 @@
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <label for="input-name" class="label active">Nombre</label>
-                    <input type=" text" id="input-name" name="name" value="{{property.name}}"
-                        />
+                    <input type=" text" id="input-name" name="name" value="{{property.name}}"/>
                 </div>
                 <div class="form-group">
                     <label for="input-description" class="label active">Descripción</label>
@@ -33,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input-image" class="label active">Imagen Principal</label>
-                    <input type="url" name="main" id="input-image-main" value="{{property.mainImage}}"/>
+                    <input type="file" name="main" id="input-image-main"/>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
@@ -43,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input-ubication" class="label active">Ubicación</label>
-                    <input type="text" name="ubication" id="input-ubication" />
+                    <input type="text" name="ubication" id="input-ubication" value="{{property.location.name}}"//>
                 </div>
                 <div class="form-group">
                     <label for="input-latitude" class="label active">Latitud</label>
@@ -60,11 +59,11 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="input-opening">Día de apertura</label>
+                    <label for="input-opening" class="label active">Día de apertura</label>
                     <input type="date" name="opening" id="input-opening"/>
                 </div>
                 <div class="form-group">
-                    <label for="input-closing">Día de cierre</label>
+                    <label for="input-closing" class="label active">Día de cierre</label>
                     <input type="date" name="closing" id="input-closing"/>
                 </div>
 
@@ -122,15 +121,15 @@
                 </div>
                 <div class="form-group">
                     <label for="input-closehour" class="label active">Hora de cierre</label>
-                    <input type="number" name="closehour" id="input-closehour" />
+                    <input type="number" name="closehour" id="input-closehour"/>
                 </div>
                 <div class="form-group">
-                    <label for="input-duration" class="label active">Duración de la reserva</label>
-                    <input type="number" name="duration" id="input-duration"/>
+                    <label for="input-duration" class="label active">Duración de la reserva (en minutos)</label>
+                    <input type="number" name="duration" id="input-duration" value="{{property.bookingDuration}}"/>
                 </div>
                 <div class="form-group">
                     <label for="input-places" class="label active">Plazas</label>
-                    <input type="number" name="places" id="input-places"/>
+                    <input type="number" name="places" id="input-places" value="{{property.availablePlaces}}"/>
                 </div>
             </div>
         </div>
