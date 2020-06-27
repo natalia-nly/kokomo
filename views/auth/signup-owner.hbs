@@ -1,6 +1,5 @@
 <div class="row align-middle p-4" style="min-height: 100vh;">
-    <div class="col-sm-12 col-md-4"></div>
-    <div class="col-sm-12 col-md-4 align-self-center">
+    <div class="col-sm-12 col-md-4 align-self-center justify-content-center">
         <form action="/signup-local" method="POST">
             <div class="form-group">
                 <label for="input-username" class="label active">Username</label>
@@ -27,7 +26,6 @@
             <p class="error">{{errorMessage}}</p>
             {{/if}}
         </form>
-        <a href="/auth/google" class="btn-kokomo btn-kokomo-grey btn-block p-3">Login con Google</a>
+        <a href="/auth/google" class="btn-kokomo btn-kokomo-grey btn-block p-3 mt-4">Login con Google</a>
     </div>
-    <div class="col-sm-12 col-md-4"></div>
 </div>
