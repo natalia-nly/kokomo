@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
 
+
 //middleware function para crear o recoger una sesión existente
 
 module.exports = app => {
@@ -17,7 +18,7 @@ module.exports = app => {
 
         session({
             secret: process.env.SESS_SECRET,
-            resave: false,
+            resave: true,
             saveUninitialized: true,
             cookie: {
                 maxAge: 30600000
