@@ -108,12 +108,11 @@ exports.registerLocal = (req, res, next) => {
     workingDays.push(req.body.sunday);
   }
   const sessionUser =req.session.currentUser|| req.user;
-  Property.create({
+  const dataProperty = {
     owner: sessionUser,
     name: req.body.name,
     description: req.body.description,
     categories: [req.body.categories],
-    mainImage: req.file.path,
     media: [req.body.media],
     location: {
       name: req.body.ubication,
@@ -133,16 +132,15 @@ exports.registerLocal = (req, res, next) => {
     }],
     bookingDuration: req.body.duration,
     availablePlaces: req.body.places,
-  }).then(property => {
+  };
+  if(req.file) {
+    dataProperty.mainImage = req.file.path
+  }
+  Property.create(dataProperty).then(property => {
     createSchedule(property);
-    const ownerLocal = {
-      id: property._id,
-      name: property.name,
-      mainImage: property.mainImage
-    }
     Customer.findByIdAndUpdate(sessionUser._id, {
       $push: {
-        ownProperties: ownerLocal
+        ownProperties:  property._id
       }
     }, {
       new: true
@@ -256,28 +254,18 @@ exports.editLocal = (req, res, next) => {
 exports.loveLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
-      const newFavourite = {
-        _id: resultado._id,
-        name: resultado.name,
-        mainImage: resultado.mainImage,
-        location: resultado.location.name
-      };
       const sessionUser =req.session.currentUser|| req.user;
-      Customer.findOneAndUpdate({
-          _id: sessionUser
-        }, {
-          $push: {
-            favourites: newFavourite
-          }
-        })
-        .then(customer => {
-          console.log("Usuario actualizado", customer);
-          res.redirect('back');
-        })
-        .catch(error => {
-          console.log('Error: ', error);
-        });
 
+      return Customer.update({
+        "_id": sessionUser._id,
+        "favourites": {$ne: resultado._id}
+      }, 
+      {$addToSet: { favourites: resultado._id}}, 
+      {new: true});
+    })
+    .then(customer => {
+      console.log("Usuario actualizado", customer);
+      res.redirect('back');
     })
     .catch(error => {
       console.log('Error: ', error);
@@ -418,18 +406,10 @@ exports.createBooking = (req, res, next) => {
       // Actualizar el perfil del cliente 
       // Buscando la property para coger el nombre del local
       Property.findById(booking.property).then(property => {
-          const bookingCliente = {
-            bookingId: booking._id,
-            bookingRef: booking.bookingRef,
-            guests: booking.guests,
-            property: property.name,
-            day: booking.day,
-            time: booking.time
-          };
-          // Actualizar el customer añadiéndole la reserva con el nombre del local
+          // Actualizar el customer añadiéndole la reserva
           Customer.findByIdAndUpdate(sessionUser._id, {
             $push: {
-              bookings: bookingCliente
+              bookings: booking._id
             }
           }, {
             new: true
@@ -448,13 +428,9 @@ exports.createBooking = (req, res, next) => {
 
 
           // GUARDANDO LA RESERVA EN LA PROPERTY
-          const bookingProperty = {
-            bookingId: booking._id,
-            bookingRef: booking.bookingRef,
-          }
           Property.findByIdAndUpdate(booking.property, {
             $push: {
-              bookings: bookingProperty
+              bookings: booking._id
             }
           }, {
             new: true
