@@ -34,12 +34,7 @@ const propertySchema = new Schema({
         comment: String
     }],
     rating: Number,
-    bookings: [{bookingId: {
-            type: Schema.Types.ObjectId,
-            ref: "Booking"
-        },
-        bookingRef: String
-     } ]
+    bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}]
 }, {
     timestamps: {
         createdAt: 'createdAt',

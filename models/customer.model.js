@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const deepPopulate = require('mongoose-deep-populate')(mongoose);
+// const options = {};
+
 
 const customerSchema = new Schema({
       //Username del cliente
@@ -32,17 +35,7 @@ const customerSchema = new Schema({
         default: "https://i.ya-webdesign.com/images/avatar-icon-png-5.png"
       },  
       //reservas del cliente
-      bookings: [{
-        bookingId: {
-          type: Schema.Types.ObjectId,
-          ref: "Booking"
-        },
-        bookingRef: String,
-        property: String,
-        day: String,
-        time: String,
-        guests: Number
-      }],
+      bookings: [{type: Schema.Types.ObjectId, ref: "Booking"}],
       //favoritos
       favourites: [{type: Schema.Types.ObjectId, ref: "Property"}],
       // boolean para saber si es owner
@@ -51,7 +44,7 @@ const customerSchema = new Schema({
         default: false
       },
       // lista de sus locales
-      ownProperties: [{type: Schema.Types.ObjectId, ref: "Property"}]
+      ownProperties: [{type: Schema.Types.ObjectId, ref: "Property"}],
     },
 
         {
@@ -63,5 +56,6 @@ const customerSchema = new Schema({
 
 
       const Customer = mongoose.model("Customer", customerSchema);
+      //Customer.plugin(deepPopulate, options);
 
       module.exports = Customer;

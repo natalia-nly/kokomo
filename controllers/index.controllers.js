@@ -4,12 +4,14 @@ const Booking = require('../models/booking.model');
 const Customer = require('../models/customer.model');
 const uploadCloud = require('../config/cloudinary.js');
 
-exports.createLocal = (req, res, next) => res.render('owner/create-local', {
+exports.createLocal = (req, res, next) => {
+  const sessionUser =req.session.currentUser|| req.user;
+  
+  res.render('owner/create-local', {
   title: 'Crea tu local | KOKOMO',
   layout: 'layout',
-  user: req.session.currentUser
-});
-
+  user: sessionUser
+});};
 
 function createSchedule(property) {
   const timeRanges = property.openingHours;
@@ -105,13 +107,12 @@ exports.registerLocal = (req, res, next) => {
   if (req.body.sunday) {
     workingDays.push(req.body.sunday);
   }
-
-  Property.create({
-    owner: req.session.currentUser,
+  const sessionUser =req.session.currentUser|| req.user;
+  const dataProperty = {
+    owner: sessionUser,
     name: req.body.name,
     description: req.body.description,
     categories: [req.body.categories],
-    mainImage: req.file.path,
     media: [req.body.media],
     location: {
       name: req.body.ubication,
@@ -131,12 +132,15 @@ exports.registerLocal = (req, res, next) => {
     }],
     bookingDuration: req.body.duration,
     availablePlaces: req.body.places,
-  }).then(property => {
+  };
+  if(req.file) {
+    dataProperty.mainImage = req.file.path
+  }
+  Property.create(dataProperty).then(property => {
     createSchedule(property);
-
-    Customer.findByIdAndUpdate(req.session.currentUser._id, {
+    Customer.findByIdAndUpdate(sessionUser._id, {
       $push: {
-        ownProperties: property._id
+        ownProperties:  property._id
       }
     }, {
       new: true
@@ -146,7 +150,7 @@ exports.registerLocal = (req, res, next) => {
     res.render('property/property-details', {
       title: 'Local creado | KOKOMO',
       layout: 'layout',
-      user: req.session.currentUser,
+      user: sessionUser,
       property
     });
   })
@@ -155,14 +159,14 @@ exports.registerLocal = (req, res, next) => {
 
 
 exports.allProperties = (req, res, next) => {
-
+  const sessionUser =req.session.currentUser|| req.user;
   Property.find()
     .then(allProp => {
-      if (req.session.currentUser) {
+      if (sessionUser) {
         res.render('index', {
           properties: allProp,
           title: 'KOKOMO | ¡Haz tu reserva!',
-          user: req.session.currentUser
+          user: sessionUser
         });
       } else {
         res.render('landing-page', {
@@ -180,12 +184,13 @@ exports.allProperties = (req, res, next) => {
 };
 
 exports.viewLocal = (req, res, next) => {
+  const sessionUser =req.session.currentUser|| req.user;
   Property.findById(req.params.id)
     .then(resultado => {
       res.render("property/property-details", {
         property: resultado,
         title: `${resultado.name} | KOKOMO`,
-        user: req.session.currentUser
+        user: sessionUser
       });
     })
     .catch(error => {
@@ -195,6 +200,7 @@ exports.viewLocal = (req, res, next) => {
 };
 
 exports.ownerViewLocal = (req, res, next) => {
+  const sessionUser =req.session.currentUser|| req.user;
   Property.findById(req.params.id)
     .then(resultado => {
 
@@ -214,7 +220,7 @@ exports.ownerViewLocal = (req, res, next) => {
             property: resultado,
             bookings: bookings,
             title: `${resultado.name} | KOKOMO`,
-            user: req.session.currentUser
+            user: sessionUser
           });
         })
         .catch(error => {
@@ -230,12 +236,13 @@ exports.ownerViewLocal = (req, res, next) => {
 };
 
 exports.editLocal = (req, res, next) => {
+  const sessionUser =req.session.currentUser|| req.user;
   Property.findById(req.params.id)
     .then(resultado => {
       res.render("owner/edit-local", {
         property: resultado,
         title: `Editar ${resultado.name} | KOKOMO`,
-        user: req.session.currentUser
+        user: sessionUser
       });
     })
     .catch(error => {
@@ -247,28 +254,18 @@ exports.editLocal = (req, res, next) => {
 exports.loveLocal = (req, res, next) => {
   Property.findById(req.params.id)
     .then(resultado => {
-      const newFavourite = {
-        _id: resultado._id,
-        name: resultado.name,
-        mainImage: resultado.mainImage,
-        location: resultado.location.name
-      };
+      const sessionUser =req.session.currentUser|| req.user;
 
-      Customer.findOneAndUpdate({
-          _id: req.session.currentUser._id
-        }, {
-          $push: {
-            favourites: newFavourite
-          }
-        })
-        .then(customer => {
-          console.log("Usuario actualizado", customer);
-          res.redirect('back');
-        })
-        .catch(error => {
-          console.log('Error: ', error);
-        });
-
+      return Customer.update({
+        "_id": sessionUser._id,
+        "favourites": {$ne: resultado._id}
+      }, 
+      {$addToSet: { favourites: resultado._id}}, 
+      {new: true});
+    })
+    .then(customer => {
+      console.log("Usuario actualizado", customer);
+      res.redirect('back');
     })
     .catch(error => {
       console.log('Error: ', error);
@@ -289,7 +286,7 @@ exports.bookingDay = (req, res, next) => {
       $eq: propertyId
     }
   });
-
+  const sessionUser =req.session.currentUser|| req.user;
   Promise.all([p1, p2])
     .then(resultados => {
       const theProperty = resultados[0];
@@ -303,7 +300,7 @@ exports.bookingDay = (req, res, next) => {
         newDate: bookingDate,
         newGuests: newGuests,
         guests: newGuests,
-        user: req.session.currentUser,
+        user: sessionUser,
         title: `${theProperty.name} | KOKOMO`,
       });
     })
@@ -345,6 +342,7 @@ exports.createBooking = (req, res, next) => {
 
   console.log("Schedule ID: ", req.params.id);
   console.log("Body: ", req.body);
+  const sessionUser =req.session.currentUser|| req.user;
 
   let {
     day,
@@ -381,12 +379,12 @@ exports.createBooking = (req, res, next) => {
         }
       }).then(finalbox => console.log(finalbox));
 
-
+     
       //Crear la reserva en la colección de bookings
       return Booking.create({
-        customer: req.session.currentUser._id,
-        customerName: req.session.currentUser.username,
-        telNumber: req.session.currentUser.telNumber,
+        customer: sessionUser._id,
+        customerName: sessionUser.username,
+        telNumber: sessionUser.telNumber,
         property: propertyId,
         day: day,
         bookingRef: bookingRef,
@@ -401,25 +399,17 @@ exports.createBooking = (req, res, next) => {
       console.log("Reserva creada: ", booking);
       res.render('property/booking-details', {
         booking: booking,
-        user: req.session.currentUser,
+        user: sessionUser,
         title: `Reserva creada | KOKOMO`,
       });
 
       // Actualizar el perfil del cliente 
       // Buscando la property para coger el nombre del local
       Property.findById(booking.property).then(property => {
-          const bookingCliente = {
-            bookingId: booking._id,
-            bookingRef: booking.bookingRef,
-            guests: booking.guests,
-            property: property.name,
-            day: booking.day,
-            time: booking.time
-          };
-          // Actualizar el customer añadiéndole la reserva con el nombre del local
-          Customer.findByIdAndUpdate(req.session.currentUser._id, {
+          // Actualizar el customer añadiéndole la reserva
+          Customer.findByIdAndUpdate(sessionUser._id, {
             $push: {
-              bookings: bookingCliente
+              bookings: booking._id
             }
           }, {
             new: true
@@ -438,13 +428,9 @@ exports.createBooking = (req, res, next) => {
 
 
           // GUARDANDO LA RESERVA EN LA PROPERTY
-          const bookingProperty = {
-            bookingId: booking._id,
-            bookingRef: booking.bookingRef,
-          }
           Property.findByIdAndUpdate(booking.property, {
             $push: {
-              bookings: bookingProperty
+              bookings: booking._id
             }
           }, {
             new: true
@@ -467,6 +453,7 @@ exports.createBooking = (req, res, next) => {
 exports.deleteBooking = (req, res) => {
   const bookingRef = req.params.bookingRef;
   console.log("BOOKING REF", bookingRef);
+  const sessionUser =req.session.currentUser|| req.user;
   Booking.findOne({
     bookingRef: {
       $eq: bookingRef
@@ -481,7 +468,7 @@ exports.deleteBooking = (req, res) => {
     }
   });
   const p2 = Customer.findByIdAndUpdate({
-    _id: req.session.currentUser._id
+    _id: sessionUser._id
   }, {
     $pull: {
       bookings: {

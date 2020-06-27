@@ -1,35 +1,24 @@
 {{#if user}}
-<div class="home-bg" style="
-    background-image: url(/images/water.jpg);
-    background-size: 60vw;
-    background-position: left center;
-    background-repeat: no-repeat">
+<div class="body-container">
+<h3 class="section-title mdi mdi-account-circle">Edita tu perfil</h3>
 
-    <div class="container-left">
-
-        <h2 class="display-cream"><i class="fas fa-umbrella-beach fa-sm cream"></i><br> ¡Aloha, <br>{{user.username}}!
-        </h2>
+    <div>
+            <a href="/profile" class="btn-kokomo btn-kokomo-grey mr-3 mb-4"><i class="fas fa-arrow-left"></i> Volver a mi perfil</a>
+            <a href="/profile/delete" class="btn-kokomo btn-kokomo-danger mb-4"><i class="fas fa-user-alt-slash"></i> Eliminar mi
+                cuenta</a>
     </div>
 
-    <div class="white-card">
-        <div class="mb-4">
-            <a href="/profile" class="btn-kokomo btn-kokomo-grey mr-3"><i class="fas fa-arrow-left"></i> Volver a mi perfil</a>
-            <a href="/profile/delete" class="btn-kokomo btn-kokomo-danger"><i class="fas fa-user-alt-slash"></i> Eliminar mi
-                cuenta</a>
-        </div>
-
-        <h3 class="section-title"><i class="far fa-edit"></i> Edita tus datos</h3>
-                    {{!-- info message will be added here --}}
+           {{!-- info message will be added here --}}
             {{#if infoMessage}}
             <p class="info">{{infoMessage}}</p>
             {{/if}}
 
         <form action="/profile/editTelephone" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">
+            
              <div class="form-group">
-                <label for="telephone">Nuevo Teléfono</label>
-                <input type="telephone" name="newTelephone" id="input-telephone" placeholder="Nuevo número de teléfono"
-                    class="form-control" />
+                <label for="telephone" class="label active">Nuevo Teléfono</label>
+                <input type="telephone" name="newTelephone" id="input-telephone" />
             </div>
             <button type="submit" class="btn-kokomo btn-kokomo-success">Cambiar teléfono</button>
 
@@ -38,7 +27,7 @@
             <p class="error">{{errorMessage}}</p>
             {{/if}}
         </form>
-
+{{#unless user.googleID}}
         <form action="/profile/editPassword" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">
             <div class="form-group">
@@ -61,7 +50,7 @@
 
 
         </form>
-
+{{/unless}}
     </div>
 </div>
 
