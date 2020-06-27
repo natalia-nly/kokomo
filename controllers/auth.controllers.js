@@ -161,23 +161,22 @@ exports.login = (req, res, next) => {
 
 
 exports.profile = (req, res, next) => {
-    console.log("SESSION: ", req.session);
-
-    if (req.session.currentUser.owner) {
-        Customer.findById(req.session.currentUser._id).then(user => {
+    console.log("SESSION: ", req.user);
+const sessionUser =req.session.currentUser|| req.user;
+    
+        Customer.findById(sessionUser._id).then(user => {
+            if (user.owner) {
             res.render('owner/profile', {
                 user,
                 title: 'Mi perfil | KOKOMO'
-            });
+            });}else{
+                res.render('customer/profile', {
+                    user,
+                    title: 'Mi perfil | KOKOMO'
+                });
+            }
         }).catch(error => next(error));
-    } else {
-        Customer.findById(req.session.currentUser._id).then(user => {
-            res.render('customer/profile', {
-                user,
-                title: 'Mi perfil | KOKOMO'
-            });
-        }).catch(error => next(error));
-    }
+
 
 };
 
@@ -194,7 +193,6 @@ exports.myFavourites = (req, res, next) => {
 exports.myBookings = (req, res, next) => {
     if (req.session.currentUser.owner) {
         Customer.findById(req.session.currentUser._id).then(user => {
-
             const getProperties = async () => {
                 return Promise.all(user.ownProperties.map(async (property) => {
                     var local = await Property.findById(property.id);

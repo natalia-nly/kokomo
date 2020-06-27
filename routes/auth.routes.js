@@ -46,7 +46,7 @@ router.get("/auth/google",passport.authenticate("google", {
 );
 
 router.get("/auth/google/callback",passport.authenticate("google", {
-  successRedirect: "/",
+  successRedirect: "/profile",
   failureRedirect: "/" // hacia dónde debe ir si falla?
 })
 );
