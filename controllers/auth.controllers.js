@@ -313,13 +313,14 @@ exports.myBookings = (req, res, next) => {
     const sessionUser =req.session.currentUser|| req.user;
     // BOOKINGS DEL OWNER
     if (sessionUser.owner) {
+        console.log(sessionUser)
         Customer.findById(sessionUser._id).populate({
             path: 'ownProperties',
-            populate: { path: 'bookings' }
+            populate: {path: 'bookings'}
           })
         .then(user => {
             console.log("USER CON DEEP POPULATE: ", user);
-            console.log(user.ownProperties[0].bookings)
+            console.log(user.ownProperties[0].bookings);
             res.render('owner/bookings', {
                 user,
                 title: 'Mis reservas | KOKOMO'
