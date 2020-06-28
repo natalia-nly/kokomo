@@ -135,29 +135,42 @@ exports.loginView = (req, res, next) =>
     layout: "layout-nouser",
   });
 
+
 exports.login = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    if (sessionUser) {
-        return res.redirect('/profile');
-    }
-    const {
-        email,
-        password
-    } = req.body;
-    if (email === '' || password === '') {
-        res.render('auth/login', {
-            errorMessage: 'Please enter both, email and password to login.'
-        });
-        return;
-      } else if (bcrypt.compareSync(password, user.passwordHash)) {
-        req.session.currentUser = user;
-        res.redirect("/");
-      } else {
-        res.render("auth/login", {
-          errorMessage: "Incorrect password.",
-        });
-      }
-    
+  const sessionUser =req.session.currentUser|| req.user;
+  if (sessionUser) {
+      return res.redirect('/profile');
+  }
+  const {
+      email,
+      password
+  } = req.body;
+  if (email === '' || password === '') {
+      res.render('auth/login', {
+          errorMessage: 'Please enter both, email and password to login.'
+      });
+      return;
+  }
+
+  Customer.findOne({
+          email
+      })
+      .then(user => {
+          if (!user) {
+              res.render('auth/login', {
+                  errorMessage: 'Email is not registered. Try with other email.'
+              });
+              return;
+          } else if (bcrypt.compareSync(password, user.passwordHash)) {
+              req.session.currentUser = user;
+              res.redirect('/');
+          } else {
+              res.render('auth/login', {
+                  errorMessage: 'Incorrect password.'
+              });
+          }
+      })
+      .catch(error => next(error));
 };
 
 exports.profile = (req, res, next) => {
@@ -296,7 +309,7 @@ exports.myFavourites = (req, res, next) => {
   
 //   };
 
-  exports.myBookings = (req, res, next) => {
+exports.myBookings = (req, res, next) => {
     const sessionUser =req.session.currentUser|| req.user;
     // BOOKINGS DEL OWNER
     if (sessionUser.owner) {
@@ -311,86 +324,19 @@ exports.myFavourites = (req, res, next) => {
                 user,
                 title: 'Mis reservas | KOKOMO'
             });
-
-            /*const getProperties = async () => {
-                return Promise.all(user.ownProperties.map(async (property) => {
-                    var local = await Property.findById(property.id);
-                    return local;
-                }))
-            }
-            getProperties().then(properties => {
-                const propertiesBookings = async () => {
-                    return Promise.all(properties.map(property => {
-                        const getBookings = async () => {
-                            return Promise.all(property.bookings.map(async (booking) => {
-                                var item = await Booking.findById(booking.bookingId);
-                                return item;
-                            }))
-                        };
-                        getBookings().then(bookings => {
-                            console.log(bookings)
-                            res.render('owner/bookings', {
-                                user,
-                                title: 'Mis reservas | KOKOMO',
-                                bookings
-                            });
-                        })
-                    }))
-                }
-                propertiesBookings()
-                
-                
-            })*/
       }).catch(error => next(error));
     } 
     // BOOKINGS DEL CUSTOMER
     else {
-        Customer.findById(sessionUser._id).populate('bookings').then(user => {
-            console.log(user)
+        Customer.findById(sessionUser._id)
+        .populate('bookings')
+        .then(user => {
             res.render('customer/bookings', {
                 user,
                 title: 'Mis reservas | KOKOMO'
             });
         }).catch(error => next(error));
     }
-
-        getProperties().then((properties) => {
-          const propertiesBookings = async () => {
-            return Promise.all(
-              properties.map((property) => {
-                const getBookings = async () => {
-                  return Promise.all(
-                    property.bookings.map(async (booking) => {
-                      var item = await Booking.findById(booking.bookingId);
-                      return item;
-                    })
-                  );
-                };
-                getBookings().then((bookings) => {
-                  console.log(bookings);
-                  res.render("owner/bookings", {
-                    user,
-                    title: "Mis reservas | KOKOMO",
-                    bookings,
-                  });
-                });
-              })
-            );
-          };
-          propertiesBookings();
-        });
-      })
-      .catch((error) => next(error));
-  } else {
-    Customer.findById(req.session.currentUser._id)
-      .then((user) => {
-        res.render("customer/bookings", {
-          user,
-          title: "Mis reservas | KOKOMO",
-        });
-      })
-      .catch((error) => next(error));
-  }
 };
 
 
@@ -446,15 +392,7 @@ exports.profilePasswordChange = (req, res, next) => {
             title: 'Editar mi perfil | KOKOMO',
             errorMessage: 'Tu contraseña actual no es correcta'
         });
-      })
-      .catch((error) => next(error));
-  } else {
-    res.render("customer/edit", {
-      user: req.session.currentUser,
-      title: "Editar mi perfil | KOKOMO",
-      errorMessage: "Tu contraseña actual no es correcta",
-    });
-  }
+      }
 };
 
 exports.deleteAccount = (req, res, next) => {
