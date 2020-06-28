@@ -235,14 +235,19 @@ exports.ownerViewLocal = (req, res, next) => {
 
 };
 
+
 exports.editLocal = (req, res, next) => {
   const sessionUser =req.session.currentUser|| req.user;
   Property.findById(req.params.id)
     .then(resultado => {
+      console.log(resultado.openingHours[0]);
       res.render("owner/edit-local", {
         property: resultado,
         title: `Editar ${resultado.name} | KOKOMO`,
-        user: sessionUser
+        user: sessionUser,
+        weekDays: resultado.openingHours[0].weekDays,
+        openingTimes: resultado.openingHours[0].openingTimes[0],
+        openingDays: resultado.openingHours[0].openingDays
       });
     })
     .catch(error => {
@@ -250,6 +255,78 @@ exports.editLocal = (req, res, next) => {
     });
 
 };
+
+exports.saveLocal = (req, res, next) => {
+  console.log(req.body);
+  const workingDays = [];
+  if (req.body.monday) {
+    workingDays.push(req.body.monday);
+  }
+  if (req.body.tuesday) {
+    workingDays.push(req.body.tuesday);
+  }
+  if (req.body.wednesday) {
+    workingDays.push(req.body.wednesday);
+  }
+  if (req.body.thursday) {
+    workingDays.push(req.body.thursday);
+  }
+  if (req.body.friday) {
+    workingDays.push(req.body.friday);
+  }
+  if (req.body.satuday) {
+    workingDays.push(req.body.saturday);
+  }
+  if (req.body.sunday) {
+    workingDays.push(req.body.sunday);
+  }
+  const sessionUser =req.session.currentUser|| req.user;
+  const dataProperty = {
+    owner: sessionUser,
+    name: req.body.name,
+    description: req.body.description,
+    categories: [req.body.categories],
+    media: [req.body.media],
+    location: {
+      name: req.body.ubication,
+      lat: req.body.latitude,
+      long: req.body.longitude
+    },
+    openingHours: [{
+      openingDays: {
+        openingDay: req.body.opening,
+        closingDay: req.body.closing
+      },
+      weekDays: workingDays,
+      openingTimes: [{
+        openingTime: req.body.openhour,
+        closingTime: req.body.closehour
+      }]
+    }],
+    bookingDuration: req.body.duration,
+    availablePlaces: req.body.places,
+  };
+  if(req.file) {
+    dataProperty.mainImage = req.file.path
+  }
+
+  Property.findByIdAndUpdate(req.params.id, dataProperty, {new: true})
+  .then(property => {
+    createSchedule(property);
+
+    res.render('property/property-details', {
+      title: 'Local creado | KOKOMO',
+      layout: 'layout',
+      user: sessionUser,
+      property
+    });
+  })
+  .catch(error => {
+      console.log('Error: ', error);
+    });
+
+};
+
 
 exports.loveLocal = (req, res, next) => {
   Property.findById(req.params.id)

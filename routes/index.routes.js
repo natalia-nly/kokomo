@@ -23,6 +23,7 @@ router.post('/profile/create-local', uploadCloud.single('main'), index_controlle
 router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
 router.get('/local/edit/:id', index_controller.editLocal);
+router.post('/local/edit/:id', uploadCloud.single('main'), index_controller.saveLocal);
 
 router.get('/local/love/:id', index_controller.loveLocal);
 
