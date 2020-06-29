@@ -12,4 +12,6 @@ router.get("/my-bookings", auth_controller.myBookings);
 
 router.get('/booking/delete/:id', index_controller.deleteBooking);
 
+router.get('/booking/details/:id', index_controller.bookingDetails);
+
 module.exports = router;

@@ -162,17 +162,25 @@ exports.registerLocal = (req, res, next) => {
 
 exports.allProperties = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
-  Property.find()
-    .then(allProp => {
+
+  const p1 = Customer.findById(sessionUser._id);
+  const p2 = Property.find();
+
+  Promise.all([p1, p2])
+    .then(results => {
+      const favourites = results[0].favourites;
+      const properties = results[1];
+      console.log(favourites)
       if (sessionUser) {
         res.render('index', {
-          properties: allProp,
+          properties: properties,
           title: 'KOKOMO | ¡Haz tu reserva!',
-          user: sessionUser
+          user: sessionUser,
+          favourites: favourites
         });
       } else {
         res.render('landing-page', {
-          properties: allProp,
+          properties: properties,
           title: 'KOKOMO | ¡Haz tu reserva!',
           layout: 'layout-nouser'
         });
@@ -403,6 +411,20 @@ exports.bookingDay = (req, res, next) => {
     });
 };
 
+exports.bookingDetails = (req, res) => {
+  Booking.findById(req.params.id)
+  .then(booking => {
+    console.log("BOOKING: ", booking);
+    res.render('customer/booking-details', {
+      booking: booking,
+      layout: "layout-nouser"
+    });
+  })
+  .catch(error => {
+    console.log('Error: ', error);
+  });
+};
+
 function uniqueId(stringLength, possible) {
   stringLength = 5;
   possible = "ABCDEFGHJKMNPQRSTUXY12345";
@@ -588,7 +610,6 @@ exports.deleteBooking = (req, res) => {
   });
   Promise.all([p1, p2, p3])
     .then(resultados => {
-      console.log(resultados);
       res.redirect('/my-bookings');
     })
     .catch(error => {

@@ -18,95 +18,99 @@
 
             </div>
         </div>
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
-                    role="tab" aria-controls="nav-description" aria-selected="true">Descripción</a>
-                <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
-                    aria-controls="nav-comments" aria-selected="false">Comentarios</a>
-                <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
-                    aria-controls="nav-openings" aria-selected="false">Horarios</a>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
-                aria-labelledby="nav-description-tab">
-                <h3 class="subtitle-search mb-4">{{property.description}}</h3>
-                <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
-                </p>
+        <div style="max-height: 50vh; overflow: scroll;">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab"
+                        href="#nav-description" role="tab" aria-controls="nav-description"
+                        aria-selected="true">Descripción</a>
+                    <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
+                        aria-controls="nav-comments" aria-selected="false">Comentarios</a>
+                    <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
+                        aria-controls="nav-openings" aria-selected="false">Horarios</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
+                    aria-labelledby="nav-description-tab">
+                    <h3 class="subtitle-search mb-4">{{property.description}}</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
+                    </p>
 
-                <p>Duración de la reserva: {{property.bookingDuration}}</p>
-                <p>Plazas disponibles: {{property.availablePlaces}}</p>
-                {{#each property.categories}}
-                <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
-                {{/each}}
-            </div>
-            <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
-                <div class="row">
-                    <div class="col-md-6">
-                        {{#each property.comments}}
-                        <div class="border-bottom pb-4 pt-4">
-                            <h5><i class="fas fa-user-circle"></i> {{username}}</h5>
-                            <p><i class="far fa-comment-dots"></i> {{comment}}</p>
+                    <p>Duración de la reserva: {{property.bookingDuration}}</p>
+                    <p>Plazas disponibles: {{property.availablePlaces}}</p>
+                    {{#each property.categories}}
+                    <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
+                    {{/each}}
+                </div>
+                <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="/add-comment/{{property._id}}" method="POST">
+                                <input type="hidden" name="userId" value="{{../user.username}}">
+                                <div class="form-group">
+                                    <label for="comment" class="label active">Deja tu comentario</label>
+                                    <textarea name="comment" cols="30" rows="3"></textarea>
+                                </div>
+
+                                <input type="submit" value="Enviar" class="btn-kokomo btn-kokomo-grey btn-block">
+                            </form>
                         </div>
-
-                        {{/each}}
-                    </div>
-                    <div class="col-md-6">
-                        <form action="/add-comment/{{property._id}}" method="POST">
-                            <input type="hidden" name="userId" value="{{../user.username}}">
-                            <div class="form-group">
-                                <label for="comment" class="label active">Deja tu comentario</label>
-                                <textarea name="comment" cols="30" rows="5"></textarea>
+                        <div class="col-md-6">
+                            {{#each property.comments}}
+                            <div class="border-bottom pb-4 pt-4">
+                                <h5><i class="fas fa-user-circle"></i> {{username}}</h5>
+                                <p><i class="far fa-comment-dots"></i> {{comment}}</p>
                             </div>
 
-                            <input type="submit" value="Enviar" class="btn-kokomo btn-kokomo-grey btn-block">
-                        </form>
+                            {{/each}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
-                <h3 class="subtitle-search mb-4">Días de apertura</h3>
-                {{#each property.openingHours}}
-                <p>Día de apertura: <span id="openingDay1">{{openingDays.openingDay}}</span></p>
+                <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
+                    <h3 class="subtitle-search mb-4">Días de apertura</h3>
+                    {{#each property.openingHours}}
+                    <p>Día de apertura: <span id="openingDay1">{{openingDays.openingDay}}</span></p>
 
-                <p>Día de cierre: <span id="closingDay1">{{openingDays.closingDay}}</span></p>
+                    <p>Día de cierre: <span id="closingDay1">{{openingDays.closingDay}}</span></p>
 
-                <p>Días de la semana: {{weekDays}}</p>
-                {{#each opening_times}}
-                <p>Hora de apertura: {{openingTime}}</p>
-                <p>Hora de cierre: {{closingTime}}</p>
-                {{/each}}
-                {{/each}}
+                    <p>Días de la semana: {{weekDays}}</p>
+                    {{#each opening_times}}
+                    <p>Hora de apertura: {{openingTime}}</p>
+                    <p>Hora de cierre: {{closingTime}}</p>
+                    {{/each}}
+                    {{/each}}
+                </div>
             </div>
+
         </div>
-
 
         {{#if user}}
-        <form action="/local/{{property._id}}" method="POST" class="mt-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
-                        <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
+            <form action="/local/{{property._id}}" method="POST" class="mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
+                            <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
+                            <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
-                        <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
-                    </div>
-                </div>
+
+                <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
+            </form>
+            {{else}}
+            <div class="mt-4 border-top">
+                <p>Necesitas una cuenta para poder hacer reservas.</p>
+                <a href="/signup" class="btn btn-success mt-3">Regístrate ahora</a>
             </div>
 
-            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
-        </form>
-        {{else}}
-        <div class="mt-4 border-top">
-            <p>Necesitas una cuenta para poder hacer reservas.</p>
-            <a href="/signup" class="btn btn-success mt-3">Regístrate ahora</a>
-        </div>
+            {{/if}}
 
-        {{/if}}
     </div>
 </div>
