@@ -3,9 +3,13 @@ const router  = express.Router();
 const Property = require('../models/property.model');
 const mongoose = require('mongoose');
 const index_controller = require('../controllers/index.controllers');
+const auth_controller = require('../controllers/auth.controllers');
 const uploadCloud = require('../config/cloudinary.js');
 
-// GET home page
-router.get('/', index_controller.allProperties);
+router.post('/booking/:id', index_controller.createBooking);
+
+router.get("/my-bookings", auth_controller.myBookings);
+
+router.get('/booking/delete/:id', index_controller.deleteBooking);
 
 module.exports = router;

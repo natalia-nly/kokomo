@@ -1,11 +1,18 @@
 {{#if user}}
 <div class="body-container">
-<h3 class="section-title mdi mdi-account-circle">Edita tu perfil</h3>
+<h3 class="section-title mdi mdi-account-circle">Editar mi perfil</h3>
 
     <div>
-            <a href="/profile" class="btn-kokomo btn-kokomo-grey mr-3 mb-4"><i class="fas fa-arrow-left"></i> Volver a mi perfil</a>
+            <a href="/profile" class="btn-kokomo btn-kokomo-grey mr-3 mb-4"><i class="fas fa-arrow-left"></i>Volver a mi perfil</a>
+            {{#unless user.owner}}
+            <form action="/profile/add-owner" method="POST">
+        
+            <button type="submit" class="btn-kokomo btn-kokomo-success mb-4"><i class="fas fa-map-marker"></i>Tengo un local</button>
+            </form>
+            {{/unless}}
             <a href="/profile/delete" class="btn-kokomo btn-kokomo-danger mb-4"><i class="fas fa-user-alt-slash"></i> Eliminar mi
                 cuenta</a>
+            
     </div>
 
            {{!-- info message will be added here --}}
@@ -20,7 +27,7 @@
                 <label for="telephone" class="label active">Nuevo Teléfono</label>
                 <input type="telephone" name="newTelephone" id="input-telephone" />
             </div>
-            <button type="submit" class="btn-kokomo btn-kokomo-success">Cambiar teléfono</button>
+            <button type="submit" class="btn-kokomo btn-kokomo-success">Guardar teléfono</button>
 
             {{!-- error message will be added here --}}
             {{#if errorMessage}}
