@@ -17,7 +17,12 @@ exports.signUpLocal = (req, res, next) =>
   });
 
 exports.registerCustomer = (req, res, next) => {
-  const { username, telephone, email, password } = req.body;
+  const {
+    username,
+    telephone,
+    email,
+    password
+  } = req.body;
   if (!username || !telephone || !email || !password) {
     res.render("auth/signup", {
       errorMessage: "Necesitas completar todos los campos para crear tu cuenta",
@@ -27,8 +32,7 @@ exports.registerCustomer = (req, res, next) => {
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res.status(500).render("auth/signup", {
-      errorMessage:
-        "La contraseña debe tener al menos 6 caracteres y debe contener, por lo menos, una letra minúscula, una mayúscula y un número.",
+      errorMessage: "La contraseña debe tener al menos 6 caracteres y debe contener, por lo menos, una letra minúscula, una mayúscula y un número.",
     });
     return;
   }
@@ -73,7 +77,12 @@ exports.registerCustomer = (req, res, next) => {
 };
 
 exports.registerOwner = (req, res, next) => {
-  const { username, telephone, email, password } = req.body;
+  const {
+    username,
+    telephone,
+    email,
+    password
+  } = req.body;
   if (!username || !telephone || !email || !password) {
     res.render("auth/signup", {
       errorMessage: "Necesitas completar todos los campos para crear tu cuenta",
@@ -83,8 +92,7 @@ exports.registerOwner = (req, res, next) => {
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res.status(500).render("auth/signup", {
-      errorMessage:
-        "La contraseña debe tener al menos 6 caracteres y debe contener, por lo menos, una letra minúscula, una mayúscula y un número.",
+      errorMessage: "La contraseña debe tener al menos 6 caracteres y debe contener, por lo menos, una letra minúscula, una mayúscula y un número.",
     });
     return;
   }
@@ -137,40 +145,40 @@ exports.loginView = (req, res, next) =>
 
 
 exports.login = (req, res, next) => {
-  const sessionUser =req.session.currentUser|| req.user;
+  const sessionUser = req.session.currentUser || req.user;
   if (sessionUser) {
-      return res.redirect('/profile');
+    return res.redirect('/profile');
   }
   const {
-      email,
-      password
+    email,
+    password
   } = req.body;
   if (email === '' || password === '') {
-      res.render('auth/login', {
-          errorMessage: 'Please enter both, email and password to login.'
-      });
-      return;
+    res.render('auth/login', {
+      errorMessage: 'Please enter both, email and password to login.'
+    });
+    return;
   }
 
   Customer.findOne({
-          email
-      })
-      .then(user => {
-          if (!user) {
-              res.render('auth/login', {
-                  errorMessage: 'Email is not registered. Try with other email.'
-              });
-              return;
-          } else if (bcrypt.compareSync(password, user.passwordHash)) {
-              req.session.currentUser = user;
-              res.redirect('/');
-          } else {
-              res.render('auth/login', {
-                  errorMessage: 'Incorrect password.'
-              });
-          }
-      })
-      .catch(error => next(error));
+      email
+    })
+    .then(user => {
+      if (!user) {
+        res.render('auth/login', {
+          errorMessage: 'Email is not registered. Try with other email.'
+        });
+        return;
+      } else if (bcrypt.compareSync(password, user.passwordHash)) {
+        req.session.currentUser = user;
+        res.redirect('/');
+      } else {
+        res.render('auth/login', {
+          errorMessage: 'Incorrect password.'
+        });
+      }
+    })
+    .catch(error => next(error));
 };
 
 exports.profile = (req, res, next) => {
@@ -196,14 +204,14 @@ exports.profile = (req, res, next) => {
 };
 
 exports.myFavourites = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    Customer.findById(sessionUser._id).populate('favourites').then(user => {
-        console.log(user.favourites);
-        res.render('customer/favourites', {
-            user,
-            title: 'Mis favoritos | KOKOMO'
-        });
-    }).catch(error => next(error));
+  const sessionUser = req.session.currentUser || req.user;
+  Customer.findById(sessionUser._id).populate('favourites').then(user => {
+    console.log(user.favourites);
+    res.render('customer/favourites', {
+      user,
+      title: 'Mis favoritos | KOKOMO'
+    });
+  }).catch(error => next(error));
 };
 
 // exports.myBookings = (req, res, next) => {
@@ -252,8 +260,8 @@ exports.myFavourites = (req, res, next) => {
 //                     }))
 //                 }
 //                 propertiesBookings()
-                
-                
+
+
 //             })*/
 //       }).catch(error => next(error));
 //     } 
@@ -296,8 +304,8 @@ exports.myFavourites = (req, res, next) => {
 //           };
 //           propertiesBookings();
 //         })
-    
-  
+
+
 //     Customer.findById(req.session.currentUser._id)
 //       .then((user) => {
 //         res.render("customer/bookings", {
@@ -306,102 +314,110 @@ exports.myFavourites = (req, res, next) => {
 //         });
 //       })
 //       .catch((error) => next(error))
-  
+
 //   };
 
 exports.myBookings = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    // BOOKINGS DEL OWNER
-    if (sessionUser.owner) {
-        console.log(sessionUser)
-        Customer.findById(sessionUser._id).populate({
-            path: 'ownProperties',
-            populate: {path: 'bookings'}
-          })
-        .then(user => {
-            console.log("USER CON DEEP POPULATE: ", user);
-            console.log(user.ownProperties[0].bookings);
-            res.render('owner/bookings', {
-                user,
-                title: 'Mis reservas | KOKOMO'
-            });
+  const sessionUser = req.session.currentUser || req.user;
+  // BOOKINGS DEL OWNER
+  if (sessionUser.owner) {
+    console.log(sessionUser)
+    Customer.findById(sessionUser._id).populate({
+        path: 'ownProperties',
+        populate: {
+          path: 'bookings'
+        }
+      })
+      .then(user => {
+        console.log("USER CON DEEP POPULATE: ", user);
+        console.log(user.ownProperties[0].bookings);
+        res.render('owner/bookings', {
+          user,
+          title: 'Mis reservas | KOKOMO'
+        });
       }).catch(error => next(error));
-    } 
-    // BOOKINGS DEL CUSTOMER
-    else {
-        Customer.findById(sessionUser._id)
-        .populate('bookings')
-        .then(user => {
-            res.render('customer/bookings', {
-                user,
-                title: 'Mis reservas | KOKOMO'
-            });
-        }).catch(error => next(error));
-    }
+  }
+  // BOOKINGS DEL CUSTOMER
+  else {
+    Customer.findById(sessionUser._id)
+      .populate({
+        path: 'bookings',
+        populate: {
+          path: 'property'
+        }
+      })
+      .then(user => {
+        console.log(user)
+        res.render('customer/bookings', {
+          user,
+          title: 'Mis reservas | KOKOMO'
+        });
+      }).catch(error => next(error));
+  }
 };
 
 
 exports.profileEdit = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    Customer.findById(sessionUser._id).then(user => {
-        res.render('customer/edit', {
-            user,
-            title: 'Editar mi perfil | KOKOMO'
-        });
-    }).catch(error => next(error));
+  const sessionUser = req.session.currentUser || req.user;
+  Customer.findById(sessionUser._id).then(user => {
+    res.render('customer/edit', {
+      user,
+      title: 'Editar mi perfil | KOKOMO'
+    });
+  }).catch(error => next(error));
 
 };
 
 exports.profileTelephoneChange = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    const {
-        id,
-        newTelephone
-    } = req.body;
-    Customer.findByIdAndUpdate(id, newTelephone, {
-            new: true
-        })
-        .then(resultado => {
-            res.render('customer/edit', {
-                user: sessionUser,
-                title: 'Editar mi perfil | KOKOMO',
-                infoMessage: '¡Número de Teléfono cambiado! ✌️'
-            });
-        }).catch(error => next(error));
+  const sessionUser = req.session.currentUser || req.user;
+  const {
+    id,
+    newTelephone
+  } = req.body;
+  Customer.findByIdAndUpdate(id, newTelephone, {
+      new: true
+    })
+    .then(resultado => {
+      res.render('customer/edit', {
+        user: sessionUser,
+        title: 'Editar mi perfil | KOKOMO',
+        infoMessage: '¡Número de Teléfono cambiado! ✌️'
+      });
+    }).catch(error => next(error));
 };
 
 exports.profilePasswordChange = (req, res, next) => {
-    const {
-        id,
-        oldPassword,
-        newPassword
-    } = req.body;
-    if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)) {
-        Customer.findByIdAndUpdate(id, newPassword, {
-                new: true
-            })
-            .then(resultado => {
-                res.render('customer/edit', {
-                    user: req.session.currentUser,
-                    title: 'Editar mi perfil | KOKOMO',
-                    infoMessage: '¡Contraseña cambiada! ✌️'
-                });
-            }).catch(error => next(error));
-    } else {
+  const {
+    id,
+    oldPassword,
+    newPassword
+  } = req.body;
+  if (bcrypt.compareSync(oldPassword, req.session.currentUser.passwordHash)) {
+    Customer.findByIdAndUpdate(id, newPassword, {
+        new: true
+      })
+      .then(resultado => {
         res.render('customer/edit', {
-            user: req.session.currentUser,
-            title: 'Editar mi perfil | KOKOMO',
-            errorMessage: 'Tu contraseña actual no es correcta'
+          user: req.session.currentUser,
+          title: 'Editar mi perfil | KOKOMO',
+          infoMessage: '¡Contraseña cambiada! ✌️'
         });
-      }
+      }).catch(error => next(error));
+  } else {
+    res.render('customer/edit', {
+      user: req.session.currentUser,
+      title: 'Editar mi perfil | KOKOMO',
+      errorMessage: 'Tu contraseña actual no es correcta'
+    });
+  }
 };
 
 exports.deleteAccount = (req, res, next) => {
-    const sessionUser =req.session.currentUser|| req.user;
-    Customer.findByIdAndDelete(sessionUser)
-        .then(user => {
-            res.redirect('/');
-        }).catch(error => next(error));
+  const sessionUser = req.session.currentUser || req.user;
+  Customer.findByIdAndDelete(sessionUser)
+    .then(user => {
+      res.redirect('/');
+    }).catch(error => next(error));
 };
 
 exports.logout = (req, res) => {
