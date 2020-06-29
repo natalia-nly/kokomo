@@ -327,6 +327,11 @@ exports.myBookings = (req, res, next) => {
         populate: {
           path: 'bookings'
         }
+      }).populate({
+        path: 'bookings',
+        populate: {
+          path: 'property'
+        }
       })
       .then(user => {
         console.log("USER CON DEEP POPULATE: ", user);
@@ -410,6 +415,22 @@ exports.profilePasswordChange = (req, res, next) => {
       errorMessage: 'Tu contraseña actual no es correcta'
     });
   }
+};
+
+exports.profileOwnerAdd = (req, res, next) => {
+  const sessionUser = req.session.currentUser || req.user;
+  console.log(sessionUser)
+ 
+  Customer.findByIdAndUpdate(sessionUser._id, {owner:true}, {
+      new: true
+    })
+    .then(resultado => {
+      res.render('owner/profile', {
+        user: sessionUser,
+        title: 'Editar mi perfil | KOKOMO',
+        infoMessage: '¡Ya estás regustrado como propietario! ✌️'
+      });
+    }).catch(error => next(error));
 };
 
 exports.deleteAccount = (req, res, next) => {

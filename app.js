@@ -125,9 +125,15 @@ app.locals.title = 'KOKOMO';
 //ROUTES
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
+const booking = require('./routes/booking.routes');
+const local = require('./routes/local.routes');
+const profile = require('./routes/profile.routes');
 
 app.use('/', index);
 app.use('/', auth);
+app.use('/', booking);
+app.use('/', local);
+app.use('/', profile);
 
 
 
