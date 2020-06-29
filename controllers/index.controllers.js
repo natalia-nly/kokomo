@@ -3,6 +3,7 @@ const Schedule = require('../models/schedule.model');
 const Booking = require('../models/booking.model');
 const Customer = require('../models/customer.model');
 const uploadCloud = require('../config/cloudinary.js');
+const { registerOwner } = require('./auth.controllers');
 
 exports.createLocal = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
@@ -186,17 +187,27 @@ exports.allProperties = (req, res, next) => {
 
 exports.viewLocal = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
-  Property.findById(req.params.id)
-    .then(resultado => {
-      res.render("property/property-details", {
-        property: resultado,
-        title: `${resultado.name} | KOKOMO`,
-        user: sessionUser
-      });
-    })
-    .catch(error => {
-      console.log('Error: ', error);
+  
+  const p1 = Customer.findById(sessionUser._id);
+  const p2 = Property.findById(req.params.id);
+
+  Promise.all([p1, p2])
+  .then(resultados => {
+    const favourites = resultados[0].favourites;
+    const property = resultados[1];
+
+    console.log(favourites)
+
+    res.render("property/property-details", {
+      property: property,
+      title: `${property.name} | KOKOMO`,
+      user: resultados[0],
+      favourites: favourites
     });
+  })
+  .catch(error => {
+    console.log('Error: ', error);
+  });
 
 };
 
@@ -420,6 +431,27 @@ function formattedDate(d) {
   if (day.length < 2) day = '0' + day;
   return `${day}/${month}/${year}`;
 }
+
+exports.addComment = (req, res) => {
+  const sessionUser = req.session.currentUser || req.user;
+  const newComment = {
+    username: sessionUser.username,
+    comment: req.body.comment
+  };
+
+  Property.findByIdAndUpdate(req.params.id, {
+    $push: {
+      comments: newComment
+    }
+  }, {
+    new: true
+  })
+  .then(propertyUpdated => {
+    console.log(propertyUpdated);
+    res.redirect(`/local/${propertyUpdated._id}`);
+  });
+
+};
 
 exports.createBooking = (req, res, next) => {
 

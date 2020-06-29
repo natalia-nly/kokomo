@@ -9,7 +9,8 @@
             <a href="/local/love/{{property._id}}">
                 <span class="fa-stack fa-2x mr-4">
                     <i class="fas fa-circle fa-stack-2x orange"></i>
-                    <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                    <i
+                        class=" {{#ifCond favourites "includes" property._id}} fas {{else}} far {{/ifCond}} fa-heart fa-stack-1x fa-inverse"></i>
                 </span>
             </a>
             <div>
@@ -42,10 +43,18 @@
             </div>
             <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
                 <div class="row">
-                    <div class="col-md-6"></div>
                     <div class="col-md-6">
-                        <form action="/add-comment/{{property._id}}">
-                        <input type="hidden" name="userId" value="{{../user.username}}">
+                        {{#each property.comments}}
+                        <div class="border-bottom pb-4 pt-4">
+                            <h5><i class="fas fa-user-circle"></i> {{username}}</h5>
+                            <p><i class="far fa-comment-dots"></i> {{comment}}</p>
+                        </div>
+
+                        {{/each}}
+                    </div>
+                    <div class="col-md-6">
+                        <form action="/add-comment/{{property._id}}" method="POST">
+                            <input type="hidden" name="userId" value="{{../user.username}}">
                             <div class="form-group">
                                 <label for="comment" class="label active">Deja tu comentario</label>
                                 <textarea name="comment" cols="30" rows="5"></textarea>

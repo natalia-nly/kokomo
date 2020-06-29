@@ -113,6 +113,8 @@ hbs.registerHelper('ifCond', function (v1, operator, v2, options) {
           return (v1 && v2) ? options.fn(this) : options.inverse(this);
       case '||':
           return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      case 'includes':
+          return (v1.includes(v2)) ? options.fn(this) : options.inverse(this);
       default:
           return options.inverse(this);
   }

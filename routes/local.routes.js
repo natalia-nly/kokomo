@@ -12,7 +12,8 @@ router.post('/local/:id', index_controller.bookingDay);
 router.get('/local/edit/:id', index_controller.editLocal);
 router.post('/local/edit/:id', uploadCloud.single('main'), index_controller.saveLocal);
 router.get('/local/love/:id', index_controller.loveLocal);
-router.get('/owner/property/:id', index_controller.ownerViewLocal)
+router.post('/add-comment/:id', index_controller.addComment);
+router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
 
 module.exports = router;
