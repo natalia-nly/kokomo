@@ -40,7 +40,22 @@
                 <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
                 {{/each}}
             </div>
-            <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">...</div>
+            <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <form action="/add-comment/{{property._id}}">
+                        <input type="hidden" name="userId" value="{{../user.username}}">
+                            <div class="form-group">
+                                <label for="comment" class="label active">Deja tu comentario</label>
+                                <textarea name="comment" cols="30" rows="5"></textarea>
+                            </div>
+
+                            <input type="submit" value="Enviar" class="btn-kokomo btn-kokomo-grey btn-block">
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
                 <h3 class="subtitle-search mb-4">Días de apertura</h3>
                 {{#each property.openingHours}}
@@ -74,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
         </form>
         {{else}}

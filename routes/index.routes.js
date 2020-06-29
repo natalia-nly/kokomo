@@ -27,5 +27,6 @@ router.post('/local/edit/:id', uploadCloud.single('main'), index_controller.save
 
 router.get('/local/love/:id', index_controller.loveLocal);
 
+router.post('/add-coment/:id', index_controller.createBooking);
 
 module.exports = router;
