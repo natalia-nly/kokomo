@@ -4,7 +4,8 @@ const Booking = require("../models/booking.model");
 const Customer = require("../models/customer.model");
 const uploadCloud = require("../config/cloudinary.js");
 const { registerOwner } = require("./auth.controllers");
-const dateFormat = require('dateformat');
+const dateFormat = require("dateformat");
+const Swal = require("sweetalert2");
 
 
 exports.createLocal = (req, res, next) => {
@@ -195,19 +196,18 @@ exports.allProperties = (req, res, next) => {
       });
   } else {
     // si no hay usuario cargamos solamente los locales
-  Property.find()
-  .then((properties) => {
-    res.render("landing-page", {
-      properties: properties,
-      title: "KOKOMO | ¡Haz tu reserva!",
-      layout: "layout-nouser",
-    });
-  })
-  .catch((error) => {
-    console.log("Error while getting the properties from the DB: ", error);
-  });
+    Property.find()
+      .then((properties) => {
+        res.render("landing-page", {
+          properties: properties,
+          title: "KOKOMO | ¡Haz tu reserva!",
+          layout: "layout-nouser",
+        });
+      })
+      .catch((error) => {
+        console.log("Error while getting the properties from the DB: ", error);
+      });
   }
-  
 };
 
 exports.viewLocal = (req, res, next) => {
@@ -224,14 +224,45 @@ exports.viewLocal = (req, res, next) => {
       const closingDay = property.openingHours[0].openingDays.closingDay;
       const formatOpening = dateFormat(openingDay, "dd/mm/yyyy");
       const formatClosing = dateFormat(closingDay, "dd/mm/yyyy");
+      const weekDays = property.openingHours[0].weekDays;
+      const weekDaysFormat = [];
+      weekDays.forEach((day) => {
+        switch (day) {
+          case 1:
+            weekDaysFormat.push("Lunes");
+            break;
+          case 2:
+            weekDaysFormat.push("Martes");
+            break;
+          case 3:
+            weekDaysFormat.push("Miércoles");
+            break;
+          case 4:
+            weekDaysFormat.push("Jueves");
+            break;
+          case 5:
+            weekDaysFormat.push("Viernes");
+            break;
+          case 6:
+            weekDaysFormat.push("Sábado");
+            break;
+          case 7:
+            weekDaysFormat.push("Domingo");
+        }
+      });
 
+      console.log(property.openingHours[0].openingTimes[0])
       res.render("property/property-details", {
         property: property,
         title: `${property.name} | KOKOMO`,
         user: resultados[0],
         favourites: favourites,
         openingDay: formatOpening,
-        closingDay: formatClosing
+        closingDay: formatClosing,
+        weekDays: weekDaysFormat,
+        openingTime: property.openingHours[0].openingTimes[0].openingTime,
+        closingTime: property.openingHours[0].openingTimes[0].closingTime
+
       });
     })
     .catch((error) => {
@@ -620,6 +651,8 @@ exports.createBooking = (req, res, next) => {
 exports.deleteBooking = (req, res) => {
   const bookingId = req.params.id;
   const sessionUser = req.session.currentUser || req.user;
+
+
   Booking.findById(bookingId).then((booking) => {
     console.log("this is booking", booking);
     Schedule.update(

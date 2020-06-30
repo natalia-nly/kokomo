@@ -172,6 +172,7 @@ exports.login = (req, res, next) => {
       } else if (bcrypt.compareSync(password, user.passwordHash)) {
         req.session.currentUser = user;
         res.redirect('/');
+        
       } else {
         res.render('auth/login', {
           errorMessage: 'Incorrect password.'
