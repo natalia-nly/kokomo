@@ -145,6 +145,7 @@ exports.registerLocal = (req, res, next) => {
   }
   Property.create(dataProperty).then((property) => {
     createSchedule(property);
+
     Customer.findByIdAndUpdate(
       sessionUser._id,
       {
@@ -156,16 +157,19 @@ exports.registerLocal = (req, res, next) => {
         new: true,
       }
     )
-      .then((customer) => console.log(customer))
+      .then((customer) => {
+        console.log(customer);
+      })
       .catch((error) => {
         console.log("Error: ", error);
       });
+
     res.render("property/property-details", {
-      title: "Local creado | KOKOMO",
-      layout: "layout",
-      user: sessionUser,
-      property,
-    });
+          title: "Local creado | KOKOMO",
+          layout: "layout",
+          user: sessionUser,
+          property: property
+        });
   });
 };
 
@@ -532,7 +536,7 @@ exports.bookingDetails = (req, res) => {
       console.log("BOOKING: ", booking);
       res.render("customer/booking-details", {
         booking: booking,
-        layout: "layout-nouser",
+        layout: "layout-nouser"
       });
     })
     .catch((error) => {

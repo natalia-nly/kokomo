@@ -10,7 +10,7 @@
                 <span class="fa-stack fa-2x">
                     <i class="fas fa-circle fa-stack-2x orange"></i>
                     <i
-                        class=" {{#if user}} {{#ifCond favourites "includes" property._id}} fas {{else}} far {{/ifCond}} {{else}} far {{/if}} fa-heart fa-stack-1x fa-inverse"></i>
+                        class=" {{#if user}} {{#ifCond user.favourites "includes" property._id}} fas {{else}} far {{/ifCond}} {{else}} far {{/if}} fa-heart fa-stack-1x fa-inverse"></i>
                 </span>
             </a>
             <div>
