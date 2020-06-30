@@ -1,9 +1,9 @@
 {{#if user}}
 <div class="body-container">
-  <h3 class="section-title mt-4 mdi mdi-calendar">  Tus reservas</h3>
+  <h3 class="section-title mt-4 mdi mdi-calendar"> Tus reservas</h3>
   <div class="row mb-5">
     <div class="col-md-6">
-     
+
     </div>
     <div class="col-md-6 text-right">
       <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey"><i class="fas fa-user-cog"></i> Configuración</a>
@@ -15,9 +15,9 @@
   <div>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-next-bookings-tab" data-toggle="tab"
-          href="#nav-next-bookings" role="tab" aria-controls="nav-next-bookings" aria-selected="true">Próximas reservas
-          </a>
+        <a class="nav-item nav-link active" id="nav-next-bookings-tab" data-toggle="tab" href="#nav-next-bookings"
+          role="tab" aria-controls="nav-next-bookings" aria-selected="true">Próximas reservas
+        </a>
         <a class="nav-item nav-link" id="nav-last-bookings-tab" data-toggle="tab" href="#nav-last-bookings" role="tab"
           aria-controls="nav-last-bookings" aria-selected="false">Reservas pasadas</a>
 
@@ -27,10 +27,12 @@
       <div class="tab-pane fade show active" id="nav-next-bookings" role="tabpanel"
         aria-labelledby="nav-next-bookings-tab">
         {{#if user.bookings}}
-       <div class="group-booking">
+        <div class="group-booking">
           {{#each user.bookings}}
           <div class="div-booking">
-            <div class="column-xs"><p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p></div>
+            <div class="column-xs">
+              <p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p>
+            </div>
             <div class="column-xl">
               <p>
                 <span class="fa-stack fa-lg">
@@ -64,7 +66,7 @@
               </p>
             </div>
             <div class="column-xs">
-              
+
               <div class="dropdown dropleft float-right">
                 <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false" style="
@@ -77,7 +79,8 @@
                   <a class="dropdown-item" href="#"><i class="mdi mdi-eye"></i> Ver detalles</a>
                   <a class="dropdown-item" href="#"><i class="mdi mdi-share-variant"></i> Compartir reserva</a>
                   <div class="dropdown-divider"></div>
-                  <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar reserva</a>
+                  <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar
+                    reserva</a>
                 </div>
               </div>
             </div>
@@ -95,7 +98,9 @@
         <div class="group-booking">
           {{#each user.bookings}}
           <div class="div-booking">
-            <div class="column-xs"><p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p></div>
+            <div class="column-xs">
+              <p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p>
+            </div>
             <div class="column-xl">
               <p>
                 <span class="fa-stack fa-lg">
@@ -129,7 +134,7 @@
               </p>
             </div>
             <div class="column-xs">
-              
+
               <div class="dropdown dropleft float-right">
                 <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false" style="
@@ -139,10 +144,13 @@
                   <i class="fas fa-ellipsis-v"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-eye"></i> Ver detalles</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-share-variant"></i> Compartir reserva</a>
+                  <a class="dropdown-item" href="/booking/details/{{_id}}"><i class="mdi mdi-eye"></i> Ver detalles</a>
+                  <a class="dropdown-item"
+                    href="whatsapp://send?text=¡Te espera una reserva de Kokomo! 😎 Aquí tienes los detalles: http://localhost:3000/booking/details/{{_id}}"><i
+                      class="mdi mdi-share-variant"></i> Compartir reserva</a>
                   <div class="dropdown-divider"></div>
-                  <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar reserva</a>
+                  <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar
+                    reserva</a>
                 </div>
               </div>
             </div>

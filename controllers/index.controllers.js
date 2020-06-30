@@ -7,7 +7,6 @@ const { registerOwner } = require("./auth.controllers");
 const dateFormat = require("dateformat");
 const Swal = require("sweetalert2");
 
-
 exports.createLocal = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
 
@@ -213,13 +212,65 @@ exports.allProperties = (req, res, next) => {
 exports.viewLocal = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
 
-  const p1 = Customer.findById(sessionUser._id);
-  const p2 = Property.findById(req.params.id);
+  if (sessionUser) {
+    const p1 = Customer.findById(sessionUser._id);
+    const p2 = Property.findById(req.params.id);
 
-  Promise.all([p1, p2])
+    Promise.all([p1, p2])
+      .then((resultados) => {
+        const favourites = resultados[0].favourites;
+        const property = resultados[1];
+        const openingDay = property.openingHours[0].openingDays.openingDay;
+        const closingDay = property.openingHours[0].openingDays.closingDay;
+        const formatOpening = dateFormat(openingDay, "dd/mm/yyyy");
+        const formatClosing = dateFormat(closingDay, "dd/mm/yyyy");
+        const weekDays = property.openingHours[0].weekDays;
+        const weekDaysFormat = [];
+        weekDays.forEach((day) => {
+          switch (day) {
+            case 1:
+              weekDaysFormat.push("Lunes");
+              break;
+            case 2:
+              weekDaysFormat.push("Martes");
+              break;
+            case 3:
+              weekDaysFormat.push("Miércoles");
+              break;
+            case 4:
+              weekDaysFormat.push("Jueves");
+              break;
+            case 5:
+              weekDaysFormat.push("Viernes");
+              break;
+            case 6:
+              weekDaysFormat.push("Sábado");
+              break;
+            case 7:
+              weekDaysFormat.push("Domingo");
+          }
+        });
+
+        console.log(property.openingHours[0].openingTimes[0]);
+        res.render("property/property-details", {
+          property: property,
+          title: `${property.name} | KOKOMO`,
+          user: resultados[0],
+          favourites: favourites,
+          openingDay: formatOpening,
+          closingDay: formatClosing,
+          weekDays: weekDaysFormat,
+          openingTime: property.openingHours[0].openingTimes[0].openingTime,
+          closingTime: property.openingHours[0].openingTimes[0].closingTime,
+        });
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  } else {
+    Property.findById(req.params.id)
     .then((resultados) => {
-      const favourites = resultados[0].favourites;
-      const property = resultados[1];
+      const property = resultados;
       const openingDay = property.openingHours[0].openingDays.openingDay;
       const closingDay = property.openingHours[0].openingDays.closingDay;
       const formatOpening = dateFormat(openingDay, "dd/mm/yyyy");
@@ -246,28 +297,26 @@ exports.viewLocal = (req, res, next) => {
           case 6:
             weekDaysFormat.push("Sábado");
             break;
-          case 7:
+          case 0:
             weekDaysFormat.push("Domingo");
         }
       });
 
-      console.log(property.openingHours[0].openingTimes[0])
+      console.log(property.openingHours[0].openingTimes[0]);
       res.render("property/property-details", {
         property: property,
         title: `${property.name} | KOKOMO`,
-        user: resultados[0],
-        favourites: favourites,
         openingDay: formatOpening,
         closingDay: formatClosing,
         weekDays: weekDaysFormat,
         openingTime: property.openingHours[0].openingTimes[0].openingTime,
-        closingTime: property.openingHours[0].openingTimes[0].closingTime
-
+        closingTime: property.openingHours[0].openingTimes[0].closingTime,
       });
     })
     .catch((error) => {
       console.log("Error: ", error);
     });
+  }
 };
 
 exports.ownerViewLocal = (req, res, next) => {
@@ -429,10 +478,21 @@ exports.loveLocal = (req, res, next) => {
     });
 };
 
+function filterSchedules(day, guests, schedules) {
+  const newDate = new Date(day);
+  const finalSchedules = schedules.filter(
+    (element) =>
+      element.day.getTime() == newDate.getTime() &&
+      element.remaining >= guests
+  );
+
+  return finalSchedules;
+}
+
 exports.bookingDay = (req, res, next) => {
   const propertyId = req.params.id;
   let bookingDate = req.body.bookingDate;
-  let newDate = new Date(bookingDate);
+  //let newDate = new Date(bookingDate);
   let newGuests = req.body.numberGuests;
   console.log(newGuests);
 
@@ -448,11 +508,8 @@ exports.bookingDay = (req, res, next) => {
       const theProperty = resultados[0];
       const schedules = resultados[1];
       const allSchedules = schedules[0].timeBoxes;
-      const finalSchedules = allSchedules.filter(
-        (element) =>
-          element.day.getTime() == newDate.getTime() &&
-          element.remaining >= newGuests
-      );
+
+      const finalSchedules = filterSchedules(bookingDate, newGuests, allSchedules);
 
       res.render("property/booking-options", {
         property: theProperty,
@@ -652,7 +709,6 @@ exports.deleteBooking = (req, res) => {
   const bookingId = req.params.id;
   const sessionUser = req.session.currentUser || req.user;
 
-
   Booking.findById(bookingId).then((booking) => {
     console.log("this is booking", booking);
     Schedule.update(
@@ -696,17 +752,61 @@ exports.deleteBooking = (req, res) => {
 
 exports.viewCategory = (req, res) => {
   const sessionUser = req.session.currentUser || req.user;
-  console.log(req.params.name)
-  Property.find({ categories: req.params.name })
-  .then(properties => {
-    res.render('property/category', {
-      category: req.params.name,
-      user: sessionUser,
-      properties: properties,
-      favourites: sessionUser.favourites
+
+  if(sessionUser){
+    Property.find({ categories: req.params.name })
+    .then((properties) => {
+      res.render("property/category", {
+        category: req.params.name,
+        user: sessionUser,
+        properties: properties
+      });
+    })
+    .catch((error) => {
+      console.log("Error: ", error);
     });
-  })
-  .catch((error) => {
-    console.log("Error: ", error);
-  });
+  } else {
+    Property.find({ categories: req.params.name })
+    .then((properties) => {
+      res.render("property/category", {
+        category: req.params.name,
+        user: sessionUser,
+        properties: properties,
+        layout: 'layout-nouser'
+      });
+    })
+    .catch((error) => {
+      console.log("Error: ", error);
+    });
+  }
+
+};
+
+exports.newSearch = (req, res, next) => {
+  res.render('search');
+};
+
+exports.searchResults = (req, res, next) => {
+  Schedule.find({
+    "timeBoxes.day": {$eq: req.body.bookingDate}, 
+    "timeBoxes.remaining": {$gte: req.body.numberGuests}})
+    .populate('property')
+    .then(schedules => { 
+      //const finalArray = [];
+      const finalResults = schedules.map(element => {
+        const finalSchedules = filterSchedules(req.body.bookingDate, req.body.numberGuests, element.timeBoxes);
+        let obj = {
+          property: element.property,
+          timeboxes: finalSchedules,
+          guests: req.body.numberGuests
+        };
+        return obj;
+      });
+      console.log("FINAL RESULTS", finalResults);
+      res.render('search-result', {schedule: finalResults});
+    })
+    .catch((error) => {
+      console.log("Error: ", error);
+    });
+  
 };

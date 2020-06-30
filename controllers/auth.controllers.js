@@ -215,108 +215,6 @@ exports.myFavourites = (req, res, next) => {
   }).catch(error => next(error));
 };
 
-// exports.myBookings = (req, res, next) => {
-//     const sessionUser =req.session.currentUser|| req.user;
-//     // BOOKINGS DEL OWNER
-//     if (sessionUser.owner) {
-//         Customer.findById(sessionUser._id).populate({
-//             path: 'ownProperties',
-//             populate: { path: 'bookings' }
-//           })
-//         .then(user => {
-//             console.log("USER CON DEEP POPULATE: ", user);
-//             console.log(user.ownProperties[0].bookings)
-//             res.render('owner/bookings', {
-//                 user,
-//                 title: 'Mis reservas | KOKOMO'
-//             });
-
-//             /*const getProperties = async () => {
-//                 return Promise.all(user.ownProperties.map(async (property) => {
-//                     var local = await Property.findById(property.id);
-//                     return local;
-
-//                 }))
-//             }
-
-//             getProperties().then(properties => {
-
-//                 const propertiesBookings = async () => {
-//                     return Promise.all(properties.map(property => {
-//                         const getBookings = async () => {
-//                             return Promise.all(property.bookings.map(async (booking) => {
-//                                 var item = await Booking.findById(booking.bookingId);
-//                                 return item;
-//                             }))
-//                         };
-//                         getBookings().then(bookings => {
-//                             console.log(bookings)
-//                             res.render('owner/bookings', {
-//                                 user,
-//                                 title: 'Mis reservas | KOKOMO',
-//                                 bookings
-//                             });
-//                         })
-
-//                     }))
-//                 }
-//                 propertiesBookings()
-
-
-//             })*/
-//       }).catch(error => next(error));
-//     } 
-//     // BOOKINGS DEL CUSTOMER
-//     else {
-//         Customer.findById(sessionUser._id).populate('bookings').then(user => {
-//             console.log(user)
-//             res.render('customer/bookings', {
-//                 user,
-//                 title: 'Mis reservas | KOKOMO'
-//             });
-//         }).catch(error => next(error));
-//     }
-
-//     getProperties()
-//     .then((properties) => {
-//           const propertiesBookings = async () => {
-//             return Promise.all(
-//               properties.map((property) => {
-//                 const getBookings = async () => {
-//                   return Promise.all(
-//                     property.bookings.map(async (booking) => {
-//                       var item = await Booking.findById(booking.bookingId);
-//                       return item;
-//                     })
-//                   );
-//                 };
-//                 getBookings()
-//                 .then((bookings) => {
-//                   console.log(bookings);
-//                   res.render("owner/bookings", {
-//                     user,
-//                     title: "Mis reservas | KOKOMO",
-//                     bookings,
-//                   });
-//                 })
-//                 .catch((error) => next(error));
-//               })
-//             );
-//           };
-//           propertiesBookings();
-//         })
-
-
-//     Customer.findById(req.session.currentUser._id)
-//       .then((user) => {
-//         res.render("customer/bookings", {
-//           user,
-//           title: "Mis reservas | KOKOMO",
-//         });
-//       })
-//       .catch((error) => next(error))
-
-//   };
 
 exports.myBookings = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
@@ -336,7 +234,6 @@ exports.myBookings = (req, res, next) => {
       })
       .then(user => {
         console.log("USER CON DEEP POPULATE: ", user);
-        console.log(user.ownProperties[0].bookings);
         res.render('owner/bookings', {
           user,
           title: 'Mis reservas | KOKOMO'

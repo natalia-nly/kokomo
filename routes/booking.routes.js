@@ -14,4 +14,8 @@ router.get('/booking/delete/:id', index_controller.deleteBooking);
 
 router.get('/booking/details/:id', index_controller.bookingDetails);
 
+router.get('/search', index_controller.newSearch);
+
+router.post('/search', index_controller.searchResults);
+
 module.exports = router;
