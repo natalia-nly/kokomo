@@ -1,0 +1,21 @@
+<div class="body-container">
+  <form action="/search" method="POST" class="mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
+          <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
+          <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
+        </div>
+      </div>
+
+    </div>
+
+    <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
+  </form>
+</div>

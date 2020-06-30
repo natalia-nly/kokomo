@@ -90,6 +90,35 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+hbs.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+  switch (operator) {
+      case '==':
+          return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case '===':
+          return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case '!=':
+          return (v1 != v2) ? options.fn(this) : options.inverse(this);
+      case '!==':
+          return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+      case '<':
+          return (v1 < v2) ? options.fn(this) : options.inverse(this);
+      case '<=':
+          return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+      case '>':
+          return (v1 > v2) ? options.fn(this) : options.inverse(this);
+      case '>=':
+          return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+      case '&&':
+          return (v1 && v2) ? options.fn(this) : options.inverse(this);
+      case '||':
+          return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      case 'includes':
+          return (v1.includes(v2)) ? options.fn(this) : options.inverse(this);
+      default:
+          return options.inverse(this);
+  }
+});
 
 // default value for title local
 app.locals.title = 'KOKOMO';
@@ -98,9 +127,15 @@ app.locals.title = 'KOKOMO';
 //ROUTES
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
+const booking = require('./routes/booking.routes');
+const local = require('./routes/local.routes');
+const profile = require('./routes/profile.routes');
 
 app.use('/', index);
 app.use('/', auth);
+app.use('/', booking);
+app.use('/', local);
+app.use('/', profile);
 
 
 

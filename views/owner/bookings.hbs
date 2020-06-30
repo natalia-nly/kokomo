@@ -1,7 +1,6 @@
 {{#if user}}
 <div class="body-container">
-  <h3 class="section-title mt-4 mdi mdi-calendar">  Tus reservas</h3>
-
+  <h3 class="section-title mt-4 mdi mdi-calendar">Tus reservas, {{user.username}}</h3>
   <div>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -9,165 +8,160 @@
           href="#nav-property-bookings" role="tab" aria-controls="nav-property-bookings" aria-selected="true">Reservas
           en tus locales</a>
         <a class="nav-item nav-link" id="nav-own-bookings-tab" data-toggle="tab" href="#nav-own-bookings" role="tab"
-          aria-controls="nav-own-bookings" aria-selected="false">Tus reservas</a>
-
+          aria-controls="nav-own-bookings" aria-selected="false">Mis reservas</a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-property-bookings" role="tabpanel"
         aria-labelledby="nav-property-bookings-tab">
-        {{#if bookings}}
+        {{#if user.ownProperties}}
+        {{#each user.ownProperties}}
+        <h4 class="section-title mt-4 mdi mdi-map-marker">Nombre de la propiedad: {{name}}</h4>
 
         <div class="group-booking">
           {{#each bookings}}
-          <div class="div-booking">
-            <div class="column-xs"><p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p></div>
-            <div class="column-xl">
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="far fa-calendar-check fa-stack-1x orange"></i>
-                </span>
-                {{day}}
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="far fa-clock fa-stack-1x orange"></i>
-                </span>
-                {{time}}
-              </p>
-            </div>
-            <div class="column-xl">
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-users fa-stack-1x orange"></i>
-                </span>
-                {{guests}} personas
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="far fa-user fa-stack-1x orange"></i>
-                </span>
-                {{customerName}}
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-phone fa-stack-1x orange"></i> 
-                </span>
-                {{telNumber}}
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-                </span>
-                {{propertyName}}
-              </p>
-            </div>
-            <div class="column-xs">
-              
-              <div class="dropdown dropleft float-right">
-                <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false" style="
+          <div class="column-xs">
+            <p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p>
+          </div>
+          <div class="column-xl">
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="far fa-calendar-check fa-stack-1x orange"></i>
+              </span>
+              {{day}}
+            </p>
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="far fa-clock fa-stack-1x orange"></i>
+              </span>
+              {{time}}
+            </p>
+          </div>
+          <div class="column-xl">
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="fas fa-users fa-stack-1x orange"></i>
+              </span>
+              {{guests}} personas
+            </p>
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="far fa-user fa-stack-1x orange"></i>
+              </span>
+              {{customerName}}
+            </p>
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="fas fa-phone fa-stack-1x orange"></i>
+              </span>
+              {{telNumber}}
+            </p>
+            <p>
+          </div>
+          <div class="column-xs">
+            <div class="dropdown dropleft float-right">
+              <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="
                       padding: 10px 19px;
                       border-radius: 100%;
                   ">
-                  <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-eye"></i> Ver detalles</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-share-variant"></i> Compartir reserva</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="danger ml-4" href="/booking/delete/{{bookingRef}}"><i class="far fa-trash-alt"></i> Cancelar reserva</a>
-                </div>
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/booking/details/{{_id}}"><i class="mdi mdi-eye"></i> Ver detalles</a>
+                <a class="dropdown-item"
+                  href="whatsapp://send?text=¡Te espera una reserva de Kokomo! 😎 Aquí tienes los detalles: http://localhost:3000/booking/details/{{_id}}"><i
+                    class="mdi mdi-share-variant"></i> Compartir reserva</a>
+                <div class="dropdown-divider"></div>
+                <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar
+                  reserva</a>
               </div>
             </div>
-
-
           </div>
-          {{/each}}
+
+
         </div>
 
-        {{/if}}
+        {{/each}}
       </div>
-      <div class="tab-pane fade" id="nav-own-bookings" role="tabpanel" aria-labelledby="nav-own-bookings-tab">
-        {{#if user.bookings}}
-        <div class="group-booking">
-          {{#each user.bookings}}
-          <div class="div-booking">
-            <div class="column-xs"><p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p></div>
-            <div class="column-xl">
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="far fa-calendar-check fa-stack-1x orange"></i>
-                </span>
-                {{day}}
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="far fa-clock fa-stack-1x orange"></i>
-                </span>
-                {{time}}
-              </p>
-            </div>
-            <div class="column-xl">
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-users fa-stack-1x orange"></i>
-                </span>
-                {{guests}} personas
-              </p>
-              <p>
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-square fa-stack-2x orange-20"></i>
-                  <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-                </span>
-                {{propertyName}}
-              </p>
-            </div>
-            <div class="column-xs">
-              
-              <div class="dropdown dropleft float-right">
-                <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false" style="
-                      padding: 10px 19px;
-                      border-radius: 100%;
-                  ">
-                  <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-eye"></i> Ver detalles</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-share-variant"></i> Compartir reserva</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="danger ml-4" href="/booking/delete/{{bookingRef}}"><i class="far fa-trash-alt"></i> Cancelar reserva</a>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-          {{/each}}
-        </div>
-
-        {{else}}
-        <p>Todavía no tienes reservas</p>
-        {{/if}}
-      </div>
-
+      {{/each}}
+      {{/if}}
     </div>
+    <div class="tab-pane fade" id="nav-own-bookings" role="tabpanel" aria-labelledby="nav-own-bookings-tab">
+      {{#if user.bookings}}
+      <div class="group-booking">
+        {{#each user.bookings}}
+        <div class="div-booking">
+          <div class="column-xs">
+            <p class="mb-4"><span class="booking-ref">{{bookingRef}}</span></p>
+          </div>
+          <div class="column-xl">
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="far fa-calendar-check fa-stack-1x orange"></i>
+              </span>
+              {{day}}
+            </p>
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="far fa-clock fa-stack-1x orange"></i>
+              </span>
+              {{time}}
+            </p>
+          </div>
+          <div class="column-xl">
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="fas fa-users fa-stack-1x orange"></i>
+              </span>
+              {{guests}} personas
+            </p>
+            <p>
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-square fa-stack-2x orange-20"></i>
+                <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+              </span>
+              {{property.name}}
+            </p>
+          </div>
+          <div class="column-xs">
 
+            <div class="dropdown dropleft float-right">
+              <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="
+                      padding: 10px 19px;
+                      border-radius: 100%;
+                  ">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/booking/details/{{_id}}"><i class="mdi mdi-eye"></i> Ver detalles</a>
+                <a class="dropdown-item"
+                  href="whatsapp://send?text=¡Te espera una reserva de Kokomo! 😎 Aquí tienes los detalles: http://localhost:3000/booking/details/{{_id}}"><i
+                    class="mdi mdi-share-variant"></i> Compartir reserva</a>
+                <div class="dropdown-divider"></div>
+                <a class="danger ml-4" href="/booking/delete/{{_id}}"><i class="far fa-trash-alt"></i> Cancelar
+                  reserva</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{else}}
+      <p>Todavía no tienes reservas</p>
+      {{/if}}
+    </div>
   </div>
-</div>
-
-
-{{else}}
-<p>Please, login first!</p>
-<a href="/login" class="btn btn-primary">Login</a>
-{{/if}}
+  {{else}}
+  <p>Please, login first!</p>
+  <a href="/login" class="btn btn-primary">Login</a>
+  {{/if}}

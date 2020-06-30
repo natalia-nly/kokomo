@@ -6,10 +6,11 @@
 
     <div class="white-card">
         <div class="title-heart">
-            <a href="/local/love/{{property._id}}">
-                <span class="fa-stack fa-2x mr-4">
+            <a href="/local/love/{{property._id}}" class="text-right">
+                <span class="fa-stack fa-2x">
                     <i class="fas fa-circle fa-stack-2x orange"></i>
-                    <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                    <i
+                        class=" {{#if user}} {{#ifCond favourites "includes" property._id}} fas {{else}} far {{/ifCond}} {{else}} far {{/if}} fa-heart fa-stack-1x fa-inverse"></i>
                 </span>
             </a>
             <div>
@@ -17,46 +18,90 @@
 
             </div>
         </div>
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
-                    role="tab" aria-controls="nav-description" aria-selected="true">Descripción</a>
-                <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
-                    aria-controls="nav-comments" aria-selected="false">Comentarios</a>
-                <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
-                    aria-controls="nav-openings" aria-selected="false">Horarios</a>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
-                aria-labelledby="nav-description-tab">
-                <h3 class="subtitle-search mb-4">{{property.description}}</h3>
-                <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
-                </p>
+        <div style="max-height: 50vh; overflow: scroll;">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab"
+                        href="#nav-description" role="tab" aria-controls="nav-description"
+                        aria-selected="true">Descripción</a>
+                    <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab"
+                        aria-controls="nav-comments" aria-selected="false">Comentarios</a>
+                    <a class="nav-item nav-link" id="nav-openings-tab" data-toggle="tab" href="#nav-openings" role="tab"
+                        aria-controls="nav-openings" aria-selected="false">Horarios</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
+                    aria-labelledby="nav-description-tab">
+                    <h3 class="subtitle-search mb-4">{{property.description}}</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> {{property.location.name}}
+                    </p>
 
-                <p>Duración de la reserva: {{property.bookingDuration}}</p>
-                <p>Plazas disponibles: {{property.availablePlaces}}</p>
-                {{#each property.categories}}
-                <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
-                {{/each}}
-            </div>
-            <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">...</div>
-            <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
-                <h3 class="subtitle-search mb-4">Días de apertura</h3>
-                {{#each property.openingHours}}
-                <p>Día de apertura: <span id="openingDay1">{{openingDays.openingDay}}</span></p>
+                    <p>Duración de la reserva: {{property.bookingDuration}}</p>
+                    <p>Plazas disponibles: {{property.availablePlaces}}</p>
+                    {{#each property.categories}}
+                    <br>
+                    <a href="/category/{{this}}" class="kokomo-hours text-center text-uppercase mt-4 p-2">{{this}}</a>
+                    {{/each}}
+                </div>
+                <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="/add-comment/{{property._id}}" method="POST">
+                                <input type="hidden" name="userId" value="{{../user.username}}">
+                                <div class="form-group">
+                                    <label for="comment" class="label active">Deja tu comentario</label>
+                                    <textarea name="comment" cols="30" rows="3"></textarea>
+                                </div>
 
-                <p>Día de cierre: <span id="closingDay1">{{openingDays.closingDay}}</span></p>
+                                <input type="submit" value="Enviar" class="btn-kokomo btn-kokomo-grey btn-block">
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            {{#each property.comments}}
+                            <div class="border-bottom pb-4 pt-4">
+                                <h5><i class="fas fa-user-circle"></i> {{username}}</h5>
+                                <p><i class="far fa-comment-dots"></i> {{comment}}</p>
+                            </div>
 
-                <p>Días de la semana: {{weekDays}}</p>
-                {{#each opening_times}}
-                <p>Hora de apertura: {{openingTime}}</p>
-                <p>Hora de cierre: {{closingTime}}</p>
-                {{/each}}
-                {{/each}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Este local está abierto en estas fechas:</p>
+                            <p>{{openingDay}} - {{closingDay}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {{#each property.openingHours}}
+
+                            <table class="table">
+                                <tbody>
+                                    {{#each ../weekDays}}
+                                    <tr>
+                                        <td>
+                                            <p>{{this}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{../../openingTime}}:00 - {{../../closingTime}}:00</p>
+                                        </td>
+
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+                            {{/each}}
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
+
         </div>
-
 
         {{#if user}}
         <form action="/local/{{property._id}}" method="POST" class="mt-4">
@@ -74,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
         </form>
         {{else}}
@@ -84,5 +129,6 @@
         </div>
 
         {{/if}}
+
     </div>
 </div>

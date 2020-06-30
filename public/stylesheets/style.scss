@@ -17,23 +17,20 @@
 
 /* ## Colors
 --------------------------------------------- */
-$blue: #3294BB;
-$orange: #FFBA69;
-$text-color: #809EAA;
-$cream: #FBF7F3;
+$blue: #3294bb;
+$orange: #ffba69;
+$text-color: #809eaa;
+$cream: #fbf7f3;
 $light-blue: #e8f5fb;
-$success: #0AC5A3;
-$danger: #FF8D69;
-$grey: #C9C0B6;
+$success: #0ac5a3;
+$danger: #ff8d69;
+$grey: #c9c0b6;
 $blue-background: #e7eff3;
 
 /* ## Fonts
 --------------------------------------------- */
 $text-font: europa, sans-serif;
 $heading-font: bely-display, sans-serif;
-
-
-
 
 body {
   padding: 0px;
@@ -48,11 +45,17 @@ a {
   color: $orange;
 }
 
-a:hover{
+a:hover {
   text-decoration: none !important;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin-bottom: 0px !important;
 }
 
@@ -74,11 +77,11 @@ p {
 }
 
 .orange-20 {
-  color: rgba($orange, .2);
+  color: rgba($orange, 0.2);
 }
 
 .orange-80 {
-  color: rgba($orange, .8);
+  color: rgba($orange, 0.8);
 }
 
 .blue {
@@ -106,12 +109,13 @@ p {
   text-align: center;
   vertical-align: middle;
   user-select: none;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   border: none;
   border-radius: 5px;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn-kokomo-success {
@@ -138,7 +142,7 @@ p {
   }
 }
 
-.btn-kokomo-danger{
+.btn-kokomo-danger {
   color: #fff;
   background-color: $danger;
   border-color: $danger;
@@ -178,12 +182,9 @@ p {
       a {
         font-size: 20px;
         color: $cream;
-
       }
-
     }
   }
-
 }
 
 .search-icon-menu {
@@ -204,51 +205,50 @@ nav {
     color: $blue !important;
   }
 
-  .navbar-toggler, i {
+  .navbar-toggler,
+  i {
     border: none;
     color: $blue;
   }
 }
 
-
-
-.form-group{
+.form-group {
   position: relative;
   margin-bottom: 2rem;
 
-  input, textarea {
+  input,
+  textarea {
     font-family: $text-font;
     color: #49636d;
     width: 100%;
     outline: none;
     background-color: white;
     border: none;
-    border: 1px solid rgba($text-color, .2);
+    border: 1px solid rgba($text-color, 0.2);
     vertical-align: top;
     margin-bottom: 10px;
     padding: 30px 10px 10px 10px;
     border-radius: 8px;
 
-    &:focus{
+    &:focus {
       border: 2px solid $orange;
     }
-
   }
 
-  textarea{
+  textarea {
     max-width: 100%;
     max-height: 10.25rem;
     min-height: 5.125rem;
     min-width: 100%;
   }
 
-  label{
+  label {
     color: $text-color;
     font-family: $text-font;
     font-size: 16px;
     font-weight: 500;
 
-    &.label{
+    &.label {
       position: absolute;
       top: 12px;
       left: 0;
@@ -256,9 +256,8 @@ nav {
       line-height: 1rem;
       margin-left: 10px;
       font-size: 12px;
-        line-height: 0.75rem;
-        color: $text-color;
-
+      line-height: 0.75rem;
+      color: $text-color;
     }
   }
 }
@@ -274,8 +273,8 @@ h2.hero-subtitle {
 
 .hero-title {
   font-size: 30px;
-    color: #49636d;
-    padding-bottom: 10px;
+  color: #49636d;
+  padding-bottom: 10px;
 }
 
 .hero {
@@ -284,9 +283,9 @@ h2.hero-subtitle {
 
 .hero-arrow-phone {
   font-size: 35px;
-    margin-left: -6px;
-    color: #d0dde2;
-    margin-top: 10px;
+  margin-left: -6px;
+  color: #d0dde2;
+  margin-top: 10px;
 }
 
 .hero-arrow-desktop {
@@ -311,7 +310,6 @@ h1 {
   font-weight: 100;
 }
 
-
 .title-search-home {
   font-size: 20px;
   font-family: $heading-font;
@@ -332,13 +330,12 @@ h1 {
   padding-bottom: 50px;
 
   input {
-    background-color: rgba($text-color, .15);
+    background-color: rgba($text-color, 0.15);
     border: none;
     padding: 26px;
     border-radius: 14px;
   }
 }
-
 
 .properties-group {
   display: grid;
@@ -356,6 +353,61 @@ h1 {
       height: 50vw;
       object-fit: cover;
       border-radius: 20px;
+    }
+
+    .blur-image {
+      position: relative;
+      top: -60vw;
+      z-index: -1;
+      filter: blur(10px);
+      opacity: 0.5;
+      margin-bottom: -60vw;
+    }
+
+    h3 {
+      font-family: $heading-font;
+      color: $orange;
+      font-size: 16px;
+      padding-top: 0;
+    }
+
+    p {
+      color: $text-color;
+      font-weight: 200;
+      font-size: 13px;
+    }
+  }
+}
+
+.properties-group-2 {
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  // grid-gap: 26px;
+  overflow: scroll;
+  padding: 20px;
+
+  .one-property {
+    display: flex;
+  }
+
+  .property-card {
+    width: 35vw;
+    margin-top: -60px;
+
+    img {
+      width: 100%;
+      height: 50vw;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .blur-image {
+      position: relative;
+      top: -60vw;
+      z-index: -1;
+      filter: blur(10px);
+      opacity: 0.5;
+      margin-bottom: -60vw;
     }
 
     h3 {
@@ -388,8 +440,8 @@ h1 {
 }
 
 .table-bookings {
- max-height: 50vh;
- overflow: scroll;
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .group-booking {
@@ -405,17 +457,15 @@ h1 {
 
 .white-card {
   width: 100vw;
-    height: 100%;
-    background-color: #FBF7F3;
-    padding: 26px;
-    padding-bottom: 100px;
-    border-radius: 50px 50px 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-top: -50px;
-
-
+  height: 100%;
+  background-color: #fbf7f3;
+  padding: 26px;
+  padding-bottom: 100px;
+  border-radius: 50px 50px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: -50px;
 }
 
 .banner-profile {
@@ -426,7 +476,6 @@ h1 {
   margin-top: 10px;
 }
 
-
 .title-heart {
   display: flex;
   flex-direction: column;
@@ -434,32 +483,30 @@ h1 {
   margin-top: -50px;
 }
 
-.title-heart div:first-child{
+.title-heart div:first-child {
   align-self: flex-end;
 }
 
 #nav-tab {
-
-  border-bottom: 2px solid rgba($orange, .2) !important;
+  border-bottom: 2px solid rgba($orange, 0.2) !important;
 
   .nav-link {
     font-size: 14px;
   }
-  
-  .nav-link, .nav-tabs .nav-link {
-    color: #8D8883 !important;
+
+  .nav-link,
+  .nav-tabs .nav-link {
+    color: #8d8883 !important;
     background-color: transparent !important;
     border-color: transparent !important;
   }
-  
+
   .nav-link.active {
     border-bottom: 2px solid $orange !important;
     color: $orange !important;
   }
-  
-  
 }
-.tab-content{
+.tab-content {
   padding: 20px 0;
 }
 
@@ -467,7 +514,7 @@ h1 {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  
+
   div {
     width: 100%;
 
@@ -498,30 +545,30 @@ h2.display-cream {
 h3.section-title {
   color: $blue;
   font-family: $heading-font;
-    padding-bottom: 10px;
-    border-bottom: 10px solid rgba($blue, .1);
-    margin-bottom: 20px !important;
+  padding-bottom: 10px;
+  border-bottom: 10px solid rgba($blue, 0.1);
+  margin-bottom: 20px !important;
 }
 
 h4.section-title {
   color: $blue;
-    padding-bottom: 10px;
-    border-bottom: 10px solid rgba($blue, .1);
-    margin-bottom: 20px !important;
+  padding-bottom: 10px;
+  border-bottom: 10px solid rgba($blue, 0.1);
+  margin-bottom: 20px !important;
 }
 
 .kokomo-hours {
   border: none;
-    width: 100px;
-    background-color: rgba(255, 186, 105, 0.2);
-    color: #FFBA69;
-    border-radius: 10px;
+  width: 100px;
+  background-color: rgba(255, 186, 105, 0.2);
+  color: #ffba69;
+  border-radius: 10px;
 }
 
 .heart-home {
   position: relative;
-    top: 80px;
-    right: 10px;
+  top: 80px;
+  right: 10px;
 }
 
 .kokomo-btn-form {
@@ -536,9 +583,9 @@ h4.section-title {
 
 .kokomo-input {
   border-radius: 5px;
-    border: 1px solid $orange;
-    color: $text-color;
-    padding: 10px 20px;
+  border: 1px solid $orange;
+  color: $text-color;
+  padding: 10px 20px;
 }
 
 .div-booking {
@@ -550,7 +597,7 @@ h4.section-title {
   margin: 10px 0;
   padding: 20px;
 
-  .column-xs{
+  .column-xs {
     width: 100%;
   }
 
@@ -567,13 +614,57 @@ h4.section-title {
   margin-bottom: 20px;
 }
 
+.category-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  overflow: scroll;
+  padding: 20px 0;
+
+  .one-category {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    background-color: $blue;
+    border-radius: 80px;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: darken($blue, 3);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .img-container {
+      width: 100%;
+      background-color: white;
+      border-radius: 100%;
+      padding: 16px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    p {
+      color: white;
+      font-size: 12px;
+      padding-top: 16px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 
 /* ## MEDIA QUERIES PANTALLAS +768px
 --------------------------------------------- */
 
-@media all and (min-width: 768px){
+@media all and (min-width: 768px) {
   .body-container {
     margin-left: 140px;
     padding-bottom: 0px;
@@ -592,13 +683,13 @@ h4.section-title {
   .hero-arrow-phone {
     display: none;
   }
-  
+
   .hero-arrow-desktop {
     display: block;
     font-size: 35px;
-      margin-left: -6px;
-      color: #d0dde2;
-      margin-top: 10px;
+    margin-left: -6px;
+    color: #d0dde2;
+    margin-top: 10px;
   }
 
   .navbar-kokomo {
@@ -609,15 +700,15 @@ h4.section-title {
     right: auto;
     width: auto;
     margin: 10px;
-  
+
     ul {
       display: flex;
       flex-direction: column;
       padding: 10px 12px;
       margin: 0;
       height: 100%;
-  
-      li{
+
+      li {
         border-radius: 30px;
         background-color: $blue;
         padding: 20px;
@@ -626,30 +717,26 @@ h4.section-title {
           font-size: 28px;
         }
       }
-
-      }
-    
-  
+    }
   }
 
   #nav-tab {
+    border-bottom: 2px solid rgba($orange, 0.2) !important;
 
-    border-bottom: 2px solid rgba($orange, .2) !important;
-  
     .nav-link {
       font-size: 18px;
     }
-    
-    .nav-link, .nav-tabs .nav-link {
-      color: #8D8883 !important;
+
+    .nav-link,
+    .nav-tabs .nav-link {
+      color: #8d8883 !important;
       background-color: transparent !important;
       border-color: transparent !important;
     }
-    
+
     .nav-link.active {
       border-bottom: 2px solid $orange !important;
     }
-    
   }
 
   .search-icon-menu {
@@ -657,7 +744,7 @@ h4.section-title {
     margin-top: -10px;
     padding: 20px !important;
     box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
-  
+
     a {
       color: $blue !important;
     }
@@ -705,11 +792,11 @@ h4.section-title {
   }
 
   .title-heart {
-    display:flex;
+    display: flex;
     flex-direction: row;
     margin-left: -90px !important;
   }
-  
+
   h2.display-cream {
     font-size: 40px;
   }
@@ -726,7 +813,7 @@ h4.section-title {
     font-size: 40px;
     padding: 0 100px 10px 0;
   }
-  
+
   .subtitle-search {
     font-size: 20px;
     color: $text-color;
@@ -740,22 +827,56 @@ h4.section-title {
 
   .properties-group {
     padding: 40px 0;
-  
+
     .property-card {
       width: 20vw;
-  
+
       img {
         height: 30vw;
         border-radius: 40px;
       }
-  
+
+      .blur-image {
+        top: -45vw;
+      }
+
       h3 {
         font-family: $heading-font;
         color: $orange;
         font-size: 22px;
         padding-top: 18px;
       }
-  
+
+      p {
+        color: $text-color;
+        font-weight: 200;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .properties-group-2 {
+    padding: 40px 0;
+
+    .property-card {
+      width: 20vw;
+
+      img {
+        height: 30vw;
+        border-radius: 40px;
+      }
+
+      .blur-image {
+        top: -45vw;
+      }
+
+      h3 {
+        font-family: $heading-font;
+        color: $orange;
+        font-size: 22px;
+        padding-top: 18px;
+      }
+
       p {
         color: $text-color;
         font-weight: 200;
@@ -765,13 +886,12 @@ h4.section-title {
   }
 
   .div-booking {
-    .column-xs{
+    .column-xs {
       width: 20%;
     }
-  
+
     .column-xl {
       width: 30%;
     }
   }
 }
-

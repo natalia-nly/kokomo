@@ -6,18 +6,18 @@
         <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
         <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
     </div>
-    <form action="/profile/create-local" method="POST" class="kokomo-forms">
+    <form action="/local/edit/{{property._id}}" method="POST" class="kokomo-forms">
         <h3 class="section-title">Datos principales</h3>
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <label for="input-name" class="label active">Nombre</label>
-                    <input type=" text" id="input-name" name="name" value="{{property.name}}"
-                        />
+                    <input type=" text" id="input-name" name="name" value="{{property.name}}" />
                 </div>
                 <div class="form-group">
                     <label for="input-description" class="label active">Descripción</label>
-                    <textarea id="input-description" name="description" rows="3" cols="30">{{property.description}}</textarea>
+                    <textarea id="input-description" name="description" rows="3"
+                        cols="30">{{property.description}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="input-categories" class="label active">Categoría</label>
@@ -33,22 +33,21 @@
                 </div>
                 <div class="form-group">
                     <label for="input-image" class="label active">Imagen Principal</label>
-                    <input type="url" name="main" id="input-image-main" value="{{property.mainImage}}"/>
+                    <input type="file" name="main" id="input-image-main" value="{{property.mainImage}}"/>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <label for="input-media" class="label active">Imagen Secundaria</label>
-                    <input type="url" name="media" id="input-image-media"/>
+                    <input type="url" name="media" id="input-image-media" />
                 </div>
                 <div class="form-group">
                     <label for="input-ubication" class="label active">Ubicación</label>
-                    <input type="text" name="ubication" id="input-ubication" />
+                    <input type="text" name="ubication" id="input-ubication" value="{{property.location.name}}" / />
                 </div>
                 <div class="form-group">
                     <label for="input-latitude" class="label active">Latitud</label>
-                    <input type="number" name="latitude" id="input-latitude"
-                        step=".01" />
+                    <input type="number" name="latitude" id="input-latitude" step=".01" />
                 </div>
                 <div class="form-group">
                     <label for="input-longitude" class="label active">Longitud</label>
@@ -60,12 +59,12 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="input-opening">Día de apertura</label>
+                    <label for="input-opening" class="label active">Día de apertura</label>
                     <input type="date" name="opening" id="input-opening"/>
                 </div>
                 <div class="form-group">
-                    <label for="input-closing">Día de cierre</label>
-                    <input type="date" name="closing" id="input-closing"/>
+                    <label for="input-closing" class="label active">Día de cierre</label>
+                    <input type="date" name="closing" id="input-closing" />
                 </div>
 
 
@@ -75,39 +74,39 @@
                         <div class="col-6">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-monday" name="monday"
-                                    value=1>
+                                    value=1 {{#each weekDays}} {{#ifCond this '==' 1}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-monday">Lunes</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-tuesday" name="tuesday"
-                                    value=2>
+                                    value=2 {{#each weekDays}} {{#ifCond this '==' 2}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-tuesday">Martes</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-wednesday"
-                                    name="wednesday" value=3>
+                                    name="wednesday" value=3  {{#each weekDays}} {{#ifCond this '==' 3}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-wednesday">Miércoles</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-thursday" name="thursday"
-                                    value=4>
+                                    value=4  {{#each weekDays}} {{#ifCond this '==' 4}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-thursday">Jueves</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-friday" name="friday"
-                                    value=5>
+                                    value=5  {{#each weekDays}} {{#ifCond this '==' 5}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-friday">Viernes</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-saturday" name="saturday"
-                                    value=6>
+                                    value=6 {{#each weekDays}} {{#ifCond this '==' 6}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-saturday">Sábado</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="input-sunday" name="sunday"
-                                    value=7>
+                                    value=0 {{#each weekDays}} {{#ifCond this '==' 0}} checked {{/ifCond}} {{/each}}>
                                 <label class="custom-control-label" for="input-sunday">Domingo</label>
                             </div>
                         </div>
@@ -118,26 +117,26 @@
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <label for="input-openhour" class="label active">Hora de apertura</label>
-                    <input type="number" name="openhour" id="input-openhour" />
+                    <input type="number" name="openhour" id="input-openhour" value="{{openingTimes.openingTime}}"/>
                 </div>
                 <div class="form-group">
                     <label for="input-closehour" class="label active">Hora de cierre</label>
-                    <input type="number" name="closehour" id="input-closehour" />
+                    <input type="number" name="closehour" id="input-closehour" value="{{openingTimes.closingTime}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="input-duration" class="label active">Duración de la reserva</label>
-                    <input type="number" name="duration" id="input-duration"/>
+                    <label for="input-duration" class="label active">Duración de la reserva (en minutos)</label>
+                    <input type="number" name="duration" id="input-duration" value="{{property.bookingDuration}}" />
                 </div>
                 <div class="form-group">
                     <label for="input-places" class="label active">Plazas</label>
-                    <input type="number" name="places" id="input-places"/>
+                    <input type="number" name="places" id="input-places" value="{{property.availablePlaces}}" />
                 </div>
             </div>
         </div>
 
 
 
-        <button type="submit" class="btn-kokomo btn-kokomo-success">Crear propiedad y horarios</button>
+        <button type="submit" class="btn-kokomo btn-kokomo-success">Editar propiedad</button>
     </form>
 </div>
 

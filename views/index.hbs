@@ -4,6 +4,51 @@
         <h2 class="hero-subtitle">Reserva en los mejores<br>locales de tu zona</h2>
         <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
         <h2 class="hero-arrow-desktop mdi mdi-arrow-right"></h2>
+
+        <br>
+        
+        <div class="category-group">
+            <div class="one-category">
+                <a href="/category/Surfer">
+                    <div class="img-container">
+                        <img src="/images/surf.png" alt="Surfer">
+                    </div>
+                    <p>Surfer</p>
+                </a>
+            </div>
+            <div class="one-category">
+                <a href="/category/Chillout">
+                    <div class="img-container">
+                        <img src="/images/chillout.png" alt="Chillout">
+                    </div>
+                    <p>Chillout</p>
+                </a>
+            </div>
+            <div class="one-category">
+                <a href="/category/Discoteca">
+                    <div class="img-container">
+                        <img src="/images/disco.png" alt="Disco">
+                    </div>
+                    <p>Disco</p>
+                </a>
+            </div>
+            <div class="one-category">
+                <a href="/category/Bar">
+                    <div class="img-container">
+                        <img src="/images/bar.png" alt="Bar">
+                    </div>
+                    <p>Bar</p>
+                </a>
+            </div>
+            <div class="one-category">
+                <a href="/category/Restaurante">
+                    <div class="img-container">
+                        <img src="/images/restaurant.png" alt="Bar">
+                    </div>
+                    <p>Restaurant</p>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="white-card-home">
@@ -14,10 +59,12 @@
                 <div class="property-card">
                     <span class="fa-stack fa-2x float-right heart-home">
                         <i class="fas fa-circle fa-stack-2x orange-80"></i>
-                        <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                        <i
+                            class="{{#ifCond ../favourites "includes" _id}} fas {{else}} far {{/ifCond}} fa-heart fa-stack-1x fa-inverse"></i>
                     </span>
                     <img src="{{mainImage}}" style="z-index: 1;">
-                    <img src="{{mainImage}}" style="position:relative; top: -60vw; z-index: -1; filter:blur(10px); opacity: .5; margin-bottom: -60vw">
+                    <img src="{{mainImage}}"
+                        style="position:relative; top: -60vw; z-index: -1; filter:blur(10px); opacity: .5; margin-bottom: -60vw">
 
 
                     <h3>{{name}}</h3>
