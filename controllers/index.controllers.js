@@ -693,3 +693,20 @@ exports.deleteBooking = (req, res) => {
       console.log("Error: ", error);
     });
 };
+
+exports.viewCategory = (req, res) => {
+  const sessionUser = req.session.currentUser || req.user;
+  console.log(req.params.name)
+  Property.find({ categories: req.params.name })
+  .then(properties => {
+    res.render('property/category', {
+      category: req.params.name,
+      user: sessionUser,
+      properties: properties,
+      favourites: sessionUser.favourites
+    });
+  })
+  .catch((error) => {
+    console.log("Error: ", error);
+  });
+};

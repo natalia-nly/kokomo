@@ -40,7 +40,8 @@
                     <p>Duración de la reserva: {{property.bookingDuration}}</p>
                     <p>Plazas disponibles: {{property.availablePlaces}}</p>
                     {{#each property.categories}}
-                    <p class="kokomo-hours text-center text-uppercase mt-4">{{this}}</p>
+                    <br>
+                    <a href="/category/{{this}}" class="kokomo-hours text-center text-uppercase mt-4 p-2">{{this}}</a>
                     {{/each}}
                 </div>
                 <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">

@@ -15,5 +15,7 @@ router.get('/local/love/:id', index_controller.loveLocal);
 router.post('/add-comment/:id', index_controller.addComment);
 router.get('/owner/property/:id', index_controller.ownerViewLocal);
 
+router.get('/category/:name', index_controller.viewCategory);
+
 
 module.exports = router;

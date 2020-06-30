@@ -4,6 +4,13 @@
         <h2 class="hero-subtitle">Reserva en los mejores<br>locales de tu zona</h2>
         <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
         <h2 class="hero-arrow-desktop mdi mdi-arrow-right"></h2>
+
+        <br>
+        <a href="/category/Chillout" class="btn-kokomo btn-kokomo-grey text-center text-uppercase mb-2 p-2">Chillout</a>
+        <a href="/category/Surfer" class="btn-kokomo btn-kokomo-grey text-center text-uppercase mb-2 p-2">Surfer</a>
+        <a href="/category/Restaurante" class="btn-kokomo btn-kokomo-grey text-center text-uppercase mb-2 p-2">Restaurante</a>
+        <a href="/category/Discoteca" class="btn-kokomo btn-kokomo-grey text-center text-uppercase mb-2 p-2">Discoteca</a>
+        <a href="/category/Bar" class="btn-kokomo btn-kokomo-grey text-center text-uppercase mb-2 p-2">Bar</a>
     </div>
 
     <div class="white-card-home">
@@ -14,10 +21,12 @@
                 <div class="property-card">
                     <span class="fa-stack fa-2x float-right heart-home">
                         <i class="fas fa-circle fa-stack-2x orange-80"></i>
-                        <i class="{{#ifCond ../favourites "includes" _id}} fas {{else}} far {{/ifCond}} fa-heart fa-stack-1x fa-inverse"></i>
+                        <i
+                            class="{{#ifCond ../favourites "includes" _id}} fas {{else}} far {{/ifCond}} fa-heart fa-stack-1x fa-inverse"></i>
                     </span>
                     <img src="{{mainImage}}" style="z-index: 1;">
-                    <img src="{{mainImage}}" style="position:relative; top: -60vw; z-index: -1; filter:blur(10px); opacity: .5; margin-bottom: -60vw">
+                    <img src="{{mainImage}}"
+                        style="position:relative; top: -60vw; z-index: -1; filter:blur(10px); opacity: .5; margin-bottom: -60vw">
 
 
                     <h3>{{name}}</h3>
