@@ -68,49 +68,95 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="nav-openings" role="tabpanel" aria-labelledby="nav-openings-tab">
-                    <h3 class="subtitle-search mb-4">Días de apertura</h3>
-                    {{#each property.openingHours}}
-                    <p>Día de apertura: <span id="openingDay1">{{openingDays.openingDay}}</span></p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Este local está abierto en estas fechas:</p>
+                            <p>{{openingDay}} - {{closingDay}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {{#each property.openingHours}}
 
-                    <p>Día de cierre: <span id="closingDay1">{{openingDays.closingDay}}</span></p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Día</th>
+                                        <th scope="col">Horario</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{#each weekDays}}
+                                            {{#ifCond this "==" 1}}
+                                            <p>Lunes</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 2}}
+                                            <p>Martes</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 3}}
+                                            <p>Miércoles</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 4}}
+                                            <p>Jueves</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 5}}
+                                            <p>Viernes</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 6}}
+                                            <p>Sábado</p>
+                                            {{/ifCond}}
+                                            {{#ifCond this "==" 7}}
+                                            <p>Domingo</p>
+                                            {{/ifCond}}
 
-                    <p>Días de la semana: {{weekDays}}</p>
-                    {{#each opening_times}}
-                    <p>Hora de apertura: {{openingTime}}</p>
-                    <p>Hora de cierre: {{closingTime}}</p>
-                    {{/each}}
-                    {{/each}}
+                                            {{/each}}
+                                        </td>
+                                        <td>
+                                            {{#each openingTimes}}
+                                            <p>{{openingTime}}:00 - {{closingTime}}:00</p>
+                                            {{/each}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            {{/each}}
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
         </div>
 
         {{#if user}}
-            <form action="/local/{{property._id}}" method="POST" class="mt-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
-                            <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
-                            <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
-                        </div>
+        <form action="/local/{{property._id}}" method="POST" class="mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bookingDate" class="label active">¿Qué día quieres venir?</label>
+                        <input type="date" name="bookingDate" data-date-format="DD MMMM YYYY" id="">
                     </div>
                 </div>
-
-                <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
-            </form>
-            {{else}}
-            <div class="mt-4 border-top">
-                <p>Necesitas una cuenta para poder hacer reservas.</p>
-                <a href="/signup" class="btn btn-success mt-3">Regístrate ahora</a>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="numberGuests" class="label active">¿Cuántos seréis?</label>
+                        <input type="number" name="numberGuests" id="" min="1" class="kokomo-input">
+                    </div>
+                </div>
             </div>
 
-            {{/if}}
+            <input type="submit" value="Ver disponibilidad" class="kokomo-btn-form p-3">
+        </form>
+        {{else}}
+        <div class="mt-4 border-top">
+            <p>Necesitas una cuenta para poder hacer reservas.</p>
+            <a href="/signup" class="btn btn-success mt-3">Regístrate ahora</a>
+        </div>
+
+        {{/if}}
 
     </div>
 </div>
