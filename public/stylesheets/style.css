@@ -71,6 +71,9 @@ p {
 .blue-background {
   background-color: #e7eff3; }
 
+.heading-font {
+  font-family: bely-display, sans-serif; }
+
 /* ## Botones
 --------------------------------------------- */
 .btn-kokomo {

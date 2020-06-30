@@ -536,7 +536,7 @@ exports.bookingDetails = (req, res) => {
       console.log("BOOKING: ", booking);
       res.render("customer/booking-details", {
         booking: booking,
-        layout: "layout-nouser",
+        layout: "layout-nouser"
       });
     })
     .catch((error) => {
