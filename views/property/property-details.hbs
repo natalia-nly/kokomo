@@ -47,7 +47,7 @@
                 <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="/add-comment/{{property._id}}" method="POST">
+                            <form action="/property/add-comment/{{property._id}}" method="POST">
                                 <input type="hidden" name="userId" value="{{../user.username}}">
                                 <div class="form-group">
                                     <label for="comment" class="label active">Deja tu comentario</label>
@@ -104,7 +104,7 @@
         </div>
 
         {{#if user}}
-        <form action="/local/{{property._id}}" method="POST" class="mt-4">
+        <form action="/property/{{property._id}}" method="POST" class="mt-4">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

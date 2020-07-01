@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Property = require("../models/property.model");
-const mongoose = require("mongoose");
 const authController = require("../controllers/auth.controllers");
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 //GET página de registro dónde el usario rellena su username y contraseña
 router.get("/signup", authController.signUp);

@@ -1,12 +1,5 @@
 const Property = require("../models/property.model");
-const Schedule = require("../models/schedule.model");
-const Booking = require("../models/booking.model");
 const Customer = require("../models/customer.model");
-const uploadCloud = require("../config/cloudinary.js");
-const { registerOwner } = require("./auth.controllers");
-const dateFormat = require("dateformat");
-const Swal = require("sweetalert2");
-
 
 //HOME
 exports.allProperties = (req, res, next) => {
@@ -49,7 +42,7 @@ exports.allProperties = (req, res, next) => {
   }
 };
 
-exports.ownerViewLocal = (req, res, next) => {
+/*exports.ownerViewLocal = (req, res, next) => {
   const sessionUser = req.session.currentUser || req.user;
   Property.findById(req.params.id)
     .then((resultado) => {
@@ -80,7 +73,7 @@ exports.ownerViewLocal = (req, res, next) => {
     .catch((error) => {
       console.log("Error: ", error);
     });
-};
+};*/
 
 
 
@@ -88,105 +81,8 @@ exports.ownerViewLocal = (req, res, next) => {
 
 
 
-exports.addComment = (req, res) => {
-  const sessionUser = req.session.currentUser || req.user;
-  const newComment = {
-    username: sessionUser.username,
-    comment: req.body.comment,
-  };
-
-  Property.findByIdAndUpdate(
-    req.params.id,
-    {
-      $push: {
-        comments: newComment,
-      },
-    },
-    {
-      new: true,
-    }
-  ).then((propertyUpdated) => {
-    console.log(propertyUpdated);
-    res.redirect(`/local/${propertyUpdated._id}`);
-  });
-};
 
 
 
-exports.deleteBooking = (req, res) => {
-  const bookingId = req.params.id;
-  const sessionUser = req.session.currentUser || req.user;
 
-  Booking.findById(bookingId).then((booking) => {
-    console.log("this is booking", booking);
-    Schedule.update(
-      {
-        "timeBoxes._id": booking.timeBox,
-      },
-      {
-        $inc: {
-          "timeBoxes.$.remaining": booking.guests,
-        },
-      }
-    );
-  });
-  const p1 = Booking.findByIdAndDelete(bookingId);
-  const p2 = Customer.findByIdAndUpdate(
-    {
-      _id: sessionUser._id,
-    },
-    {
-      $pull: {
-        bookings: bookingId,
-      },
-    }
-  );
-  const p3 = Property.findOneAndUpdate(
-    {},
-    {
-      $pull: {
-        bookings: bookingId,
-      },
-    }
-  );
-  Promise.all([p1, p2, p3])
-    .then((resultados) => {
-      res.redirect("/my-bookings");
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-    });
-};
-
-exports.viewCategory = (req, res) => {
-  const sessionUser = req.session.currentUser || req.user;
-
-  if(sessionUser){
-    Property.find({ categories: req.params.name })
-    .then((properties) => {
-      res.render("property/category", {
-        category: req.params.name,
-        user: sessionUser,
-        properties: properties
-      });
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-    });
-  } else {
-    Property.find({ categories: req.params.name })
-    .then((properties) => {
-      res.render("property/category", {
-        category: req.params.name,
-        user: sessionUser,
-        properties: properties,
-        layout: 'layout-nouser'
-      });
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-    });
-  }
-
-};
 

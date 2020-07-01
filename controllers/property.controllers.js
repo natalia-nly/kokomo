@@ -1,14 +1,7 @@
 const Property = require("../models/property.model");
 const Schedule = require("../models/schedule.model");
-const Booking = require("../models/booking.model");
 const Customer = require("../models/customer.model");
-const uploadCloud = require("../config/cloudinary.js");
-const {
-    registerOwner
-} = require("./auth.controllers");
 const dateFormat = require("dateformat");
-const Swal = require("sweetalert2");
-
 
 //GET Form creación del local
 exports.createProperty = (req, res, next) => {
@@ -19,7 +12,6 @@ exports.createProperty = (req, res, next) => {
         user: sessionUser,
     });
 };
-
 //Función creadora de Schedules para un local
 function createSchedule(property) {
     const timeRanges = property.openingHours;
@@ -86,7 +78,6 @@ function createSchedule(property) {
         console.log(`Created ${scheduleObject.property} schedules`);
     });
 }
-
 //POST Creación del local
 exports.registerProperty = (req, res, next) => {
     console.log(req.body);
@@ -166,7 +157,6 @@ exports.registerProperty = (req, res, next) => {
         });
     });
 };
-
 //Ver detalle del local
 exports.viewProperty = (req, res, next) => {
     const sessionUser = req.session.currentUser || req.user;
@@ -176,7 +166,6 @@ exports.viewProperty = (req, res, next) => {
         Promise.all([p1, p2])
             .then((resultados) => {
                 const favourites = resultados[0].favourites;
-                console.log(resultados)
                 const property = resultados[1];
                 const openingDay = property.openingHours[0].openingDays.openingDay;
                 const closingDay = property.openingHours[0].openingDays.closingDay;
@@ -274,7 +263,6 @@ exports.viewProperty = (req, res, next) => {
             });
     }
 };
-
 //Editar Local
 exports.editProperty = (req, res, next) => {
     const sessionUser = req.session.currentUser || req.user;
@@ -294,7 +282,6 @@ exports.editProperty = (req, res, next) => {
             console.log("Error: ", error);
         });
 };
-
 //Guardar cambios del local
 exports.saveProperty = (req, res, next) => {
     console.log(req.body);
@@ -365,34 +352,49 @@ exports.saveProperty = (req, res, next) => {
             console.log("Error: ", error);
         });
 };
-
 //Añadir un favorito
 exports.loveProperty = (req, res, next) => {
     Property.findById(req.params.id)
-      .then((resultado) => {
-        const sessionUser = req.session.currentUser || req.user;
-        return Customer.update(
-          {
-            _id: sessionUser._id,
-            favourites: {
-              $ne: resultado._id,
+        .then((resultado) => {
+            const sessionUser = req.session.currentUser || req.user;
+            return Customer.update({
+                _id: sessionUser._id,
+                favourites: {
+                    $ne: resultado._id,
+                },
+            }, {
+                $addToSet: {
+                    favourites: resultado._id,
+                },
+            }, {
+                new: true,
+            });
+        })
+        .then((customer) => {
+            console.log("Usuario actualizado", customer);
+            res.redirect("back");
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+        });
+};
+//Añadir comentario
+exports.addComment = (req, res) => {
+    const sessionUser = req.session.currentUser || req.user;
+    const newComment = {
+        username: sessionUser.username,
+        comment: req.body.comment,
+    };
+    Property.findByIdAndUpdate(
+        req.params.id, {
+            $push: {
+                comments: newComment,
             },
-          },
-          {
-            $addToSet: {
-              favourites: resultado._id,
-            },
-          },
-          {
+        }, {
             new: true,
-          }
-        );
-      })
-      .then((customer) => {
-        console.log("Usuario actualizado", customer);
-        res.redirect("back");
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
-      });
-  };
+        }
+    ).then((propertyUpdated) => {
+        console.log(propertyUpdated);
+        res.redirect(`/property/${propertyUpdated._id}`);
+    });
+};
