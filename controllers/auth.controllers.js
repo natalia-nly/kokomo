@@ -216,48 +216,7 @@ exports.myFavourites = (req, res, next) => {
 };
 
 
-exports.myBookings = (req, res, next) => {
-  const sessionUser = req.session.currentUser || req.user;
-  // BOOKINGS DEL OWNER
-  if (sessionUser.owner) {
-    console.log(sessionUser)
-    Customer.findById(sessionUser._id).populate({
-        path: 'ownProperties',
-        populate: {
-          path: 'bookings'
-        }
-      }).populate({
-        path: 'bookings',
-        populate: {
-          path: 'property'
-        }
-      })
-      .then(user => {
-        console.log("USER CON DEEP POPULATE: ", user);
-        res.render('owner/bookings', {
-          user,
-          title: 'Mis reservas | KOKOMO'
-        });
-      }).catch(error => next(error));
-  }
-  // BOOKINGS DEL CUSTOMER
-  else {
-    Customer.findById(sessionUser._id)
-      .populate({
-        path: 'bookings',
-        populate: {
-          path: 'property'
-        }
-      })
-      .then(user => {
-        console.log(user)
-        res.render('customer/bookings', {
-          user,
-          title: 'Mis reservas | KOKOMO'
-        });
-      }).catch(error => next(error));
-  }
-};
+
 
 
 exports.profileEdit = (req, res, next) => {

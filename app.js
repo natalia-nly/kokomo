@@ -128,14 +128,16 @@ app.locals.title = 'KOKOMO';
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
 const booking = require('./routes/booking.routes');
-const local = require('./routes/local.routes');
+const property = require('./routes/property.routes');
 const profile = require('./routes/profile.routes');
+const search = require('./routes/search.routes');
 
 app.use('/', index);
 app.use('/', auth);
 app.use('/', booking);
-app.use('/', local);
+app.use('/', property);
 app.use('/', profile);
+app.use('/', search);
 
 
 

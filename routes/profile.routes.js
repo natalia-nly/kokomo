@@ -6,8 +6,8 @@ const index_controller = require('../controllers/index.controllers');
 const auth_controller = require('../controllers/auth.controllers');
 const uploadCloud = require('../config/cloudinary.js');
 
-router.get('/profile/create-local', index_controller.createLocal);
-router.post('/profile/create-local', uploadCloud.single('main'), index_controller.registerLocal);
+
+
 
 // GET de la ruta profile del customer
 router.get("/profile", auth_controller.profile);
