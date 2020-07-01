@@ -18,11 +18,11 @@ MVP → chiringuitos
 
 ## User Stories
 
-[Notion Link](https://www.notion.so/1e08243224c842e29a9b44db892fec01?v=44c1c2c3a0244edc82a37e0c015e7b5b)
+[Notion Link](https://www.notion.so/1e08243224c842e29a9b44db892fec01?v=609e57e9cefd4931b2a8eead1ed3812b)
 
 ## Backlog
 
-[Notion Link](https://www.notion.so/1e08243224c842e29a9b44db892fec01?v=44c1c2c3a0244edc82a37e0c015e7b5b)
+[Notion Link](https://www.notion.so/1e08243224c842e29a9b44db892fec01?v=609e57e9cefd4931b2a8eead1ed3812b)
 
 ## Rutas
 
