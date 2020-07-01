@@ -1,4 +1,3 @@
-[TOC]
 
 # KOKOMO 🌴
 
@@ -66,10 +65,10 @@ MVP → chiringuitos
 
 ## Models
 
-## CUSTOMER: Usuario que hace reservas y/o gestiona locales
-## PROPERTY: Local que puede ser reservado
-## SCHEDULE: Horarios e inventario de un Local
-## BOOKING: Reserva de un usario en un local con un horario determinado para un cierto número de personas
+- CUSTOMER: Usuario que hace reservas y/o gestiona locales
+- PROPERTY: Local que puede ser reservado
+- SCHEDULE: Horarios e inventario de un Local
+- BOOKING: Reserva de un usario en un local con un horario determinado para un cierto número de personas
 
 ## Links
 
