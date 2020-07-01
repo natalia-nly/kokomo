@@ -47,6 +47,7 @@
                 <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
                     <div class="row">
                         <div class="col-md-6">
+                            {{#if user}}
                             <form action="/property/add-comment/{{property._id}}" method="POST">
                                 <input type="hidden" name="userId" value="{{../user.username}}">
                                 <div class="form-group">
@@ -56,6 +57,7 @@
 
                                 <input type="submit" value="Enviar" class="btn-kokomo btn-kokomo-grey btn-block">
                             </form>
+                            {{/if}}
                         </div>
                         <div class="col-md-6">
                             {{#each property.comments}}
