@@ -1,32 +1,122 @@
-<div class="home-bg">
-    <div class="container p-4">
-        <div class="hero" style="padding-top: 50px">
-            <h2 class="display-blue text-center">Este verano<br>no te quedes sin planes</h2>
-            <h2 class="hero-subtitle">Reserva en los mejores locales de tu zona</h2>
+<div class="home-container" style="padding-bottom: 80px">
+    <div class="hero" style="padding: 50px 10px;">
+        <h2 class="hero-title">Este verano
+            no te quedes sin planes</h2>
+        <h2 class="hero-subtitle">Reserva en los mejores<br>locales de tu zona</h2>
+        <h2 class="hero-arrow-phone mdi mdi-arrow-down"></h2>
+        <h2 class="hero-arrow-desktop mdi mdi-arrow-down"></h2>
+
+        <br>
+
+    </div>
+    <div class="category-group">
+        <div class="one-category">
+            <a href="/category/Surfer">
+                <div class="img-container">
+                    <img src="/images/surf.png" alt="Surfer">
+                </div>
+                <p>Surfer</p>
+            </a>
         </div>
-
-
-        <form action="" class="search-form">
-            <input type="search" name="" class="form-control ds-input" placeholder="Buscar...">
-        </form>
+        <div class="one-category">
+            <a href="/category/Chillout">
+                <div class="img-container">
+                    <img src="/images/chillout.png" alt="Chillout">
+                </div>
+                <p>Chillout</p>
+            </a>
+        </div>
+        <div class="one-category">
+            <a href="/category/Discoteca">
+                <div class="img-container">
+                    <img src="/images/disco.png" alt="Disco">
+                </div>
+                <p>Disco</p>
+            </a>
+        </div>
+        <div class="one-category">
+            <a href="/category/Bar">
+                <div class="img-container">
+                    <img src="/images/bar.png" alt="Bar">
+                </div>
+                <p>Bar</p>
+            </a>
+        </div>
+        <div class="one-category">
+            <a href="/category/Restaurante">
+                <div class="img-container">
+                    <img src="/images/restaurant.png" alt="Bar">
+                </div>
+                <p>Restaurant</p>
+            </a>
+        </div>
     </div>
 
-    <div class="white-card-home">
+    <div class="">
         <h2 class="title-search-home">Nuestros chiringuitos</h2>
-        <h3 class="subtitle-search-home">¡Reserva ahora!</h3>
         <div class="properties-group">
             {{#each properties}}
-            <a href="/local/{{_id}}">
+            <a href="/property/{{_id}}">
                 <div class="property-card">
                     <span class="fa-stack fa-2x float-right heart-home">
-                        <i class="fas fa-circle fa-stack-2x orange"></i>
-                        <i class="far fa-heart fa-stack-1x fa-inverse"></i>
+                        <i class="fas fa-circle fa-stack-2x orange-80"></i>
+                        <i
+                            class="far fa-heart fa-stack-1x fa-inverse"></i>
                     </span>
-                    <img src="{{mainImage}}" alt="">
+                    <img src="{{mainImage}}" style="z-index: 1;">
+                    <img src="{{mainImage}}" class="blur-image">
+
+
                     <h3>{{name}}</h3>
-                    <p>{{description}}</p>
+                    <p class="mdi mdi-map-marker-radius"> {{location.name}}</p>
                 </div>
             </a>
+            {{/each}}
+        </div>
+
+        <h2 class="title-search-home mt-4">Estilo chillout</h2>
+        <div class="properties-group">
+            {{#each properties}}
+            {{#ifCond categories "includes" "Chillout"}}
+            <a href="/property/{{_id}}">
+                <div class="property-card">
+                    <span class="fa-stack fa-2x float-right heart-home">
+                        <i class="fas fa-circle fa-stack-2x orange-80"></i>
+                        <i
+                            class="far fa-heart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <img src="{{mainImage}}" style="z-index: 1;">
+                    <img src="{{mainImage}}" class="blur-image">
+
+
+                    <h3>{{name}}</h3>
+                    <p class="mdi mdi-map-marker-radius"> {{location.name}}</p>
+                </div>
+            </a>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+
+        <h2 class="title-search-home mt-4">Los mejores restaurantes</h2>
+        <div class="properties-group">
+            {{#each properties}}
+            {{#ifCond categories "includes" "Restaurante"}}
+            <a href="/property/{{_id}}">
+                <div class="property-card">
+                    <span class="fa-stack fa-2x float-right heart-home">
+                        <i class="fas fa-circle fa-stack-2x orange-80"></i>
+                        <i
+                            class="far fa-heart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <img src="{{mainImage}}" style="z-index: 1;">
+                    <img src="{{mainImage}}" class="blur-image">
+
+
+                    <h3>{{name}}</h3>
+                    <p class="mdi mdi-map-marker-radius"> {{location.name}}</p>
+                </div>
+            </a>
+            {{/ifCond}}
             {{/each}}
         </div>
     </div>

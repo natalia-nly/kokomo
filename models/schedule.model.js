@@ -2,21 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const scheduleSchema = new Schema({
-    property: {type: Schema.Types.ObjectId, ref: "Property"},
+    property: {
+        type: Schema.Types.ObjectId,
+        ref: "Property"
+    },
     timeBoxes: [{
         day: Date,
-		startTime: String,
-		endTime: Number,
-		status: Boolean,
-		remaining: Number,
+        startTime: String,
+        endTime: Number,
+        status: Boolean,
+        remaining: Number,
         total: Number
-	}]
-},
-{
+    }]
+}, {
     timestamps: {
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-    }    
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt'
+    }
 });
 
 

@@ -26,6 +26,7 @@ $success: #0ac5a3;
 $danger: #ff8d69;
 $grey: #c9c0b6;
 $blue-background: #e7eff3;
+$dark: #49636d;
 
 /* ## Fonts
 --------------------------------------------- */
@@ -184,7 +185,7 @@ p {
       padding: 10px;
 
       a {
-        font-size: 20px;
+        font-size: 24px;
         color: $cream;
       }
     }
@@ -276,13 +277,13 @@ h2.hero-subtitle {
 }
 
 .hero-title {
-  font-size: 30px;
+  font-size: 32px;
   color: #49636d;
-  padding-bottom: 10px;
+  padding: 10px 0 10px 5px;
 }
 
 .hero {
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .hero-arrow-phone {
@@ -304,7 +305,7 @@ h1 {
   font-size: 26px;
   color: $blue;
   font-weight: 600;
-  padding-bottom: 4px;
+  padding: 4px 0;
   font-family: $heading-font;
 }
 
@@ -315,11 +316,10 @@ h1 {
 }
 
 .title-search-home {
-  font-size: 20px;
-  font-family: $heading-font;
-  color: $blue;
-  font-weight: 600;
-  padding-bottom: 20px;
+  font-size: 24px;
+  font-family: $text-font;
+  color: $dark;
+  font-weight: 700;
   padding-left: 20px;
 }
 
@@ -369,45 +369,51 @@ h1 {
     }
 
     h3 {
-      font-family: $heading-font;
-      color: $orange;
-      font-size: 16px;
-      padding-top: 0;
+      font-family: $text-font;
+      font-weight: 800;
+      color: $text-color;
+      font-size: 18px;
+      padding-left: 4px;
+      margin-top: -10px;
+      padding-bottom: 10px;
     }
 
     p {
       color: $text-color;
       font-weight: 200;
-      font-size: 13px;
+      font-size: 14px;
+      padding-left: 4px;
     }
   }
 }
 
 .properties-group-2 {
-  // display: grid;
-  // grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  // grid-gap: 26px;
   overflow: scroll;
   padding: 20px;
 
-  .one-property {
-    display: flex;
+  .kokomo-hours {
+    border: none;
+    padding: 6px 20px;
+    background-color: rgba(255, 186, 105, 0.2);
+    color: #ffba69;
+    border-radius: 10px;
+    margin: 6px;
   }
 
-  .property-card {
-    width: 35vw;
-    margin-top: -60px;
+  .one-property {
+    display: flex;
+    flex-direction: column;
 
     img {
       width: 100%;
-      height: 50vw;
+      height: 40vw;
       object-fit: cover;
       border-radius: 20px;
     }
 
     .blur-image {
       position: relative;
-      top: -60vw;
+      top: -53vw;
       z-index: -1;
       filter: blur(10px);
       opacity: 0.5;
@@ -415,10 +421,13 @@ h1 {
     }
 
     h3 {
-      font-family: $heading-font;
-      color: $orange;
-      font-size: 16px;
-      padding-top: 0;
+      font-family: $text-font;
+      font-weight: 800;
+      color: $text-color;
+      font-size: 18px;
+      padding-left: 4px;
+      margin-top: -10px;
+      padding-bottom: 10px;
     }
 
     p {
@@ -426,6 +435,11 @@ h1 {
       font-weight: 200;
       font-size: 13px;
     }
+  }
+
+  .property-card {
+    width: 80vw;
+    margin-top: -60px;
   }
 }
 
@@ -547,17 +561,17 @@ h2.display-cream {
 }
 
 h3.section-title {
-  color: $blue;
-  font-family: $heading-font;
+  color: $dark;
+  font-family: $text-font;
   padding-bottom: 10px;
-  border-bottom: 10px solid rgba($blue, 0.1);
+  border-bottom: 1px solid rgba($blue, 0.1);
   margin-bottom: 20px !important;
 }
 
 h4.section-title {
   color: $blue;
   padding-bottom: 10px;
-  border-bottom: 10px solid rgba($blue, 0.1);
+  border-bottom: 1px solid rgba($blue, 0.1);
   margin-bottom: 20px !important;
 }
 
@@ -620,22 +634,23 @@ h4.section-title {
 
 .category-group {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
   overflow: scroll;
-  padding: 20px 0;
+  padding: 0 0 50px 20px;
+  margin-top: -20px;
 
   .one-category {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 90px;
     background-color: $blue;
     border-radius: 80px;
-    padding: 20px;
+    padding: 12px;
     align-items: center;
     text-align: center;
     justify-content: center;
-    transition: all ease .3s;
+    transition: all ease 0.3s;
 
     &:hover {
       background-color: darken($blue, 3);
@@ -656,10 +671,28 @@ h4.section-title {
     p {
       color: white;
       font-size: 12px;
-      padding-top: 16px;
-      padding-bottom: 10px;
+      padding-top: 10px;
+      padding-bottom: 14px;
     }
   }
+}
+
+.beach-background {
+  min-height: 30vh;
+  padding: 50px;
+  background-image: url("../images/water.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.avatar {
+  border-radius: 300px;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  max-width: 140px;
+  margin-top: -60px;
+  margin-bottom: 30px;
+  background-color: #b2c7c6;
 }
 
 /* # 01. MEDIA QUERIES
@@ -670,6 +703,11 @@ h4.section-title {
 
 @media all and (min-width: 768px) {
   .body-container {
+    margin-left: 140px;
+    padding-bottom: 0px;
+  }
+
+  .home-container {
     margin-left: 140px;
     padding-bottom: 0px;
   }
@@ -814,7 +852,7 @@ h4.section-title {
   }
 
   .title-search-home {
-    font-size: 40px;
+    font-size: 26px;
     padding: 0 100px 10px 0;
   }
 
@@ -833,22 +871,25 @@ h4.section-title {
     padding: 40px 0;
 
     .property-card {
-      width: 20vw;
+      width: 30vw;
 
       img {
-        height: 30vw;
+        height: 18vw;
         border-radius: 40px;
       }
 
       .blur-image {
-        top: -45vw;
+        position: relative;
+        top: -40vw;
+        z-index: -1;
+        filter: blur(10px);
+        opacity: 0.5;
+        margin-bottom: -60vw;
       }
 
       h3 {
-        font-family: $heading-font;
-        color: $orange;
         font-size: 22px;
-        padding-top: 18px;
+        padding-top: 10px;
       }
 
       p {
@@ -862,23 +903,39 @@ h4.section-title {
   .properties-group-2 {
     padding: 40px 0;
 
+    .search-pc {
+      padding-left: 40px;
+      padding-top: 30px;
+    }
+
+    .one-property {
+      display: flex;
+      flex-direction: row;
+    }
+  
+
     .property-card {
-      width: 20vw;
+      width: 30vw;
 
       img {
-        height: 30vw;
+        height: 18vw;
         border-radius: 40px;
       }
 
       .blur-image {
-        top: -45vw;
+        position: relative;
+        top: -40vw;
+        z-index: -1;
+        filter: blur(10px);
+        opacity: 0.5;
+        margin-bottom: -60vw;
       }
 
       h3 {
         font-family: $heading-font;
         color: $orange;
         font-size: 22px;
-        padding-top: 18px;
+        padding-top: 10px;
       }
 
       p {
@@ -897,5 +954,9 @@ h4.section-title {
     .column-xl {
       width: 30%;
     }
+  }
+
+  .category-group {
+    width: 560px;
   }
 }
