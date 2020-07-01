@@ -635,7 +635,7 @@ h4.section-title {
     align-items: center;
     text-align: center;
     justify-content: center;
-    transition: all ease .3s;
+    transition: all ease 0.3s;
 
     &:hover {
       background-color: darken($blue, 3);
@@ -662,6 +662,23 @@ h4.section-title {
   }
 }
 
+.beach-background {
+  min-height: 30vh;
+  padding: 50px;
+  background-image: url("../images/water.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.avatar {
+  border-radius: 300px;
+  box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
+  max-width: 200px;
+  margin-top: -100px;
+  margin-bottom: 40px;
+  background-color: #b2c7c6;
+}
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 

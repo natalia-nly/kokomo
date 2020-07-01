@@ -1,6 +1,7 @@
 const Customer = require("../models/customer.model");
 const Property = require("../models/property.model");
 const Booking = require("../models/booking.model");
+const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
@@ -15,6 +16,17 @@ exports.signUpLocal = (req, res, next) =>
     title: "¡Crea tu cuenta! | KOKOMO",
     layout: "layout-nouser",
   });
+
+const randomAvatar = () => {
+  const avatarArr = [
+    '/images/avatar1.jpg',
+    '/images/avatar2.jpg',
+    '/images/avatar3.jpg',
+    '/images/avatar4.jpg',
+    '/images/avatar5.jpg'
+  ];
+  return avatarArr[Math.floor(Math.random() * 5)];
+};
 
 exports.registerCustomer = (req, res, next) => {
   const {
@@ -51,7 +63,8 @@ exports.registerCustomer = (req, res, next) => {
       return Customer.create({
         username,
         email,
-        telephone,
+        telNumber: telephone,
+        avatar: randomAvatar(),
         passwordHash: hashedPassword,
       });
     })
@@ -111,7 +124,8 @@ exports.registerOwner = (req, res, next) => {
       return Customer.create({
         username,
         email,
-        telephone,
+        telNumber: telephone,
+        avatar: randomAvatar(),
         passwordHash: hashedPassword,
         owner: true,
       });

@@ -1,21 +1,31 @@
 {{#if user}}
-<div class="body-container">
+<div class="beach-background">
+  <div class="text-right">
+    <a href="/property/create-property" class="btn-kokomo btn-kokomo-success mr-3"><i class="fas fa-plus-circle"></i>
+      Crear un nuevo
+      local</a>
+    <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mr-3"><i class="fas fa-user-cog"></i>
+      Configuración</a>
+    <a href="/logout" class="btn-kokomo btn-kokomo-danger"><i class="mdi mdi-logout-variant"></i>
+      Cerrar sesión</a>
+  </div>
+</div>
 
+<div class="body-container text-center">
+  <img src="{{user.avatar}}" alt="Avatar" class="avatar">
+  <h2>{{user.username}}</h2>
+  <p>{{user.email}}</p>
+  <p>{{user.telNumber}}</p>
 
   <div>
-    <h3 class="section-title mdi mdi-account-circle">Tu perfil</h3>
+  
 
     <div class="row mb-5">
       <div class="col-md-6">
 
       </div>
       <div class="col-md-6">
-        <a href="/property/create-property" class="btn-kokomo btn-kokomo-success"><i class="fas fa-plus-circle"></i>
-          Crear un nuevo
-          local</a>
-        <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey"><i class="fas fa-user-cog"></i> Configuración</a>
-        <a href="/logout" class="btn-kokomo btn-kokomo-danger"><i class="mdi mdi-logout-variant"></i>
-          Cerrar sesión</a>
+        
       </div>
     </div>
 
