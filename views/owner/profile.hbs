@@ -1,83 +1,87 @@
 {{#if user}}
 <div class="beach-background">
   <div class="text-right">
-    <a href="/property/create-property" class="btn-kokomo btn-kokomo-success mr-3"><i class="fas fa-plus-circle"></i>
-      Crear un nuevo
-      local</a>
     <a href="/profile/edit" class="btn-kokomo btn-kokomo-grey mr-3"><i class="fas fa-user-cog"></i>
       Configuración</a>
     <a href="/logout" class="btn-kokomo btn-kokomo-danger"><i class="mdi mdi-logout-variant"></i>
       Cerrar sesión</a>
   </div>
 </div>
-
-<div class="body-container text-center">
+<div class="text-center" style="
+    border-radius: 30px;
+    margin-top: -30px;
+    background-color: white;
+    padding-bottom: 30px;
+">
   <img src="{{user.avatar}}" alt="Avatar" class="avatar">
+
   <h2>{{user.username}}</h2>
   <p>{{user.email}}</p>
   <p>{{user.telNumber}}</p>
-
-  <div>
-    <div class="row mb-5">
-      <div class="col-md-6">
-
-      </div>
-      <div class="col-md-6">
-        
-      </div>
+</div>
+<div class="body-container">
+  <div class="row">
+    <div class="col">
+      <a href="/property/create-property" class="btn-kokomo btn-kokomo-success float-right"><i
+          class="fas fa-plus-circle"></i>
+        Crear un nuevo
+        local</a>
     </div>
+  </div>
 
-    <h4 class="section-title"><i class="fa fa-map-marker fa-sm" aria-hidden="true"></i> Tus Locales</h4>
+  <h4 class="section-title"><i class="fa fa-map-marker fa-sm" aria-hidden="true"></i> Tus Locales</h4>
 
-    {{#if user.ownProperties}}
-    <div class="group-booking">
-      {{#each user.ownProperties}}
-      <div class="div-booking">
-        <div class="column-xl">
-          <p>
-            <span class="fa-stack fa-lg">
-              <i class="fas fa-square fa-stack-2x orange-20"></i>
-              <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
-            </span>
-            {{name}}
-          </p>
-        </div>
-        <div class="column-xl">
-          <a href="/my-bookings" class="btn-kokomo btn-kokomo-success"><i class="fa fa-book mr-2"></i>Ver
-            Reservas</a>
-        </div>
 
-        <div class="column-xs">
 
-        </div>
-        <div class="column-xs">
 
-          <div class="dropdown dropleft float-right">
-            <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" style="
+  {{#if user.ownProperties}}
+  <div class="group-booking">
+    {{#each user.ownProperties}}
+    <div class="div-booking">
+      <div class="column-xl">
+        <p>
+          <span class="fa-stack fa-lg">
+            <i class="fas fa-square fa-stack-2x orange-20"></i>
+            <i class="fas fa-map-marker-alt fa-stack-1x orange"></i>
+          </span>
+          {{name}}
+        </p>
+      </div>
+      <div class="column-xl">
+        <a href="/my-bookings" class="btn-kokomo btn-kokomo-success"><i class="fa fa-book mr-2"></i>Ver
+          Reservas</a>
+      </div>
+
+      <div class="column-xs">
+
+      </div>
+      <div class="column-xs">
+
+        <div class="dropdown dropleft float-right">
+          <button class="btn-kokomo btn-kokomo-grey" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="
                       padding: 10px 19px;
                       border-radius: 100%;
                   ">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/property/{{id}}"><i class="mdi mdi-eye"></i> Ver local</a>
-              <a class="dropdown-item" href="/property/edit/{{id}}"><i class="mdi mdi-pencil"></i> Editar local</a>
-              <div class="dropdown-divider"></div>
-              <a class="danger ml-4" href="/local/delete/{{id}}"><i class="far fa-trash-alt"></i> Eliminar local</a>
-            </div>
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/property/{{id}}"><i class="mdi mdi-eye"></i> Ver local</a>
+            <a class="dropdown-item" href="/property/edit/{{id}}"><i class="mdi mdi-pencil"></i> Editar local</a>
+            <div class="dropdown-divider"></div>
+            <a class="danger ml-4" href="/local/delete/{{id}}"><i class="far fa-trash-alt"></i> Eliminar local</a>
           </div>
         </div>
-
-
       </div>
-      {{/each}}
-    </div>
-    {{else}}
-    <p>Todavía no tienes locales</p>
-    {{/if}}
 
+
+    </div>
+    {{/each}}
   </div>
+  {{else}}
+  <p>Todavía no tienes locales</p>
+  {{/if}}
+
 </div>
 
 

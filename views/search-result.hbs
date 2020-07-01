@@ -18,21 +18,17 @@
 
         </div>
       </a>
-      <div class="ml-4">
+      <div class="search-pc">
         <h3>{{property.name}}</h3>
         <p class="mdi mdi-map-marker-radius"> {{property.location.name}}</p>
-        <h3 class="mt-4 mb-4 section-title">Horas disponibles</h3>
-        <div class="row">
+        <div class="row mt-3 ml-2 mb-4">
           {{#each timeboxes}}
-          <div class="col-auto mb-3">
-            <form action="/booking/{{this._id}}" method="POST">
+          <form action="/booking/{{this._id}}" method="POST">
               <input type="hidden" name="propertyId" value="{{../property._id}}">
               <input type="hidden" name="day" value="{{day}}">
               <input type="hidden" name="guests" value="{{../guests}}">
               <input type="submit" class="kokomo-hours" value="{{startTime}}">
             </form>
-
-          </div>
           {{/each}}
         </div>
       </div>
