@@ -1,6 +1,13 @@
-<div class="body-container mt-5 pt-5">
-  <p>Booking ref: {{booking.bookingRef}}</p>
-  <p>Time: {{booking.time}}</p>
-  <p>Guests: {{booking.guests}}</p>
-  <p>Day: {{booking.day}}</p>
+<div class="container text-center d-flex align-items-center justify-content-center" style="height: 90vh;">
+    <div>
+        <img src="/images/3.png" class="emoji-img">
+
+        <h2 class="orange heading-font text-center mb-3">¡Tienes una reserva!</h2>
+        <p class="badge badge-secondary mb-3">{{booking.bookingRef}}</p>
+        <p><i class="far fa-calendar-alt"></i> Día: {{booking.day}}</p>
+        <p><i class="far fa-clock"></i> Hora: {{booking.time}}</p>
+        <p><i class="fas fa-users"></i> Número de personas: {{booking.guests}}</p>
+      
+    </div>
+
 </div>

@@ -1,15 +1,16 @@
-<div class="container text-center d-flex align-items-center justify-content-center" style="height: 100vh;">
+<div class="container text-center d-flex align-items-center justify-content-center" style="height: 90vh;">
     <div>
-        <h2 class="heading-font orange"><i class="fas fa-glass-cheers fa-sm cream"></i><br> ¡Yuhu, {{user.username}}!
-        </h2>
+        <img src="/images/3.png" class="emoji-img">
 
-        <h1 class="mb-4">Reserva creada con éxito 🥳</h1>
+        <h2 class="subtitle-landing text-center mb-3">¡Reserva creada con éxito!</h2>
         <p><i class="far fa-calendar-alt"></i> Día: {{booking.day}}</p>
         <p><i class="far fa-clock"></i> Hora: {{booking.time}}</p>
         <p><i class="fas fa-users"></i> Número de personas: {{booking.guests}}</p>
-        <a href="/" class="btn-kokomo btn-kokomo-grey mt-4 p-3">Volver a inicio</a>
+         <p><i class="fas fa-users"></i> A nombre de: {{user.username}}</p>
+        
         <a href="whatsapp://send?text=¡Te espera una reserva de Kokomo! 😎 Aquí tienes los detalles: http://kokomo-app.herokuapp.com/booking/details/{{booking._id}}"
             class="btn-kokomo btn-kokomo-grey mt-4 p-3">Compartir reserva por WhatsApp</a>
+            <a href="/" class="btn-kokomo btn-kokomo-grey mt-4 p-3">Volver a inicio</a>
     </div>
 
 </div>
