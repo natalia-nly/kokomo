@@ -215,6 +215,19 @@ h2.hero-subtitle {
 .hero {
   padding: 10px; }
 
+.hero-landing {
+  padding: 10px;
+  background-image: url(../images/hero-mobile.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+  background-position: top center;
+  margin: 50px 0; }
+  .hero-landing .home-container {
+    padding: 106px 20px 0 20px; }
+    .hero-landing .home-container .hero-title {
+      font-size: 24px; }
+
 .hero-arrow-phone {
   font-size: 35px;
   margin-left: -6px;
@@ -547,6 +560,18 @@ h4.section-title {
   .body-container {
     margin-left: 140px;
     padding-bottom: 0px; }
+  .hero-landing {
+    padding: 10px;
+    background-image: url(../images/hero.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 80vh;
+    background-position: top center;
+    margin-top: 50px; }
+    .hero-landing .home-container {
+      padding: 0px; }
+      .hero-landing .home-container .hero-title {
+        font-size: 32px; }
   .home-container {
     margin-left: 140px;
     padding-bottom: 0px; }
