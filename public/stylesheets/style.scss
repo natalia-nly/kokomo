@@ -159,6 +159,18 @@ p {
   }
 }
 
+.btn-kokomo-white {
+  color: $orange;
+  background-color: white;
+  border-color: white;
+
+  &:hover {
+    color: $orange;
+    background-color: darken(white, 1);
+    border-color: darken(white, 1);
+  }
+}
+
 .navbar-kokomo {
   background-color: $blue;
   box-shadow: 0px 4px 40px rgba(141, 136, 131, 0.45);
@@ -296,12 +308,29 @@ h2.hero-subtitle {
   margin: 50px 0;
 
   .home-container {
-    padding: 106px 20px 0 20px;
+    padding: 106px 20px 30px 20px;
 
     .hero-title {
       font-size: 24px;
+      font-family: $heading-font;
     }
   }
+}
+
+.bg-landing {
+  padding: 40px 0;
+}
+
+.subtitle-landing {
+  font-size: 22px;
+  color: $dark;
+  font-weight: 500;
+}
+
+.title-landing {
+  font-family: $heading-font;
+  color: $blue;
+  padding-bottom: 30px;
 }
 
 .hero-arrow-phone {
@@ -713,6 +742,26 @@ h4.section-title {
   background-color: #b2c7c6;
 }
 
+.emoji-img {
+  width: 80px;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 186, 105, 0.5);
+}
+
+.shadow-blue {
+  padding: 30px;
+
+}
+
+.banner-orange {
+  border-radius: 20px;
+  margin: 50px 30px 50px 30px;
+  background-color: $orange;
+  padding: 30px 30px 40px 30px;
+}
+
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 
@@ -725,10 +774,15 @@ h4.section-title {
     padding-bottom: 0px;
   }
 
+  .shadow-blue {
+    padding: 30px;
+    box-shadow: 0px 0px 30px rgba(50, 148, 187, 0.28);
+    border-radius: 20px;
+  }
   .hero-landing {
     padding: 10px;
     background-image: url(../images/hero.jpg);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     min-height: 80vh;
     background-position: top center;
@@ -745,6 +799,11 @@ h4.section-title {
 
   .home-container {
     margin-left: 140px;
+    padding-bottom: 0px;
+  }
+
+  .landing-container {
+    margin-left: 40px;
     padding-bottom: 0px;
   }
 
@@ -904,7 +963,7 @@ h4.section-title {
   }
 
   .properties-group {
-    padding: 40px 0;
+    padding: 20px 0 40px 0;
 
     .property-card {
       width: 30vw;
@@ -948,7 +1007,6 @@ h4.section-title {
       display: flex;
       flex-direction: row;
     }
-  
 
     .property-card {
       width: 30vw;
