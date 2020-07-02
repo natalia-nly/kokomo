@@ -762,6 +762,21 @@ h4.section-title {
   padding: 30px 30px 40px 30px;
 }
 
+.footer {
+  background-color: $dark;
+  color: white;
+  text-align: center;
+  padding: 30px;
+
+  a {
+    color: white;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 
