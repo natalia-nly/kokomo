@@ -591,6 +591,16 @@ h4.section-title {
   background-color: #ffba69;
   padding: 30px 30px 40px 30px; }
 
+.footer {
+  background-color: #49636d;
+  color: white;
+  text-align: center;
+  padding: 30px; }
+  .footer a {
+    color: white; }
+    .footer a:hover {
+      color: #ffba69; }
+
 /* # 01. MEDIA QUERIES
 ---------------------------------------------------------------------------------------------------- */
 /* ## MEDIA QUERIES PANTALLAS +768px

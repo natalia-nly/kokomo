@@ -256,6 +256,7 @@ exports.viewProperty = (req, res, next) => {
                     weekDays: weekDaysFormat,
                     openingTime: property.openingHours[0].openingTimes[0].openingTime,
                     closingTime: property.openingHours[0].openingTimes[0].closingTime,
+                    layout: 'layout-nouser'
                 });
             })
             .catch((error) => {
@@ -354,9 +355,10 @@ exports.saveProperty = (req, res, next) => {
 };
 //Añadir un favorito
 exports.loveProperty = (req, res, next) => {
-    Property.findById(req.params.id)
+    const sessionUser = req.session.currentUser || req.user;
+    if(sessionUser){
+        Property.findById(req.params.id)
         .then((resultado) => {
-            const sessionUser = req.session.currentUser || req.user;
             return Customer.update({
                 _id: sessionUser._id,
                 favourites: {
@@ -377,6 +379,10 @@ exports.loveProperty = (req, res, next) => {
         .catch((error) => {
             console.log("Error: ", error);
         });
+    } else {
+        res.redirect(`/property/${req.params.id}`);
+    }
+    
 };
 //Añadir comentario
 exports.addComment = (req, res) => {
